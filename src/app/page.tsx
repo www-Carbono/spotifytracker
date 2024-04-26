@@ -5,7 +5,9 @@ import scrapeSong from './server/services/scraping'
 
 const Home = (): JSX.Element => {
   useEffect(() => {
-    scrapeSong()
+    scrapeSong().catch((err: any) => {
+      console.log(err)
+    })
   }, [])
 
   return (
