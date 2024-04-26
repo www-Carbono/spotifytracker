@@ -1,5 +1,4 @@
 'use server'
-import Spotify from 'spotify-finder'
 const getViews = async (token: string): Promise<any> => {
   const first = await fetch(
     'https://api-partner.spotify.com/pathfinder/v1/query?operationName=getAlbum&variables=%7B%22uri%22%3A%22spotify%3Aalbum%3A2VZ9rmzFLZbsMMrmrJF8ur%22%2C%22locale%22%3A%22intl-es%22%2C%22offset%22%3A0%2C%22limit%22%3A50%7D&extensions=%7B%22persistedQuery%22%3A%7B%22version%22%3A1%2C%22sha256Hash%22%3A%22469874edcad37b7a379d4f22f0083a49ea3d6ae097916120d9bbe3e36ca79e9d%22%7D%7D',
@@ -47,21 +46,6 @@ const resetToken = async (): Promise<string> => {
 }
 
 const scrapeSong = async (): Promise<void> => {
-  const client = new Spotify({
-    consumer: {
-      key: '47c598b772a34e67b66a53f78927cdbc', // from v2.1.0 is required
-      secret: 'ab8ebcd80825414b96bcd5001682db6c' // from v2.1.0 is required
-    }
-  })
-  const params = {
-    q: 'Rompeolas Martin Urrutia', // required
-    type: 'track', // optional for default 'artist,album,track'
-    limit: 5 // optional for default 20
-  }
-  client.search(params).then((data: any) => {
-    console.log(data)
-  })
-
   const token = await resetToken()
   const views = await getViews(token)
   console.log(views)
