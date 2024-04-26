@@ -59,7 +59,7 @@ const scrapeSong = async (): Promise<void> => {
     limit: 5 // optional for default 20
   }
   client.search(params).then((data: any) => {
-    console.log(data.tracks.items)
+    console.log(data)
   })
 
   const token = await resetToken()
