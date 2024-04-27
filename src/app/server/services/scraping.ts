@@ -55,7 +55,7 @@ const resetToken = async (): Promise<string> => {
 const searchSongSpotify = async (song: any): Promise<any> => {
   const token = await resetToken()
   const request = await fetch(
-    `https://api.spotify.com/v1/search?q=${song}&type=track`,
+    `${process.env.SPOTIFY_API_LINK}search?q=${song}&type=track`,
     {
       method: 'GET',
       headers: {
