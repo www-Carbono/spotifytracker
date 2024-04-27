@@ -45,10 +45,26 @@ const resetToken = async (): Promise<string> => {
   return token
 }
 
-const scrapeSong = async (): Promise<void> => {
+// const scrapeSong = async (): Promise<void> => {
+//   const token = await resetToken()
+//   const views = await getViews(token)
+//   const test = await searchSong('Melendi ', token)
+//   console.log(test)
+// }
+
+const searchSongSpotify = async (song: any): Promise<any> => {
   const token = await resetToken()
-  const views = await getViews(token)
-  console.log(views)
+  const request = await fetch(
+    `https://api.spotify.com/v1/search?q=${song}&type=track`,
+    {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }
+  )
+  const data = await request.json()
+  return data.tracks.items
 }
 
-export default scrapeSong
+export default searchSongSpotify
