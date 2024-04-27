@@ -1,14 +1,14 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 
 import { useSearch } from '../hooks/useSearch'
-import { Loader } from './loader'
+import { Loader } from './Loader'
 
 export const SearchSong = (): JSX.Element => {
   const {
     handleOnChange,
     handleOnClick,
     listOfSongs,
-    link,
+    // link,
     songName,
     isLoading
   } = useSearch()
