@@ -35,7 +35,7 @@ export const SearchSong = (): JSX.Element => {
               className='song flex flex-row items-center border border-red-500 gap-5 p-2  cursor-pointer'
               key={song.id}
               onClick={() => {
-                handleOnClick(song.external_urls.spotify as string)
+                handleOnClick(song.external_urls.spotify as string, song)
               }}
             >
               <img

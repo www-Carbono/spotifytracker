@@ -1,12 +1,13 @@
 import { useEffect, useState, useRef } from 'react'
 import { useDebounce } from 'use-debounce'
 import searchSongSpotify from '../server/services/scraping'
+import saveToDatabase from '../server/services/saveToDatabase'
 
 export const useSearch = (): {
   listOfSongs: any
   link: string
   handleOnChange: () => void
-  handleOnClick: (id: string) => void
+  handleOnClick: (id: string, song: any) => void
   songName: any
   isLoading: boolean
 } => {
@@ -41,7 +42,8 @@ export const useSearch = (): {
     setSearchSong(songName.current.value)
   }
 
-  const handleOnClick = (id: string): void => {
+  const handleOnClick = (id: string, song: any): void => {
+    saveToDatabase(song)
     setLink(id)
   }
 
