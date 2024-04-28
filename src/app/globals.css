@@ -69,3 +69,16 @@ circle {
     stroke-dashoffset: -125px;
   }
 }
+
+label {
+  color: white;
+}
+
+button {
+  margin-top: 20px;
+  color: black;
+  border: 2px solid white;
+  background-color: white;
+  border-radius: 3px;
+  padding: 5px;
+}

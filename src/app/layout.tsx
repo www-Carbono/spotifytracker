@@ -2,7 +2,7 @@ import React from 'react'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
-
+import { IsUserLoggedContext } from './context/isUserLogged'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -17,7 +17,9 @@ const RootLayout = ({
 }>): JSX.Element => {
   return (
     <html lang='en'>
-      <body className={inter.className}>{children}</body>
+      <IsUserLoggedContext>
+        <body className={inter.className}>{children}</body>
+      </IsUserLoggedContext>
     </html>
   )
 }
