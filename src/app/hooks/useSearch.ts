@@ -2,6 +2,8 @@ import { useEffect, useState, useRef } from 'react'
 import { useDebounce } from 'use-debounce'
 import searchSongSpotify from '../server/services/scraping'
 import saveToDatabase from '../server/services/saveToDatabase'
+import { useIsLogged } from './useIsLogged'
+import { type Track } from '@/app/types'
 
 export const useSearch = (): {
   listOfSongs: any
@@ -11,6 +13,7 @@ export const useSearch = (): {
   songName: any
   isLoading: boolean
 } => {
+  const userData = useIsLogged()
   const [searchSong, setSearchSong] = useState<any>('')
   const songName = useRef<any>('')
   const [songNameSearch] = useDebounce(searchSong, 800)
@@ -42,8 +45,10 @@ export const useSearch = (): {
     setSearchSong(songName.current.value)
   }
 
-  const handleOnClick = (id: string, song: any): void => {
-    saveToDatabase(song)
+  const handleOnClick = (id: string, song: Track): void => {
+    saveToDatabase(song, userData).catch((err) => {
+      console.log(err)
+    })
     setLink(id)
   }
 
