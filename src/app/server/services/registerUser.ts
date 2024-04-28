@@ -1,6 +1,5 @@
 'use client'
 import { createClient } from '@supabase/supabase-js'
-// import { useRouter } from 'next/router'
 
 interface props {
   email: string
@@ -12,7 +11,6 @@ const registerUser = async ({
   password,
   username
 }: props): Promise<boolean> => {
-  console.log('pasa')
   // const router = useRouter()
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL ?? ''
   const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_KEY ?? ''

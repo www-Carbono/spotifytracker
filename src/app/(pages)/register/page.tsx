@@ -1,11 +1,12 @@
 'use client'
-import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
 import registerUser from '@/app/server/services/registerUser'
-import { UserContext } from '@/app/context/isUserLogged'
+import { useIsLogged } from '@/app/hooks/useIsLogged'
+import { Loader } from '@/app/components/Loader'
 
 const Register = (): JSX.Element => {
   const [error, setError] = useState<boolean>(false)
-  const userData = useContext(UserContext)
+  const userData = useIsLogged()
   const onSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault()
     const { username, email, password, passwordRepeat } = Object.fromEntries(
@@ -23,7 +24,6 @@ const Register = (): JSX.Element => {
             if (!data) {
               setError(true)
             } else if (data) {
-              console.log('pasa')
               setError(false)
               window.location.href = '/dashboard'
             }
@@ -49,7 +49,9 @@ const Register = (): JSX.Element => {
       ) : (
         <div>
           {userData !== null ? (
-            'Cargando...'
+            <div className='flex items-center justify-center'>
+              <Loader />
+            </div>
           ) : (
             <form
               action=''

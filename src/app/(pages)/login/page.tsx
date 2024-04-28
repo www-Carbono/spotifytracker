@@ -1,11 +1,12 @@
 'use client'
-import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
 import loginUser from '@/app/server/services/loginUser'
-import { UserContext } from '@/app/context/isUserLogged'
+import { useIsLogged } from '@/app/hooks/useIsLogged'
+import { Loader } from '@/app/components/Loader'
 
 const Login = (): JSX.Element => {
   const [error, setError] = useState<boolean>(false)
-  const userData = useContext(UserContext)
+  const userData = useIsLogged()
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault()
@@ -41,7 +42,9 @@ const Login = (): JSX.Element => {
       ) : (
         <div>
           {userData !== null ? (
-            'Cargando...'
+            <div className='flex items-center justify-center'>
+              <Loader />
+            </div>
           ) : (
             <form
               action=''
