@@ -17,7 +17,7 @@ const registerUser = async ({
 
   const supabase = createClient(supabaseUrl, supabaseKey)
 
-  const { data, error } = await supabase.auth.signUp({
+  const { error } = await supabase.auth.signUp({
     email,
     password,
     options: {
@@ -26,7 +26,6 @@ const registerUser = async ({
       }
     }
   })
-  console.log(data, error)
   if (error !== null) {
     console.log(error)
     return false

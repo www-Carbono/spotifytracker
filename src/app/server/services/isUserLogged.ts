@@ -10,7 +10,6 @@ const isUserLogged = async (): Promise<any> => {
     data: { user }
   } = await supabase.auth.getUser()
 
-  console.log('aqui', user)
   return user
 }
 

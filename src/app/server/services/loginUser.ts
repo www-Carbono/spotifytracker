@@ -11,11 +11,10 @@ const loginUser = async ({ email, password }: props): Promise<boolean> => {
 
   const supabase = createClient(supabaseUrl, supabaseKey)
 
-  const { data, error } = await supabase.auth.signInWithPassword({
+  const { error } = await supabase.auth.signInWithPassword({
     email,
     password
   })
-  console.log(data)
   if (error !== null) {
     return false
   } else {

@@ -4,7 +4,6 @@ import { useIsLogged } from '@/app/hooks/useIsLogged'
 import { Loader } from '@/app/components/Loader'
 const Dashboard = (): JSX.Element => {
   const userData = useIsLogged()
-  console.log(userData)
   return (
     <div>
       {userData === undefined ? (
