@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import loginUser from '@/app/server/services/loginUser'
 import { useIsLogged } from '@/app/hooks/useIsLogged'
 import { Loader } from '@/app/components/Loader'
+import Link from 'next/link'
 
 const Login = (): JSX.Element => {
   const [error, setError] = useState<boolean>(false)
@@ -68,6 +69,10 @@ const Login = (): JSX.Element => {
                 placeholder='***************'
               />
               <button>Iniciar Sesion</button>
+              <p className='text-white'>
+                ¿No Tienes cuenta? Registrate haciendo click{' '}
+                <Link href='/register'>aquí</Link>
+              </p>
             </form>
           )}
         </div>
