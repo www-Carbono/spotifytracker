@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/indent */
 import { useEffect, useState, useRef } from 'react'
 import { useDebounce } from 'use-debounce'
 import searchSongSpotify from '../server/services/scraping'
@@ -5,7 +6,11 @@ import saveToDatabase from '../server/services/saveToDatabase'
 import { useIsLogged } from './useIsLogged'
 import { type Track } from '@/app/types'
 
-export const useSearch = (): {
+export const useSearch = ({
+  type
+}: {
+  type: string
+}): {
   listOfSongs: any
   link: string
   handleOnChange: () => void
@@ -22,9 +27,13 @@ export const useSearch = (): {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   useEffect(() => {
     if (songNameSearch.length > 0) {
-      searchSongSpotify(songNameSearch)
+      searchSongSpotify(songNameSearch, type)
         .then((data: any) => {
-          setListsOfSongs(data)
+          if (type === 'track') {
+            setListsOfSongs(data.tracks.items)
+          } else {
+            setListsOfSongs(data.artists.items)
+          }
           setIsLoading(false)
         })
         .catch((err: any) => {
@@ -46,10 +55,18 @@ export const useSearch = (): {
   }
 
   const handleOnClick = (id: string, song: Track): void => {
-    saveToDatabase(song, userData).catch((err) => {
-      console.log(err)
-    })
-    setLink(id)
+    if (type === 'track') {
+      saveToDatabase(song, userData, 'track').catch((err) => {
+        console.log(err)
+      })
+      setLink(id)
+    } else {
+      const artistId = id.substring(32)
+      saveToDatabase(song, userData, 'artist').catch((err) => {
+        console.log(err)
+      })
+      setLink(artistId)
+    }
   }
 
   return {

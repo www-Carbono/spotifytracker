@@ -2,6 +2,7 @@
 import React from 'react'
 import { useIsLogged } from '@/hooks/useIsLogged'
 import { Loader } from '@/components/Loader'
+import { NavBar } from '@/components/navBar'
 const Dashboard = (): JSX.Element => {
   const userData = useIsLogged()
   return (
@@ -13,7 +14,7 @@ const Dashboard = (): JSX.Element => {
       ) : userData === null ? (
         window && (window.location.href = '/login')
       ) : (
-        <p>Logeado</p>
+        <NavBar />
       )}
     </div>
   )
