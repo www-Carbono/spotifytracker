@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/indent */
 export type Json =
   | string
   | number
