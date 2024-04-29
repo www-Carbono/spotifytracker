@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { AddNewSong } from './addNewSong'
 import { AddNewArtist } from './addNewArtist'
+import { AddNewFollowers } from './addNewFollowers'
 export const NavBar = (): JSX.Element => {
   const [component, setComponent] = useState<JSX.Element>()
 
@@ -27,7 +28,7 @@ export const NavBar = (): JSX.Element => {
         </li>
         <li
           onClick={() => {
-            changeComponent(<AddNewSong />)
+            changeComponent(<AddNewFollowers />)
           }}
         >
           {' '}

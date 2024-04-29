@@ -61,7 +61,7 @@ export const SearchSong = ({ type }: Props): JSX.Element => {
                 }}
               >
                 <img
-                  src={song.images[2].url}
+                  src={song?.images[2].url}
                   height={100}
                   width={100}
                   alt=''

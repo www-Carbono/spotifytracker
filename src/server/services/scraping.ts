@@ -54,16 +54,17 @@ const resetToken = async (): Promise<string> => {
 
 const searchSongSpotify = async (song: any, type: string): Promise<any> => {
   // track
+  const LINK =
+    type === 'track'
+      ? `${process.env.SPOTIFY_API_LINK}search?q=${song}&type=${type}&limit=10`
+      : `${process.env.SPOTIFY_API_LINK}search?q=${song}&type=artist&limit=10`
   const token = await resetToken()
-  const request = await fetch(
-    `${process.env.SPOTIFY_API_LINK}search?q=${song}&type=${type}`,
-    {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
+  const request = await fetch(LINK, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${token}`
     }
-  )
+  })
   const data = await request.json()
   return data
 }

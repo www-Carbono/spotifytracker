@@ -62,7 +62,7 @@ export const useSearch = ({
       setLink(id)
     } else {
       const artistId = id.substring(32)
-      saveToDatabase(song, userData, 'artist').catch((err) => {
+      saveToDatabase(song, userData, type).catch((err) => {
         console.log(err)
       })
       setLink(artistId)

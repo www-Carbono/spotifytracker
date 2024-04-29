@@ -7,6 +7,7 @@ const saveToDatabase = async (
   userid: any,
   type: string
 ): Promise<void> => {
+  console.log(type)
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL ?? ''
   const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_KEY ?? ''
   const supabase = createClient(supabaseUrl, supabaseKey)
@@ -30,9 +31,21 @@ const saveToDatabase = async (
       userId: userid.id
     })
     console.log(error)
+  } else if (type === 'artistFollowers') {
+    console.log('pasa por aqui')
+    const MonthlyListeners = await getViews(data2.id as string, 'artist')
+    const dataToUpload = {
+      [currentDate]: MonthlyListeners.followers
+    }
+    const { error } = await supabase.from('followerstracker').insert({
+      artistname: data2.name,
+      coverlink: data2.images[0].url,
+      songlink: data2.id,
+      monthlylisteners: dataToUpload,
+      userid: userid.id
+    })
+    console.log(error)
   } else {
-    // const { data, error } = await supabase.rpc('testing')
-
     const MonthlyListeners = await getViews(data2.id as string, 'artist')
     const dataToUpload = {
       [currentDate]: MonthlyListeners.monthlyListeners
