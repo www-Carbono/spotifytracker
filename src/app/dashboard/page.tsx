@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
-import { useIsLogged } from '@/app/hooks/useIsLogged'
-import { Loader } from '@/app/components/Loader'
+import { useIsLogged } from '@/hooks/useIsLogged'
+import { Loader } from '@/components/Loader'
 const Dashboard = (): JSX.Element => {
   const userData = useIsLogged()
   return (

@@ -1,6 +1,6 @@
 'use client'
 import React from 'react'
-import { SearchSong } from './components/SearchSong'
+import { SearchSong } from './../components/SearchSong'
 
 const Home = (): JSX.Element => {
   return (

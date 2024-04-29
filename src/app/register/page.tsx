@@ -1,8 +1,8 @@
 'use client'
 import React, { useState } from 'react'
-import registerUser from '@/app/server/services/registerUser'
-import { useIsLogged } from '@/app/hooks/useIsLogged'
-import { Loader } from '@/app/components/Loader'
+import registerUser from '@/server/services/registerUser'
+import { useIsLogged } from '@/hooks/useIsLogged'
+import { Loader } from '@/components/Loader'
 
 const Register = (): JSX.Element => {
   const [error, setError] = useState<boolean>(false)

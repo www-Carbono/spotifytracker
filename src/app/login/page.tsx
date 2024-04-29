@@ -1,8 +1,8 @@
 'use client'
 import React, { useState } from 'react'
-import loginUser from '@/app/server/services/loginUser'
-import { useIsLogged } from '@/app/hooks/useIsLogged'
-import { Loader } from '@/app/components/Loader'
+import loginUser from '@/server/services/loginUser'
+import { useIsLogged } from '@/hooks/useIsLogged'
+import { Loader } from '@/components/Loader'
 import Link from 'next/link'
 
 const Login = (): JSX.Element => {
