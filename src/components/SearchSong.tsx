@@ -18,18 +18,29 @@ export const SearchSong = ({ type }: Props): JSX.Element => {
   } = useSearch({ type })
 
   return (
-    <form className='flex flex-col'>
+    <form
+      className='flex flex-col'
+      onSubmit={(event) => {
+        event.preventDefault()
+      }}
+    >
       <label
         htmlFor='songName'
         className='m-5'
       >
-        Introduce el Nombre de la Canción
+        {type === 'track' ? (
+          <p>Introduce el Nombre de la Canción</p>
+        ) : (
+          <p>Introduce el Nombre del Artista</p>
+        )}
       </label>
       <input
         ref={songName}
         type='text'
         id='songName'
-        onChange={handleOnChange}
+        onChange={(event) => {
+          handleOnChange(event)
+        }}
         className='text-black'
       />
       <div className='songs text-white flex flex-col gap-5 p-5'>

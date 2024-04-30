@@ -13,7 +13,7 @@ export const useSearch = ({
 }): {
   listOfSongs: any
   link: string
-  handleOnChange: () => void
+  handleOnChange: (event: React.ChangeEvent<HTMLDivElement>) => void
   handleOnClick: (id: string, song: any) => void
   songName: any
   isLoading: boolean
@@ -50,7 +50,8 @@ export const useSearch = ({
     setListsOfSongs(undefined)
   }, [songName.current.value])
 
-  const handleOnChange = (): void => {
+  const handleOnChange = (event: React.ChangeEvent<HTMLDivElement>): void => {
+    event.preventDefault()
     setSearchSong(songName.current.value)
   }
 
