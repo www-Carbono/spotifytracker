@@ -2,6 +2,7 @@ import React from 'react'
 
 import { useSearch } from '../hooks/useSearch'
 import { Loader } from './Loader'
+import { PopUp } from './popup'
 
 interface Props {
   type: string
@@ -14,7 +15,9 @@ export const SearchSong = ({ type }: Props): JSX.Element => {
     listOfSongs,
     // link,
     songName,
-    isLoading
+    isLoading,
+    error,
+    done
   } = useSearch({ type })
 
   return (
@@ -41,8 +44,10 @@ export const SearchSong = ({ type }: Props): JSX.Element => {
         onChange={(event) => {
           handleOnChange(event)
         }}
-        className='text-black'
+        className='text-black mb-10'
       />
+      {error ? <PopUp type='error' /> : ''}
+      {done ? <PopUp type='done' /> : ''}
       <div className='songs text-white flex flex-col gap-5 p-5'>
         {listOfSongs !== undefined ? (
           listOfSongs?.map((song: any) =>

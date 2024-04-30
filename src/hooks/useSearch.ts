@@ -17,6 +17,8 @@ export const useSearch = ({
   handleOnClick: (id: string, song: any) => void
   songName: any
   isLoading: boolean
+  error: boolean
+  done: boolean
 } => {
   const userData = useIsLogged()
   const [searchSong, setSearchSong] = useState<any>('')
@@ -25,6 +27,8 @@ export const useSearch = ({
   const [listOfSongs, setListsOfSongs] = useState<any>()
   const [link, setLink] = useState<string>('')
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [error, setError] = useState<boolean>(false)
+  const [done, setDone] = useState<boolean>(false)
   useEffect(() => {
     if (songNameSearch.length > 0) {
       searchSongSpotify(songNameSearch, type)
@@ -53,19 +57,46 @@ export const useSearch = ({
   const handleOnChange = (event: React.ChangeEvent<HTMLDivElement>): void => {
     event.preventDefault()
     setSearchSong(songName.current.value)
+    setError(false)
+    setDone(false)
   }
 
   const handleOnClick = (id: string, song: Track): void => {
+    setListsOfSongs(undefined)
+    setIsLoading(true)
+    setError(false)
+    setDone(false)
+
     if (type === 'track') {
-      saveToDatabase(song, userData, 'track').catch((err) => {
-        console.log(err)
-      })
+      saveToDatabase(song, userData, 'track')
+        .then((data) => {
+          console.log(data)
+          setError(false)
+          setDone(true)
+          setIsLoading(false)
+        })
+        .catch((err) => {
+          console.log(err)
+          setError(true)
+          setDone(false)
+          setIsLoading(false)
+        })
       setLink(id)
     } else {
       const artistId = id.substring(32)
-      saveToDatabase(song, userData, type).catch((err) => {
-        console.log(err)
-      })
+      saveToDatabase(song, userData, type)
+        .then((data) => {
+          console.log(data)
+          setError(false)
+          setDone(true)
+          setIsLoading(false)
+        })
+        .catch((err) => {
+          console.log(err)
+          setError(true)
+          setDone(false)
+          setIsLoading(false)
+        })
       setLink(artistId)
     }
   }
@@ -76,6 +107,8 @@ export const useSearch = ({
     handleOnChange,
     handleOnClick,
     songName,
-    isLoading
+    isLoading,
+    error,
+    done
   }
 }
