@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import { IsUserLoggedContext } from './../context/isUserLogged'
+import { TopBar } from '@/components/topbar'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -18,7 +19,10 @@ const RootLayout = ({
   return (
     <html lang='en'>
       <IsUserLoggedContext>
-        <body className={inter.className}>{children}</body>
+        <body className={inter.className}>
+          <TopBar />
+          {children}
+        </body>
       </IsUserLoggedContext>
     </html>
   )
