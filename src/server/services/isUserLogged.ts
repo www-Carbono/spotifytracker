@@ -13,7 +13,6 @@ const isUserLogged = async (): Promise<any> => {
 
 export const logout = async (): Promise<void> => {
   const { data, error } = await supabase.auth.signOut()
-  return data
 }
 
 export default isUserLogged
