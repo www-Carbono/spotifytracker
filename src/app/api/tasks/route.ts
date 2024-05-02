@@ -6,11 +6,11 @@ import { createClient } from '@supabase/supabase-js'
 // api > hello > route.ts
 
 import { NextResponse } from 'next/server'
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL ?? ''
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_KEY ?? ''
-const supabase = createClient(supabaseUrl, supabaseKey)
 
 export async function GET(): Promise<any> {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL ?? ''
+  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_KEY ?? ''
+  const supabase = createClient(supabaseUrl, supabaseKey)
   console.log('Funciona Correctamente')
   const { data, error } = await supabase.rpc('testing')
   console.log(data, error)
