@@ -3,7 +3,7 @@ import { isSpotifyUpdated } from '@/server/services/checkSpotifyUpdates'
 import { NextResponse } from 'next/server'
 import { unstable_noStore as noStore } from 'next/cache'
 
-export async function GET(): Promise<any> {
+export async function POST(): Promise<any> {
   noStore()
 
   const { songViews, artistFollowers, artistMonthlyListeners } =
