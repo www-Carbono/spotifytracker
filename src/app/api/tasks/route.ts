@@ -1,7 +1,7 @@
 import { type NextApiRequest, type NextApiResponse } from 'next'
 import { isSpotifyUpdated } from '@/server/services/checkSpotifyUpdates'
 
-const handler = async (
+const GET = async (
   req: NextApiRequest,
   res: NextApiResponse
 ): Promise<void> => {
@@ -17,4 +17,4 @@ const handler = async (
   }
 }
 
-export default handler
+export default GET
