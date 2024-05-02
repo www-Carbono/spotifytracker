@@ -13,6 +13,7 @@ const supabase = createClient(supabaseUrl, supabaseKey)
 export async function GET(): Promise<any> {
   console.log('Funciona Correctamente')
   const { data, error } = await supabase.rpc('testing')
+  console.log(data, error)
 
   const { songViews, artistFollowers, artistMonthlyListeners } =
     await isSpotifyUpdated()
