@@ -4,6 +4,7 @@ import { createClient } from '@supabase/supabase-js'
 import { NextResponse } from 'next/server'
 
 export async function GET(): Promise<any> {
+  console.log('update')
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL ?? ''
   const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_KEY ?? ''
   const supabase = createClient(supabaseUrl, supabaseKey)
