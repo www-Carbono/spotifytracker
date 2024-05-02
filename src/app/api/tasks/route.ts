@@ -6,5 +6,6 @@
 import { NextResponse } from 'next/server'
 
 export async function GET(): Promise<any> {
+  console.log('Funciona Correctamente')
   return NextResponse.json({ ok: true })
 }
