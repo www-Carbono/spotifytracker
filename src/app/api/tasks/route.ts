@@ -2,8 +2,11 @@
 import { isSpotifyUpdated } from '@/server/services/checkSpotifyUpdates'
 import { createClient } from '@supabase/supabase-js'
 import { NextResponse } from 'next/server'
+import { unstable_noStore as noStore } from 'next/cache'
 
 export async function GET(): Promise<any> {
+  noStore()
+
   console.log('update')
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL ?? ''
   const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_KEY ?? ''
