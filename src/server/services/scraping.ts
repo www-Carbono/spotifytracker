@@ -76,7 +76,7 @@ export const CompareData = async (
   const songViews = await getViews(songId, 'track')
   const artistFollowersPromise = await getViews(artistId, 'followers')
   const artistFollowers = artistFollowersPromise.followers
-  const artistMonthlyListeners = artistFollowers.monthlyListeners
+  const artistMonthlyListeners = artistFollowersPromise.monthlyListeners
 
   return { songViews, artistFollowers, artistMonthlyListeners }
 }

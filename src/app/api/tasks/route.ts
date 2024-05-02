@@ -15,4 +15,7 @@ export async function GET(): Promise<any> {
     artistFollowers,
     artistMonthlyListeners
   })
+  // return NextResponse.json({
+  //   ok: 'ok'
+  // })
 }
