@@ -14,7 +14,7 @@ const Dashboard = (): JSX.Element => {
       ) : userData === null ? (
         window && (window.location.href = '/login')
       ) : (
-        <NavBar />
+        <NavBar userData={userData} />
       )}
     </div>
   )

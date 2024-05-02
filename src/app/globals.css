@@ -106,3 +106,7 @@ button {
   font-size: 14px;
   color: #fff;
 }
+
+th {
+  padding: 10px 30px;
+}

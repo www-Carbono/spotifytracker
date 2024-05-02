@@ -2,9 +2,16 @@ import React, { useState } from 'react'
 import { AddNewSong } from './addNewSong'
 import { AddNewArtist } from './addNewArtist'
 import { AddNewFollowers } from './addNewFollowers'
-export const NavBar = (): JSX.Element => {
+import { Stats } from './stats'
+export const NavBar = (userData: any): JSX.Element => {
   const [component, setComponent] = useState<JSX.Element>()
   const [selected, setSelected] = useState<number>()
+
+  const infoData = {
+    canciones: 'canciones',
+    oyentes: 'oyentes',
+    seguidores: 'seguidores'
+  }
 
   const changeComponent = (component: JSX.Element): void => {
     setComponent(component)
@@ -40,6 +47,54 @@ export const NavBar = (): JSX.Element => {
         >
           {' '}
           Añadir Seguimiento de Seguidores en Spotify
+        </li>
+        <li
+          onClick={() => {
+            changeComponent(
+              <Stats
+                type={infoData.canciones}
+                database='spotifytracker'
+                userData={userData}
+              />
+            )
+            setSelected(4)
+          }}
+          className={selected === 4 ? 'text-red-700' : ''}
+        >
+          {' '}
+          Oyentes Mensuales
+        </li>
+        <li
+          onClick={() => {
+            changeComponent(
+              <Stats
+                type={infoData.oyentes}
+                database='monthlylistenerstracker'
+                userData={userData}
+              />
+            )
+            setSelected(5)
+          }}
+          className={selected === 5 ? 'text-red-700' : ''}
+        >
+          {' '}
+          Seguimiento de Seguidores en Spotify
+        </li>
+        <li
+          onClick={() => {
+            changeComponent(
+              <Stats
+                type={infoData.seguidores}
+                database='followerstracker'
+                userData={userData}
+              />
+            )
+            setSelected(6)
+          }}
+          className={selected === 6 ? 'text-red-700' : ''}
+        >
+          {' '}
+          Seguidmiento Oyentes Mensuales
         </li>
       </ul>
       <div className='mx-auto'>{component}</div>
