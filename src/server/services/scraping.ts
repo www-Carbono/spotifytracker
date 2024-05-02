@@ -52,10 +52,7 @@ const resetToken = async (): Promise<string> => {
   return token
 }
 
-export const searchSongSpotify = async (
-  song: any,
-  type: string
-): Promise<any> => {
+const searchSongSpotify = async (song: any, type: string): Promise<any> => {
   // track
   const LINK =
     type === 'track'
@@ -83,3 +80,5 @@ export const CompareData = async (
 
   return { songViews, artistFollowers, artistMonthlyListeners }
 }
+
+export default searchSongSpotify
