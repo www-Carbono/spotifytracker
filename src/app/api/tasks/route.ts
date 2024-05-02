@@ -1,20 +1,16 @@
-import { type NextApiRequest, type NextApiResponse } from 'next'
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+/* eslint-disable @typescript-eslint/space-before-function-paren */
 import { isSpotifyUpdated } from '@/server/services/checkSpotifyUpdates'
 
-const GET = async (
-  req: NextApiRequest,
-  res: NextApiResponse
-): Promise<void> => {
-  try {
-    await isSpotifyUpdated()
-    // La tarea fue exitosa, responde con un código 200
-    console.log('pasa por aquí')
-    res.status(200).send('results')
-  } catch (err) {
-    // La tarea falló, responde con un código 500 para que Mergent reintente
-    console.log('error')
-    res.status(500).json({ error: 'err.message' })
-  }
-}
+// api > hello > route.ts
+import { type NextRequest, NextResponse } from 'next/server'
 
-export default GET
+export async function GET(request: NextRequest) {
+  await isSpotifyUpdated()
+  const greeting = 'Hello World!!'
+  const json = {
+    greeting
+  }
+
+  return NextResponse.json(json)
+}
