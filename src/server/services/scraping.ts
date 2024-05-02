@@ -78,6 +78,8 @@ export const CompareData = async (
   const artistFollowers = artistFollowersPromise.followers
   const artistMonthlyListeners = artistFollowersPromise.monthlyListeners
 
+  console.log(artistMonthlyListeners, 'Oyentes <<<')
+
   return { songViews, artistFollowers, artistMonthlyListeners }
 }
 

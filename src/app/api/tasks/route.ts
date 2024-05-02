@@ -10,6 +10,8 @@ export async function GET(): Promise<any> {
   const { songViews, artistFollowers, artistMonthlyListeners } =
     await isSpotifyUpdated()
 
+  console.log(songViews, artistFollowers, artistMonthlyListeners)
+
   return NextResponse.json({
     songViews,
     artistFollowers,
