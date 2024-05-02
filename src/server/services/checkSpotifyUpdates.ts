@@ -9,7 +9,5 @@ export const isSpotifyUpdated = async (): Promise<any> => {
   const { songViews, artistFollowers, artistMonthlyListeners } =
     await CompareData(songId, artistId)
 
-  console.log(songViews, artistFollowers, artistMonthlyListeners)
-
   return { songViews, artistFollowers, artistMonthlyListeners }
 }
