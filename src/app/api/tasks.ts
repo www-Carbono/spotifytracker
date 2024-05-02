@@ -1,4 +1,3 @@
-import Mergent from 'mergent'
 import { isSpotifyUpdated } from '@/server/services/checkSpotifyUpdates'
 
 const handler = async (req: any, res: any): Promise<void> => {
