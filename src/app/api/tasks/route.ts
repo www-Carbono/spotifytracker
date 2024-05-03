@@ -11,15 +11,11 @@ const SpotifyUpdateChecker = {
 }
 export async function POST(req: NextRequest): Promise<any> {
   noStore()
-  console.log('llamada')
 
   const data = await req.formData()
-  console.log(data)
   const update = data.get('update')
-  console.log(update)
 
   if (update) {
-    console.log('pasa por update')
     const DatabaseAndCurrentData: SpotifyUpdaterData = await isSpotifyUpdated()
     if (
       DatabaseAndCurrentData.DatabaseSongViews !==
