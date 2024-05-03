@@ -73,10 +73,12 @@ export const CompareData = async (
   songId: string,
   artistId: string
 ): Promise<any> => {
+  // Scrapea los datos actuales
   const songViews = await getViews(songId, 'track')
   const artistFollowersPromise = await getViews(artistId, 'followers')
-  const artistFollowers = artistFollowersPromise.followers
-  const artistMonthlyListeners = artistFollowersPromise.monthlyListeners
+  const artistFollowers: string = artistFollowersPromise.followers.toString()
+  const artistMonthlyListeners: string =
+    artistFollowersPromise.monthlyListeners.toString()
 
   return { songViews, artistFollowers, artistMonthlyListeners }
 }

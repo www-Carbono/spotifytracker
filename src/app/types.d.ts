@@ -52,3 +52,12 @@ export interface Track {
   type: string
   uri: string
 }
+
+export interface SpotifyUpdaterData {
+  DatabaseSongViews: string
+  DatabaseMonthlyListeners: string
+  DatabaseArtistFollowers: string
+  CurrentSongViews: string
+  CurrentMonthlyListeners: string
+  CurrentArtistFollowers: string
+}
