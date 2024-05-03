@@ -14,28 +14,29 @@ export async function POST(req: NextRequest): Promise<any> {
 
   const data = await req.formData()
   const update = data.get('update')
+  const updateBoolean = update === 'true'
 
-  if (update) {
-    const DatabaseAndCurrentData: SpotifyUpdaterData = await isSpotifyUpdated()
-    if (
-      DatabaseAndCurrentData.DatabaseSongViews !==
-      DatabaseAndCurrentData.CurrentSongViews
-    ) {
-      SpotifyUpdateChecker.SongViews = true
-    }
-    if (
-      DatabaseAndCurrentData.DatabaseMonthlyListeners !==
-      DatabaseAndCurrentData.CurrentMonthlyListeners
-    ) {
-      SpotifyUpdateChecker.MonthlyListeners = true
-    }
-    if (
-      DatabaseAndCurrentData.DatabaseArtistFollowers !==
-      DatabaseAndCurrentData.CurrentArtistFollowers
-    ) {
-      SpotifyUpdateChecker.ArtistFollowers = true
-    }
-    console.log(DatabaseAndCurrentData)
+  if (updateBoolean) {
+    // const DatabaseAndCurrentData: SpotifyUpdaterData = await isSpotifyUpdated()
+    // if (
+    //   DatabaseAndCurrentData.DatabaseSongViews !==
+    //   DatabaseAndCurrentData.CurrentSongViews
+    // ) {
+    //   SpotifyUpdateChecker.SongViews = true
+    // }
+    // if (
+    //   DatabaseAndCurrentData.DatabaseMonthlyListeners !==
+    //   DatabaseAndCurrentData.CurrentMonthlyListeners
+    // ) {
+    //   SpotifyUpdateChecker.MonthlyListeners = true
+    // }
+    // if (
+    //   DatabaseAndCurrentData.DatabaseArtistFollowers !==
+    //   DatabaseAndCurrentData.CurrentArtistFollowers
+    // ) {
+    //   SpotifyUpdateChecker.ArtistFollowers = true
+    // }
+    // console.log(DatabaseAndCurrentData)
   }
 
   return NextResponse.json({ SpotifyUpdateChecker })
