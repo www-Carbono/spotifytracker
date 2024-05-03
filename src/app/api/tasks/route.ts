@@ -15,7 +15,7 @@ export async function POST(req: NextRequest): Promise<any> {
 
   const data = await req.formData()
   console.log(data)
-  const update = Boolean(data.get('update'))
+  const update = data.get('update')
   console.log(update)
 
   if (update) {
