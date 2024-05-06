@@ -63,3 +63,12 @@ export interface SpotifyUpdaterData {
   CurrentArtistFollowers: string
   CurrentDate: string
 }
+
+export interface OyentesMensuales {
+  artistname: string
+  coverlink: string
+  songlink: string
+  monthlylisteners: any
+  userId: string
+  id: string
+}

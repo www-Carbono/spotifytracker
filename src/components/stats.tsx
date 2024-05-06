@@ -1,7 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 'use client'
 import React, { useEffect, useState } from 'react'
 import { Loader } from './Loader'
 import { getData } from '@/server/services/saveToDatabase'
+import { type OyentesMensuales } from '@/app/types'
 interface Props {
   type: string
   database: string
@@ -74,7 +76,9 @@ export const Stats = ({ type, database, userData }: Props): JSX.Element => {
                       <td>
                         {elemento?.viewsTest !== null &&
                           elemento?.viewsTest !== undefined &&
-                          Object.values(elemento?.viewsTest as number)[0]}
+                          Object.values(elemento?.viewsTest as number)[
+                            Object.keys(elemento.viewsTest).length - 1
+                          ]}
                       </td>
                       <td>
                         {elemento?.viewsTest !== null &&
@@ -83,9 +87,31 @@ export const Stats = ({ type, database, userData }: Props): JSX.Element => {
                           undefined
                           ? '0'
                           : elemento?.viewsTest !== null &&
-                            elemento?.viewsTest !== undefined &&
-                            Object.values(elemento?.viewsTest as number)[1] -
-                              Object.values(elemento?.viewsTest as number)[0]}
+                            elemento?.viewsTest !== undefined && (
+                              <span
+                                className={
+                                  Object.values(elemento?.viewsTest as number)[
+                                    Object.keys(elemento.viewsTest).length - 1
+                                  ] -
+                                    Object.values(
+                                      elemento?.viewsTest as number
+                                    )[
+                                      Object.keys(elemento.viewsTest).length - 2
+                                    ] >
+                                  0
+                                    ? 'text-green-500'
+                                    : 'text-red-500'
+                                }
+                              >
+                                +
+                                {Object.values(
+                                  elemento?.viewsTest as number
+                                )[1] -
+                                  Object.values(
+                                    elemento?.viewsTest as number
+                                  )[0]}
+                              </span>
+                            )}
                       </td>
                       <td>Click</td>
                     </tr>
@@ -132,9 +158,9 @@ export const Stats = ({ type, database, userData }: Props): JSX.Element => {
                       <td>
                         {elemento?.monthlylisteners !== null &&
                           elemento?.monthlylisteners !== undefined &&
-                          Object.values(
-                            elemento?.monthlylisteners as number
-                          )[0]}
+                          Object.values(elemento?.monthlylisteners as number)[
+                            Object.keys(elemento.monthlylisteners).length - 1
+                          ]}
                       </td>
                       <td>
                         {elemento?.monthlylisteners !== null &&
@@ -144,13 +170,46 @@ export const Stats = ({ type, database, userData }: Props): JSX.Element => {
                         )[1] === undefined
                           ? '0'
                           : elemento?.monthlylisteners !== null &&
-                            elemento?.monthlylisteners !== undefined &&
-                            Object.values(
-                              elemento?.monthlylisteners as number
-                            )[1] -
-                              Object.values(
-                                elemento?.monthlylisteners as number
-                              )[0]}
+                            elemento?.monthlylisteners !== undefined && (
+                              <span
+                                className={
+                                  Object.values(
+                                    elemento?.monthlylisteners as number
+                                  )[
+                                    Object.keys(elemento.monthlylisteners)
+                                      .length - 1
+                                  ] -
+                                    Object.values(
+                                      elemento?.monthlylisteners as number
+                                    )[
+                                      Object.keys(elemento.monthlylisteners)
+                                        .length - 2
+                                    ] >
+                                  0
+                                    ? "text-green-500 before:content-['+']"
+                                    : " text-red-500 before:content-['-'] "
+                                }
+                              >
+                                {Object.values(
+                                  elemento?.monthlylisteners as Record<
+                                    string,
+                                    number
+                                  >
+                                )[
+                                  Object.keys(elemento?.monthlylisteners)
+                                    .length - 1
+                                ] -
+                                  Object.values(
+                                    elemento.monthlylisteners as Record<
+                                      string,
+                                      number
+                                    >
+                                  )[
+                                    Object.keys(elemento.monthlylisteners)
+                                      .length - 2
+                                  ]}
+                              </span>
+                            )}
                       </td>
                       <td>Click</td>
                     </tr>
@@ -179,7 +238,7 @@ export const Stats = ({ type, database, userData }: Props): JSX.Element => {
                   </tr>
                 </thead>
                 <tbody>
-                  {data?.map((elemento: any) => (
+                  {data?.map((elemento: OyentesMensuales) => (
                     <tr
                       key={elemento?.id}
                       className='text-center'
@@ -197,9 +256,9 @@ export const Stats = ({ type, database, userData }: Props): JSX.Element => {
                       <td>
                         {elemento?.monthlylisteners !== null &&
                           elemento?.monthlylisteners !== undefined &&
-                          Object.values(
-                            elemento?.monthlylisteners as number
-                          )[0]}
+                          Object.values(elemento?.monthlylisteners as number)[
+                            Object.keys(elemento.monthlylisteners).length - 1
+                          ]}
                       </td>
                       <td>
                         {elemento?.monthlylisteners !== null &&
@@ -209,13 +268,46 @@ export const Stats = ({ type, database, userData }: Props): JSX.Element => {
                         )[1] === undefined
                           ? '0'
                           : elemento?.monthlylisteners !== null &&
-                            elemento?.monthlylisteners !== undefined &&
-                            Object.values(
-                              elemento?.monthlylisteners as number
-                            )[1] -
-                              Object.values(
-                                elemento?.monthlylisteners as number
-                              )[0]}
+                            elemento?.monthlylisteners !== undefined && (
+                              <span
+                                className={
+                                  Object.values(
+                                    elemento?.monthlylisteners as number
+                                  )[
+                                    Object.keys(elemento.monthlylisteners)
+                                      .length - 1
+                                  ] -
+                                    Object.values(
+                                      elemento?.monthlylisteners as number
+                                    )[
+                                      Object.keys(elemento.monthlylisteners)
+                                        .length - 2
+                                    ] >
+                                  0
+                                    ? "text-green-500 before:content-['+']"
+                                    : " text-red-500 before:content-['-'] "
+                                }
+                              >
+                                {Object.values(
+                                  elemento?.monthlylisteners as Record<
+                                    string,
+                                    number
+                                  >
+                                )[
+                                  Object.keys(elemento?.monthlylisteners)
+                                    .length - 1
+                                ] -
+                                  Object.values(
+                                    elemento.monthlylisteners as Record<
+                                      string,
+                                      number
+                                    >
+                                  )[
+                                    Object.keys(elemento.monthlylisteners)
+                                      .length - 2
+                                  ]}
+                              </span>
+                            )}
                       </td>
                       <td>Click</td>
                     </tr>
