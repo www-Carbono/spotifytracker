@@ -23,18 +23,24 @@ export async function POST(req: NextRequest): Promise<any> {
       DatabaseAndCurrentData.CurrentSongViews
     ) {
       SpotifyUpdateChecker.SongViews = true
+    } else {
+      SpotifyUpdateChecker.SongViews = false
     }
     if (
       DatabaseAndCurrentData.DatabaseMonthlyListeners !==
       DatabaseAndCurrentData.CurrentMonthlyListeners
     ) {
       SpotifyUpdateChecker.MonthlyListeners = true
+    } else {
+      SpotifyUpdateChecker.MonthlyListeners = false
     }
     if (
       DatabaseAndCurrentData.DatabaseArtistFollowers !==
       DatabaseAndCurrentData.CurrentArtistFollowers
     ) {
-      SpotifyUpdateChecker.ArtistFollowers = true
+      SpotifyUpdateChecker.MonthlyListeners = true
+    } else {
+      SpotifyUpdateChecker.MonthlyListeners = false
     }
     console.log(DatabaseAndCurrentData)
   }
