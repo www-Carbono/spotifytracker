@@ -1,5 +1,5 @@
 'use server'
-export const getViews = async (songId: string, type: string): Promise<any> => {
+export const getViews = async (songId: any, type: string): Promise<any> => {
   const token = await resetToken()
   const URL =
     type === 'track'

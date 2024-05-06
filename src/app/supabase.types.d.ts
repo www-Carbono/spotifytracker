@@ -15,7 +15,7 @@ export interface Database {
           artistName: string | null
           coverLink: string | null
           id: string
-          songLink: string | null
+          songlink: string | null
           songName: string | null
           userId: string | null
           viewsTest: Json
@@ -24,7 +24,7 @@ export interface Database {
           artistName?: string | null
           coverLink?: string | null
           id?: string
-          songLink?: string | null
+          songlink?: string | null
           songName?: string | null
           userId?: string | null
           viewsTest: Json
@@ -33,7 +33,7 @@ export interface Database {
           artistName?: string | null
           coverLink?: string | null
           id?: string
-          songLink?: string | null
+          songlink?: string | null
           songName?: string | null
           userId?: string | null
           viewsTest?: Json

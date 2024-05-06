@@ -3,6 +3,7 @@ import { isSpotifyUpdated } from '@/server/services/checkSpotifyUpdates'
 import { type NextRequest, NextResponse } from 'next/server'
 import { unstable_noStore as noStore } from 'next/cache'
 import { type SpotifyUpdaterData } from '@/app/types'
+import { updateAll, updateChecker } from '@/server/services/saveToDatabase'
 
 const SpotifyUpdateChecker = {
   SongViews: false,
@@ -16,6 +17,14 @@ export async function POST(req: NextRequest): Promise<any> {
   const update = data.get('update')
   const updateBoolean = update === 'true'
 
+  const date = new Date()
+  const day = date.getDate()
+  const month = date.getMonth() + 1
+  const year = date.getFullYear()
+
+  // const fulldate = `${day}/${month}/${year}`
+  console.log(day, month, year)
+
   if (updateBoolean) {
     const DatabaseAndCurrentData: SpotifyUpdaterData = await isSpotifyUpdated()
     if (
@@ -23,27 +32,95 @@ export async function POST(req: NextRequest): Promise<any> {
       DatabaseAndCurrentData.CurrentSongViews
     ) {
       SpotifyUpdateChecker.SongViews = true
-    } else {
-      SpotifyUpdateChecker.SongViews = false
+      updateChecker(
+        'songviews',
+        DatabaseAndCurrentData.CurrentSongViews,
+        1,
+        'checkupdated'
+      )
+        .then(() => {
+          console.log('Song Views Updated!')
+          updateAll('spotifytracker', 'viewsTest', `${month}/${day}`, 'track')
+            .then((data) => {
+              console.log(data)
+            })
+            .catch((error: any) => {
+              console.log(error)
+            })
+        })
+        .catch(() => {
+          console.log('Error Updating Song Views')
+        })
     }
     if (
       DatabaseAndCurrentData.DatabaseMonthlyListeners !==
       DatabaseAndCurrentData.CurrentMonthlyListeners
     ) {
       SpotifyUpdateChecker.MonthlyListeners = true
-    } else {
-      SpotifyUpdateChecker.MonthlyListeners = false
+      updateChecker(
+        'monthlylisteners',
+        DatabaseAndCurrentData.CurrentMonthlyListeners,
+        1,
+        'checkupdated'
+      )
+        .then(() => {
+          console.log('Monthly Listeners Updated!')
+          updateAll(
+            'monthlylistenerstracker',
+            'monthlylisteners',
+            `${month}/${day}`,
+            'listeners'
+          )
+            .then((data) => {
+              console.log(data)
+            })
+            .catch((error: any) => {
+              console.log(error)
+            })
+        })
+        .catch(() => {
+          console.log('Error Updating Monthly Listeners')
+        })
     }
     if (
       DatabaseAndCurrentData.DatabaseArtistFollowers !==
       DatabaseAndCurrentData.CurrentArtistFollowers
     ) {
-      SpotifyUpdateChecker.MonthlyListeners = true
-    } else {
-      SpotifyUpdateChecker.MonthlyListeners = false
+      SpotifyUpdateChecker.ArtistFollowers = true
+      updateChecker(
+        'artistfollowers',
+        DatabaseAndCurrentData.CurrentArtistFollowers,
+        1,
+        'checkupdated'
+      )
+        .then(() => {
+          console.log('Artist Followers Updated!!!')
+          updateAll(
+            'followerstracker',
+            'monthlylisteners',
+            `${month}/${day}`,
+            'artist'
+          )
+            .then((data) => {
+              console.log(data)
+            })
+            .catch((error: any) => {
+              console.log(error)
+            })
+        })
+        .catch(() => {
+          console.log('Error Updating Artist Followers')
+        })
     }
     console.log(DatabaseAndCurrentData)
   }
 
+  if (
+    SpotifyUpdateChecker.ArtistFollowers &&
+    SpotifyUpdateChecker.MonthlyListeners &&
+    SpotifyUpdateChecker.SongViews
+  ) {
+    console.log('los 3 son true')
+  }
   return NextResponse.json({ SpotifyUpdateChecker })
 }

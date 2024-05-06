@@ -12,14 +12,20 @@ export const isSpotifyUpdated = async (): Promise<SpotifyUpdaterData> => {
 
   // CompareData => Datos en directo
   // getDataForCheckUpdates => Datos guardados en base de datos
+  const date = new Date()
+  const day = date.getDate()
+  const month = date.getMonth() + 1
+  const year = date.getFullYear()
 
   const DatabaseAndCurrentData = {
     DatabaseSongViews: data[0].songviews,
     DatabaseMonthlyListeners: data[0].monthlylisteners,
     DatabaseArtistFollowers: data[0].artistfollowers,
+    DatabaseCurrentDate: data[0].DateUpdated,
     CurrentSongViews: songViews,
     CurrentMonthlyListeners: artistMonthlyListeners,
-    CurrentArtistFollowers: artistFollowers
+    CurrentArtistFollowers: artistFollowers,
+    CurrentDate: `${day}/${month}/${year}`
   }
 
   return DatabaseAndCurrentData

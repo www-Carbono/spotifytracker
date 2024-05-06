@@ -19,13 +19,13 @@ const saveToDatabase = async (
   if (type === 'track') {
     const currentViews = await getViews(data2.id as string, 'track')
     const dataToUpload = {
-      [currentDate]: currentViews
+      [currentDate]: Number(currentViews)
     }
     const { error } = await supabase.from('spotifytracker').insert({
       songName: data2.name,
       artistName: data2.artists[0].name,
       coverLink: data2.album.images[0].url,
-      songLink: data2.id,
+      songlink: data2.id,
       viewsTest: dataToUpload,
       userId: userid.id
     })
@@ -86,6 +86,58 @@ export const getDataForCheckUpdates = async (): Promise<any> => {
     return error
   }
   return data
+}
+
+export const updateChecker = async (
+  row: string,
+  dataToUpdate: any,
+  id: any,
+  database: string
+): Promise<any> => {
+  const { data, error } = await supabase
+    .from(database)
+    .update({ [row]: dataToUpdate })
+    .eq('id', id)
+    .select()
+
+  console.log(data, error)
+  if (error) {
+    return error
+  }
+  return data
+}
+
+export const updateAll = async (
+  database: string,
+  row: string,
+  date: string,
+  type: string
+): Promise<any> => {
+  const { data, error } = await supabase.from(database).select('*')
+  if (error) {
+    return error
+  }
+
+  for (const element of data) {
+    const dataView = await getViews(element.songlink, type)
+
+    const finalData = [
+      {
+        ...element[row],
+        [date]:
+          type === 'track'
+            ? Number(dataView)
+            : type === 'listeners'
+            ? Number(dataView.monthlyListeners)
+            : Number(dataView.followers)
+      }
+    ]
+
+    await updateChecker(row, finalData[0], element.id, database)
+
+    await new Promise((resolve) => setTimeout(resolve, 10000))
+  }
+  return `La base de datos ${database} ha sido actualizada correctamente`
 }
 
 export default saveToDatabase
