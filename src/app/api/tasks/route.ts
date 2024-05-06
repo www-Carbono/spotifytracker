@@ -74,7 +74,7 @@ export async function POST(req: NextRequest): Promise<any> {
                 .then(() => {
                   SpotifyUpdateChecker.SongViews = true
                   SpotifyUpdateChecker.LastUpdated =
-                    DatabaseAndCurrentData.DatabaseCurrentDate
+                    DatabaseAndCurrentData.CurrentDate
                 })
                 .catch((error) => {
                   console.log(error)
