@@ -51,6 +51,13 @@ export async function POST(req: NextRequest): Promise<any> {
       console.log('[+] ACTUALIZACION : Se han actualizado las views.')
       SpotifyUpdateChecker.SongViews = true
       SpotifyUpdateChecker.LastUpdated = DatabaseAndCurrentData.CurrentDate
+
+      await updateChecker(
+        'DateUpdated',
+        `${day}/${month}/${year}`,
+        1,
+        'checkupdated'
+      )
       await updateChecker(
         'songviews',
         DatabaseAndCurrentData.CurrentSongViews,
@@ -62,14 +69,6 @@ export async function POST(req: NextRequest): Promise<any> {
           updateAll('spotifytracker', 'viewsTest', `${month}/${day}`, 'track')
             .then(async (data) => {
               console.log(data)
-              await updateChecker(
-                'DateUpdated',
-                `${day}/${month}/${year}`,
-                1,
-                'checkupdated'
-              ).catch((error) => {
-                console.log(error)
-              })
             })
             .catch((error: any) => {
               console.log(error)
