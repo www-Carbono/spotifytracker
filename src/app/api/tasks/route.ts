@@ -26,8 +26,6 @@ export async function POST(req: NextRequest): Promise<any> {
   if (updateBoolean) {
     console.log('[+] Ejecución de la Cron')
     const DatabaseAndCurrentData: SpotifyUpdaterData = await isSpotifyUpdated()
-    SpotifyUpdateChecker.LastUpdated =
-      DatabaseAndCurrentData.DatabaseCurrentDate
 
     if (
       SpotifyUpdateChecker.ArtistFollowers &&
@@ -75,6 +73,8 @@ export async function POST(req: NextRequest): Promise<any> {
               )
                 .then(() => {
                   SpotifyUpdateChecker.SongViews = true
+                  SpotifyUpdateChecker.LastUpdated =
+                    DatabaseAndCurrentData.DatabaseCurrentDate
                 })
                 .catch((error) => {
                   console.log(error)
