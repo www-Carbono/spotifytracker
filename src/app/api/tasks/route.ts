@@ -8,7 +8,8 @@ import { updateAll, updateChecker } from '@/server/services/saveToDatabase'
 const SpotifyUpdateChecker = {
   SongViews: false,
   MonthlyListeners: false,
-  ArtistFollowers: false
+  ArtistFollowers: false,
+  LastUpdated: ''
 }
 export async function POST(req: NextRequest): Promise<any> {
   noStore()
@@ -27,6 +28,31 @@ export async function POST(req: NextRequest): Promise<any> {
 
   if (updateBoolean) {
     const DatabaseAndCurrentData: SpotifyUpdaterData = await isSpotifyUpdated()
+    SpotifyUpdateChecker.LastUpdated =
+      DatabaseAndCurrentData.DatabaseCurrentDate
+    // Comprobamos si los 3 son true
+    if (
+      SpotifyUpdateChecker.ArtistFollowers &&
+      SpotifyUpdateChecker.MonthlyListeners &&
+      SpotifyUpdateChecker.SongViews
+    ) {
+      if (
+        DatabaseAndCurrentData.CurrentDate !==
+        DatabaseAndCurrentData.DatabaseCurrentDate
+      )
+        updateChecker(
+          'DateUpdated',
+          `${day}/${month}/${year}`,
+          1,
+          'checkupdated'
+        ).catch((error) => {
+          console.log(error)
+        })
+      SpotifyUpdateChecker.LastUpdated = DatabaseAndCurrentData.CurrentDate
+      await new Promise((resolve) => setTimeout(resolve, 90000))
+      console.log('Espera correctamente')
+    }
+
     if (
       DatabaseAndCurrentData.DatabaseSongViews !==
       DatabaseAndCurrentData.CurrentSongViews
@@ -115,12 +141,5 @@ export async function POST(req: NextRequest): Promise<any> {
     console.log(DatabaseAndCurrentData)
   }
 
-  if (
-    SpotifyUpdateChecker.ArtistFollowers &&
-    SpotifyUpdateChecker.MonthlyListeners &&
-    SpotifyUpdateChecker.SongViews
-  ) {
-    console.log('los 3 son true')
-  }
   return NextResponse.json({ SpotifyUpdateChecker })
 }
