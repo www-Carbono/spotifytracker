@@ -24,6 +24,7 @@ export async function POST(req: NextRequest): Promise<any> {
   const year = date.getFullYear()
 
   if (updateBoolean) {
+    console.log('[+] Ejecución de la Cron')
     const DatabaseAndCurrentData: SpotifyUpdaterData = await isSpotifyUpdated()
     SpotifyUpdateChecker.LastUpdated =
       DatabaseAndCurrentData.DatabaseCurrentDate
@@ -33,10 +34,12 @@ export async function POST(req: NextRequest): Promise<any> {
       SpotifyUpdateChecker.MonthlyListeners &&
       SpotifyUpdateChecker.SongViews
     ) {
+      console.log('[+] Ejecución del if de los tres en true')
       if (
         DatabaseAndCurrentData.CurrentDate !==
         DatabaseAndCurrentData.DatabaseCurrentDate
       ) {
+        console.log('[+] Ejecución del if de la fecha y setea todo en false')
         SpotifyUpdateChecker.ArtistFollowers = false
         SpotifyUpdateChecker.MonthlyListeners = false
         SpotifyUpdateChecker.SongViews = false
@@ -47,6 +50,7 @@ export async function POST(req: NextRequest): Promise<any> {
       DatabaseAndCurrentData.DatabaseSongViews !==
       DatabaseAndCurrentData.CurrentSongViews
     ) {
+      console.log('[+] ACTUALIZACION : Se han actualizado las views.')
       SpotifyUpdateChecker.SongViews = true
       updateChecker(
         'songviews',
@@ -80,6 +84,9 @@ export async function POST(req: NextRequest): Promise<any> {
       DatabaseAndCurrentData.DatabaseMonthlyListeners !==
       DatabaseAndCurrentData.CurrentMonthlyListeners
     ) {
+      console.log(
+        '[+] ACTUALIZACION : Se han actualizado los oyentes mensuales.'
+      )
       SpotifyUpdateChecker.MonthlyListeners = true
       updateChecker(
         'monthlylisteners',
@@ -110,6 +117,9 @@ export async function POST(req: NextRequest): Promise<any> {
       DatabaseAndCurrentData.DatabaseArtistFollowers !==
       DatabaseAndCurrentData.CurrentArtistFollowers
     ) {
+      console.log(
+        '[+] ACTUALIZACION : Se han actualizado lod follows del artista.'
+      )
       SpotifyUpdateChecker.ArtistFollowers = true
       updateChecker(
         'artistfollowers',
@@ -136,7 +146,8 @@ export async function POST(req: NextRequest): Promise<any> {
           console.log('Error Updating Artist Followers')
         })
     }
-    console.log(DatabaseAndCurrentData)
+    console.log('[+] ACTUALIZACION', DatabaseAndCurrentData)
+    console.log('[+] ACTUALIZACION', SpotifyUpdateChecker)
   }
 
   return NextResponse.json({ SpotifyUpdateChecker })
