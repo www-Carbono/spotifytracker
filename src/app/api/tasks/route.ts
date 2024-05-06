@@ -23,7 +23,6 @@ export async function POST(req: NextRequest): Promise<any> {
   const month = date.getMonth() + 1
   const year = date.getFullYear()
 
-  // const fulldate = `${day}/${month}/${year}`
   console.log(day, month, year)
 
   if (updateBoolean) {
@@ -39,18 +38,11 @@ export async function POST(req: NextRequest): Promise<any> {
       if (
         DatabaseAndCurrentData.CurrentDate !==
         DatabaseAndCurrentData.DatabaseCurrentDate
-      )
-        updateChecker(
-          'DateUpdated',
-          `${day}/${month}/${year}`,
-          1,
-          'checkupdated'
-        ).catch((error) => {
-          console.log(error)
-        })
-      SpotifyUpdateChecker.LastUpdated = DatabaseAndCurrentData.CurrentDate
-      await new Promise((resolve) => setTimeout(resolve, 90000))
-      console.log('Espera correctamente')
+      ) {
+        SpotifyUpdateChecker.ArtistFollowers = false
+        SpotifyUpdateChecker.MonthlyListeners = false
+        SpotifyUpdateChecker.SongViews = false
+      }
     }
 
     if (
@@ -69,6 +61,14 @@ export async function POST(req: NextRequest): Promise<any> {
           updateAll('spotifytracker', 'viewsTest', `${month}/${day}`, 'track')
             .then((data) => {
               console.log(data)
+              updateChecker(
+                'DateUpdated',
+                `${day}/${month}/${year}`,
+                1,
+                'checkupdated'
+              ).catch((error) => {
+                console.log(error)
+              })
             })
             .catch((error: any) => {
               console.log(error)
