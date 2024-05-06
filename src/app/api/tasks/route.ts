@@ -28,7 +28,6 @@ export async function POST(req: NextRequest): Promise<any> {
     const DatabaseAndCurrentData: SpotifyUpdaterData = await isSpotifyUpdated()
     SpotifyUpdateChecker.LastUpdated =
       DatabaseAndCurrentData.DatabaseCurrentDate
-    // Comprobamos si los 3 son true
     if (
       SpotifyUpdateChecker.ArtistFollowers &&
       SpotifyUpdateChecker.MonthlyListeners &&
