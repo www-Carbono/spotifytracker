@@ -135,7 +135,7 @@ export const updateAll = async (
 
     await updateChecker(row, finalData[0], element.id, database)
 
-    await new Promise((resolve) => setTimeout(resolve, 1000))
+    await new Promise((resolve) => setTimeout(resolve, 5000))
   }
   return `La base de datos ${database} ha sido actualizada correctamente`
 }
