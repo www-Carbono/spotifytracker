@@ -23,8 +23,6 @@ export async function POST(req: NextRequest): Promise<any> {
   const month = date.getMonth() + 1
   const year = date.getFullYear()
 
-  console.log(day, month, year)
-
   if (updateBoolean) {
     const DatabaseAndCurrentData: SpotifyUpdaterData = await isSpotifyUpdated()
     SpotifyUpdateChecker.LastUpdated =
