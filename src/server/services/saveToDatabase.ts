@@ -140,4 +140,17 @@ export const updateAll = async (
   return `La base de datos ${database} ha sido actualizada correctamente`
 }
 
+export const getDetails = async (
+  database: string,
+  id: string
+): Promise<any> => {
+  const { data, error } = await supabase.from(database).select('*').eq('id', id)
+
+  console.log(data, error)
+  if (error) {
+    return error
+  }
+  return data
+}
+
 export default saveToDatabase

@@ -77,7 +77,13 @@ export const SearchSong = ({ type }: Props): JSX.Element => {
                 }}
               >
                 <img
-                  src={song?.images[2].url}
+                  src={
+                    song?.images &&
+                    song.images.length >= 3 &&
+                    song.images[2].url
+                      ? song.images[2].url
+                      : 'https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg'
+                  }
                   height={100}
                   width={100}
                   alt=''

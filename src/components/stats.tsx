@@ -2,6 +2,7 @@
 'use client'
 import React, { useEffect, useState } from 'react'
 import { Loader } from './Loader'
+import Link from 'next/link'
 import { getData } from '@/server/services/saveToDatabase'
 import { type OyentesMensuales } from '@/app/types'
 interface Props {
@@ -59,8 +60,8 @@ export const Stats = ({ type, database, userData }: Props): JSX.Element => {
                 <tbody>
                   {data?.map((elemento: any) => (
                     <tr
-                      key={elemento?.id}
                       className='text-center'
+                      key={elemento?.id}
                     >
                       <td>
                         <img
@@ -113,7 +114,12 @@ export const Stats = ({ type, database, userData }: Props): JSX.Element => {
                               </span>
                             )}
                       </td>
-                      <td>Click</td>
+                      <td>
+                        {' '}
+                        <Link href={`/dashboard/song/${elemento.id}`}>
+                          Click{' '}
+                        </Link>
+                      </td>
                     </tr>
                   ))}
                 </tbody>
@@ -211,7 +217,12 @@ export const Stats = ({ type, database, userData }: Props): JSX.Element => {
                               </span>
                             )}
                       </td>
-                      <td>Click</td>
+                      <td>
+                        {' '}
+                        <Link href={`/dashboard/listeners/${elemento.id}`}>
+                          Click{' '}
+                        </Link>
+                      </td>
                     </tr>
                   ))}
                 </tbody>
@@ -309,7 +320,12 @@ export const Stats = ({ type, database, userData }: Props): JSX.Element => {
                               </span>
                             )}
                       </td>
-                      <td>Click</td>
+                      <td>
+                        {' '}
+                        <Link href={`/dashboard/followers/${elemento.id}`}>
+                          Click{' '}
+                        </Link>
+                      </td>
                     </tr>
                   ))}
                 </tbody>

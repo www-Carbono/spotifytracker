@@ -27,7 +27,7 @@ export const NavBar = (userData: any): JSX.Element => {
           }}
           className={selected === 1 ? 'text-red-700' : ''}
         >
-          Añador Seguimiento de Canción
+          Añadir Seguimiento de Canción
         </li>
         <li
           onClick={() => {
@@ -62,7 +62,7 @@ export const NavBar = (userData: any): JSX.Element => {
           className={selected === 4 ? 'text-red-700' : ''}
         >
           {' '}
-          Oyentes Mensuales
+          Seguimiento Oyentes Mensuales
         </li>
         <li
           onClick={() => {
@@ -78,7 +78,7 @@ export const NavBar = (userData: any): JSX.Element => {
           className={selected === 5 ? 'text-red-700' : ''}
         >
           {' '}
-          Seguimiento de Seguidores en Spotify
+          Seguimiento de Oyentes Mensuales
         </li>
         <li
           onClick={() => {
@@ -94,7 +94,7 @@ export const NavBar = (userData: any): JSX.Element => {
           className={selected === 6 ? 'text-red-700' : ''}
         >
           {' '}
-          Seguidmiento Oyentes Mensuales
+          Seguidmiento Followers
         </li>
       </ul>
       <div className='mx-auto'>{component}</div>

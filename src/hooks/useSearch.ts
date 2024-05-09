@@ -62,6 +62,7 @@ export const useSearch = ({
   }
 
   const handleOnClick = (id: string, song: Track): void => {
+    console.log('click')
     setListsOfSongs(undefined)
     setIsLoading(true)
     setError(false)
@@ -99,6 +100,7 @@ export const useSearch = ({
         })
       setLink(artistId)
     }
+    // songName.current.value = ''
   }
 
   return {
