@@ -15,12 +15,10 @@ export const Stats = ({ type, database, userData }: Props): JSX.Element => {
   const [data, setData] = useState<any>([])
   const [error, setError] = useState<any>(null)
   const [isLoading, setIsLoading] = useState<boolean>(true)
-  console.log('inicia')
   useEffect(() => {
     setIsLoading(true)
     getData(database, userData.userData.id as string)
       .then((data) => {
-        console.log(data)
         setData(data)
         setIsLoading(false)
       })

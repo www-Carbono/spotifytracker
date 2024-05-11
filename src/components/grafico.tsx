@@ -28,8 +28,6 @@ const Graphics: React.FC<Props> = ({
   graphType // Si ponemos 'total' > Reproducciones totales , si ponemos 'diferencia' > Diferencia del dia anterior (el if)
 }): JSX.Element => {
   let text = ''
-  console.log(type)
-
   if (type[0] === 'spotifytracker') {
     text = 'Reproducciones'
   }
@@ -58,10 +56,13 @@ const Graphics: React.FC<Props> = ({
       const realValues = Object.values(graphicData)
       const arrayViews = []
       setLabel(`Variacion de ${text}`)
-      for (const [index] of realValues.entries()) {
-        const diferencia = realValues[index + 1] - realValues[index]
-        if (!isNaN(diferencia)) {
-          arrayViews.push(diferencia)
+      console.log(realValues.length)
+      if (realValues.length > 1) {
+        for (const [index] of realValues.entries()) {
+          const diferencia = realValues[index + 1] - realValues[index]
+          if (!isNaN(diferencia)) {
+            arrayViews.push(diferencia)
+          }
         }
       }
       setAxeY(arrayViews)
