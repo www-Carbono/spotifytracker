@@ -13,7 +13,7 @@ export const getViews = async (songId: any, type: string): Promise<any> => {
       'app-platform': 'WebPlayer',
       authorization: `Bearer ${token}`,
       'client-token':
-        'AADpy/v7jVfyfIgfg1Aa6y9v/EGc6UOv0ECx7xVAOAb47m74huGIlBkA1Sj5UzaDj9HgmEuldx8gvpIwMbkKu65qNFLY+TOXgMnagbA5Frp04SzkLa6QhOGMXGqqAbjJMSbE9FZLsGakbTzjRyeNYzCjF3FzvN07Eb+PNmuHEni06eMUb3GIskmiOx1joru6RX3oVVKVFqKi+JFhcpFfwl8azDeG9S8nG9qPa8FYNN5eS6gZqcbD/7wTlZOPLP94tnuUmXcB6IWaqxmwpmydVgJY1AmkQLxioEFkzmw0RDUCPdU=',
+        'AAD4VTVEH6fXKqMHqrSsP0icfqb4UYkHpwxtIWUWG7rUfZs2K0cfBvnw57TFatnolsdWvf0r8vrCVOGGDoUrmNFE0F6Gx/rIzebymmRs9BqWVQFQRCgUPQWgYLGviVbJVzqSZ4/H2j3CVrkfrrHEvHTVfKh4uOiO5xF1ml+WnluQwIYKnuhDd9r9M1ZQ63MeuOK6Pz8WapaFMTOh9Xl1S2IlrTibbr9BwzbU/qYrOo4lInJWy4m7qWxkyPgdhrjiQ3hQeeG1eszPkE0mZvmSfGBt2F16QGbqhRR4SFJ6wg==',
       'content-type': 'application/json;charset=UTF-8',
       priority: 'u=1, i',
       'sec-ch-ua':
@@ -23,7 +23,7 @@ export const getViews = async (songId: any, type: string): Promise<any> => {
       'sec-fetch-dest': 'empty',
       'sec-fetch-mode': 'cors',
       'sec-fetch-site': 'same-site',
-      'spotify-app-version': '1.2.37.455.gae7374f7'
+      'spotify-app-version': '1.2.38.409.gca8ff1bf'
     },
     referrer: 'https://open.spotify.com/',
     referrerPolicy: 'strict-origin-when-cross-origin',
@@ -33,6 +33,7 @@ export const getViews = async (songId: any, type: string): Promise<any> => {
     credentials: 'include'
   })
   const second = await first.json()
+  console.log(second)
   if (type === 'track') {
     return second.data.trackUnion.playcount
   } else {
