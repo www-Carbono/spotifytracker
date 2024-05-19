@@ -33,7 +33,6 @@ export const getViews = async (songId: any, type: string): Promise<any> => {
     credentials: 'include'
   })
   const second = await first.json()
-  console.log(second)
   if (type === 'track') {
     return second.data.trackUnion.playcount
   } else {

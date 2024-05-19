@@ -57,7 +57,9 @@ export interface SpotifyUpdaterData {
   DatabaseSongViews: string
   DatabaseMonthlyListeners: string
   DatabaseArtistFollowers: string
-  DatabaseCurrentDate: string
+  DatabaseViewsCurrentDate: string
+  DatabaseListenersCurrentDate: string
+  DatabaseFollowersCurrentDate: string
   CurrentSongViews: string
   CurrentMonthlyListeners: string
   CurrentArtistFollowers: string

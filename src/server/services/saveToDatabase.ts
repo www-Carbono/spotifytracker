@@ -11,12 +11,10 @@ const saveToDatabase = async (
   userid: any,
   type: string
 ): Promise<void> => {
-  const date = new Date()
-  const month = date.getMonth() + 1
-  const day = date.getDate()
-  const currentDate = `${month}/${day}`
+  const currentDataJson = await getDataForCheckUpdates()
 
   if (type === 'track') {
+    const currentDate = currentDataJson[0].ViewsDateUpdate.slice(0, -5) // Obtenemos la fecha actual
     const currentViews = await getViews(data2.id as string, 'track')
     const dataToUpload = {
       [currentDate]: Number(currentViews)
@@ -31,7 +29,7 @@ const saveToDatabase = async (
     })
     console.log(error)
   } else if (type === 'artistFollowers') {
-    console.log('pasa por aqui')
+    const currentDate = currentDataJson[0].FollowersDateUpdate.slice(0, -5) // Obtenemos la fecha actual
     const MonthlyListeners = await getViews(data2.id as string, 'artist')
     const dataToUpload = {
       [currentDate]: MonthlyListeners.followers
@@ -45,6 +43,7 @@ const saveToDatabase = async (
     })
     console.log(error)
   } else {
+    const currentDate = currentDataJson[0].ListenersDateUpdate.slice(0, -5) // Obtenemos la fecha actual
     const MonthlyListeners = await getViews(data2.id as string, 'artist')
     const dataToUpload = {
       [currentDate]: MonthlyListeners.monthlyListeners
@@ -81,7 +80,6 @@ export const getDataForCheckUpdates = async (): Promise<any> => {
     .select('*')
     .eq('id', 1)
 
-  console.log(data, error)
   if (error) {
     return error
   }
@@ -99,8 +97,6 @@ export const updateChecker = async (
     .update({ [row]: dataToUpdate })
     .eq('id', id)
     .select()
-
-  console.log(data, error)
   if (error) {
     return error
   }
@@ -118,9 +114,33 @@ export const updateAll = async (
     return error
   }
 
+  const notUpdated: any[] = []
+  console.log(type)
+
   for (const element of data) {
     const dataView = await getViews(element.songlink, type)
 
+    if (type === 'artist') {
+      // Tengo que comparar oyentes/views/followers del element(elemento de la base de datos) y el dataView (data actual de escuchas oyentes etc)
+      const lastSavedData = Object.values(element.monthlylisteners).pop()
+      console.log(dataView)
+      if (lastSavedData === dataView.followers) {
+        notUpdated.push(element.id)
+        continue
+      }
+    } else if (type === 'track') {
+      const lastSavedData = Object.values(element.viewsTest).pop()
+      if (lastSavedData === Number(dataView)) {
+        notUpdated.push(element.id)
+        continue
+      }
+    } else if (type === 'listeners') {
+      const lastSavedData = Object.values(element.monthlylisteners).pop()
+      if (lastSavedData === dataView.monthlyListeners) {
+        notUpdated.push(element.id)
+        continue
+      }
+    }
     const finalData = [
       {
         ...element[row],
@@ -137,7 +157,193 @@ export const updateAll = async (
 
     await new Promise((resolve) => setTimeout(resolve, 5000))
   }
+  console.log('los datos que no se han actualizado aun son =>', notUpdated)
+
+  await tryUpdateAgain(database, row, date, type, notUpdated)
+
   return `La base de datos ${database} ha sido actualizada correctamente`
+}
+
+const tryUpdateAgain = async (
+  database: string,
+  row: string,
+  date: string,
+  type: string,
+  notUpdated: any[]
+): Promise<any> => {
+  const CONTADOR_VALUE = 5
+  while (notUpdated.length > 0) {
+    console.log('INICIO BUCLE')
+    for (const elementId of notUpdated) {
+      let contador = 0
+      while (contador < CONTADOR_VALUE) {
+        console.log(contador)
+        const { data } = await supabase
+          .from(database)
+          .select('*')
+          .eq('id', elementId)
+
+        if (data !== null) {
+          const dataView = await getViews(data[0].songlink, type)
+
+          if (type === 'artist') {
+            // Tengo que comparar oyentes/views/followers del element(elemento de la base de datos) y el dataView (data actual de escuchas oyentes etc)
+            const lastSavedData = Object.values(data[0].monthlylisteners).pop()
+            if (lastSavedData === dataView.followers) {
+              await new Promise((resolve) => setTimeout(resolve, 5000))
+              contador++
+              if (contador === CONTADOR_VALUE - 1) {
+                const nuevoArray = notUpdated.filter(
+                  (item) => item !== elementId
+                )
+                notUpdated = nuevoArray
+                const finalData = [
+                  {
+                    ...data[0][row],
+                    [date]:
+                      type === 'track'
+                        ? Number(dataView)
+                        : type === 'listeners'
+                        ? Number(dataView.monthlyListeners)
+                        : Number(dataView.followers)
+                  }
+                ]
+
+                await updateChecker(row, finalData[0], elementId, database)
+                console.log(notUpdated, '<== Array Despues de actualizar')
+                break
+              }
+            } else {
+              const nuevoArray = notUpdated.filter((item) => item !== elementId)
+              notUpdated = nuevoArray
+              const finalData = [
+                {
+                  ...data[0][row],
+                  [date]:
+                    type === 'track'
+                      ? Number(dataView)
+                      : type === 'listeners'
+                      ? Number(dataView.monthlyListeners)
+                      : Number(dataView.followers)
+                }
+              ]
+
+              await updateChecker(row, finalData[0], elementId, database)
+              console.log(notUpdated, '<== Array Despues de actualizar')
+              break
+            }
+          } else if (type === 'track') {
+            // Tengo que comparar oyentes/views/followers del element(elemento de la base de datos) y el dataView (data actual de escuchas oyentes etc)
+            const lastSavedData = Object.values(data[0].viewsTest).pop()
+            if (lastSavedData === Number(dataView)) {
+              await new Promise((resolve) => setTimeout(resolve, 5000))
+              contador++
+              if (contador === CONTADOR_VALUE - 1) {
+                const nuevoArray = notUpdated.filter(
+                  (item) => item !== elementId
+                )
+                notUpdated = nuevoArray
+                const finalData = [
+                  {
+                    ...data[0][row],
+                    [date]:
+                      type === 'track'
+                        ? Number(dataView)
+                        : type === 'listeners'
+                        ? Number(dataView.monthlyListeners)
+                        : Number(dataView.followers)
+                  }
+                ]
+
+                await updateChecker(row, finalData[0], elementId, database)
+                console.log(notUpdated, '<== Array Despues de actualizar')
+                break
+              }
+            } else {
+              const nuevoArray = notUpdated.filter((item) => item !== elementId)
+              notUpdated = nuevoArray
+              const finalData = [
+                {
+                  ...data[0][row],
+                  [date]:
+                    type === 'track'
+                      ? Number(dataView)
+                      : type === 'listeners'
+                      ? Number(dataView.monthlyListeners)
+                      : Number(dataView.followers)
+                }
+              ]
+
+              await updateChecker(row, finalData[0], elementId, database)
+              console.log(notUpdated, '<== Array Despues de actualizar')
+              break
+            }
+          } else if (type === 'listeners') {
+            const lastSavedData = Object.values(data[0].monthlylisteners).pop()
+            if (lastSavedData === dataView.monthlyListeners) {
+              await new Promise((resolve) => setTimeout(resolve, 5000))
+              contador++
+              if (contador === CONTADOR_VALUE - 1) {
+                const nuevoArray = notUpdated.filter(
+                  (item) => item !== elementId
+                )
+                notUpdated = nuevoArray
+                const finalData = [
+                  {
+                    ...data[0][row],
+                    [date]:
+                      type === 'track'
+                        ? Number(dataView)
+                        : type === 'listeners'
+                        ? Number(dataView.monthlyListeners)
+                        : Number(dataView.followers)
+                  }
+                ]
+
+                await updateChecker(row, finalData[0], elementId, database)
+                console.log(notUpdated, '<== Array Despues de actualizar')
+                break
+              }
+            } else {
+              const nuevoArray = notUpdated.filter((item) => item !== elementId)
+              notUpdated = nuevoArray
+              const finalData = [
+                {
+                  ...data[0][row],
+                  [date]:
+                    type === 'track'
+                      ? Number(dataView)
+                      : type === 'listeners'
+                      ? Number(dataView.monthlyListeners)
+                      : Number(dataView.followers)
+                }
+              ]
+
+              await updateChecker(row, finalData[0], elementId, database)
+              console.log(notUpdated, '<== Array Despues de actualizar')
+              break
+            }
+          }
+        }
+      }
+
+      // const finalData = [
+      //   {
+      //     ...data[row],
+      //     [date]:
+      //       type === 'track'
+      //         ? Number(dataView)
+      //         : type === 'listeners'
+      //         ? Number(dataView.monthlyListeners)
+      //         : Number(dataView.followers)
+      //   }
+      // ]
+
+      // await updateChecker(row, finalData[0], elementId, database)
+    }
+  }
+
+  // while (notUpdated.length > 0) {}
 }
 
 export const getDetails = async (
@@ -152,5 +358,7 @@ export const getDetails = async (
   }
   return data
 }
+
+export const dateToSave = async (): Promise<void> => {}
 
 export default saveToDatabase

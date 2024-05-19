@@ -26,6 +26,7 @@ export async function POST(req: NextRequest): Promise<any> {
     console.log('[+] Ejecución de la Cron')
     const DatabaseAndCurrentData: SpotifyUpdaterData = await isSpotifyUpdated()
 
+    // // Este if comprueba si ya se han actualizado los datos de spotify y setea el json todo en false cuando cambia de dia. (Esto principalmente es para el aviso en la parte superior)
     if (
       SpotifyUpdateChecker.ArtistFollowers &&
       SpotifyUpdateChecker.MonthlyListeners &&
@@ -34,7 +35,7 @@ export async function POST(req: NextRequest): Promise<any> {
       console.log('[+] Ejecución del if de los tres en true')
       if (
         DatabaseAndCurrentData.CurrentDate !==
-        DatabaseAndCurrentData.DatabaseCurrentDate
+        DatabaseAndCurrentData.DatabaseViewsCurrentDate
       ) {
         console.log('[+] Ejecución del if de la fecha y setea todo en false')
         SpotifyUpdateChecker.ArtistFollowers = false
@@ -43,6 +44,7 @@ export async function POST(req: NextRequest): Promise<any> {
       }
     }
 
+    // // Este if se ejecuta cuando se actualizan las views
     if (
       DatabaseAndCurrentData.DatabaseSongViews !==
       DatabaseAndCurrentData.CurrentSongViews
@@ -51,12 +53,24 @@ export async function POST(req: NextRequest): Promise<any> {
       SpotifyUpdateChecker.SongViews = true
       SpotifyUpdateChecker.LastUpdated = DatabaseAndCurrentData.CurrentDate
 
-      await updateChecker(
-        'DateUpdated',
-        `${day}/${month}/${year}`,
-        1,
-        'checkupdated'
+      // Añadimos un dia a la fecha:
+      const fechaArray =
+        DatabaseAndCurrentData.DatabaseFollowersCurrentDate.split('/')
+      const fecha = new Date(
+        Date.UTC(
+          Number(fechaArray[2]),
+          Number(fechaArray[1]) - 1,
+          Number(fechaArray[0])
+        )
       )
+      fecha.setDate(fecha.getDate() + 1)
+      const day = fecha.getDate()
+      const month = Number(fecha.getMonth() + 1)
+      const year = fecha.getFullYear().toString().substring(-2)
+      const fechaFinal = `${day}/${month}/${year}`
+      const fechaFinalDB = `${day}/${month}`
+
+      await updateChecker('ViewsDateUpdated', fechaFinal, 1, 'checkupdated')
       await updateChecker(
         'songviews',
         DatabaseAndCurrentData.CurrentSongViews,
@@ -64,8 +78,7 @@ export async function POST(req: NextRequest): Promise<any> {
         'checkupdated'
       )
         .then(async () => {
-          console.log('Song Views Updated!')
-          updateAll('spotifytracker', 'viewsTest', `${month}/${day}`, 'track')
+          updateAll('spotifytracker', 'viewsTest', fechaFinalDB, 'track')
             .then(async (data) => {
               console.log(data)
             })
@@ -77,7 +90,7 @@ export async function POST(req: NextRequest): Promise<any> {
           console.log('Error Updating Song Views')
         })
     }
-
+    // // Este if se ejecuta cuando se actualizan los oyentes mensuales que tiene el artista en spotify
     if (
       DatabaseAndCurrentData.DatabaseMonthlyListeners !==
       DatabaseAndCurrentData.CurrentMonthlyListeners
@@ -87,6 +100,26 @@ export async function POST(req: NextRequest): Promise<any> {
       console.log(
         '[+] ACTUALIZACION : Se han actualizado los oyentes mensuales.'
       )
+
+      // Añadimos un dia a la fecha:
+      const fechaArray =
+        DatabaseAndCurrentData.DatabaseFollowersCurrentDate.split('/')
+      const fecha = new Date(
+        Date.UTC(
+          Number(fechaArray[2]),
+          Number(fechaArray[1]) - 1,
+          Number(fechaArray[0])
+        )
+      )
+      fecha.setDate(fecha.getDate() + 1)
+      const day = fecha.getDate()
+      const month = Number(fecha.getMonth() + 1)
+      const year = fecha.getFullYear().toString().substring(-2)
+      const fechaFinal = `${day}/${month}/${year}`
+      const fechaFinalDB = `${day}/${month}`
+
+      await updateChecker('ListenersDateUpdate', fechaFinal, 1, 'checkupdated')
+
       await updateChecker(
         'monthlylisteners',
         DatabaseAndCurrentData.CurrentMonthlyListeners,
@@ -94,11 +127,10 @@ export async function POST(req: NextRequest): Promise<any> {
         'checkupdated'
       )
         .then(async () => {
-          console.log('Monthly Listeners Updated!')
           updateAll(
             'monthlylistenerstracker',
             'monthlylisteners',
-            `${month}/${day}`,
+            fechaFinalDB,
             'listeners'
           )
             .then((data) => {
@@ -113,14 +145,36 @@ export async function POST(req: NextRequest): Promise<any> {
         })
     }
 
+    // // Este if se ejecuta cuando se actualizan los Followers que tiene el artista en spotify
     if (
       DatabaseAndCurrentData.DatabaseArtistFollowers !==
       DatabaseAndCurrentData.CurrentArtistFollowers
     ) {
       SpotifyUpdateChecker.ArtistFollowers = true
       console.log(
-        '[+] ACTUALIZACION : Se han actualizado lod follows del artista.'
+        '[+] ACTUALIZACION : Followers de artistas Actualizado! Comenzando Actualización'
       )
+
+      // Añadimos un dia a la fecha:
+      const fechaArray =
+        DatabaseAndCurrentData.DatabaseFollowersCurrentDate.split('/')
+      const fecha = new Date(
+        Date.UTC(
+          Number(fechaArray[2]),
+          Number(fechaArray[1]) - 1,
+          Number(fechaArray[0])
+        )
+      )
+      fecha.setDate(fecha.getDate() + 1)
+      const day = fecha.getDate()
+      const month = Number(fecha.getMonth() + 1)
+      const year = fecha.getFullYear().toString().substring(-2)
+      const fechaFinal = `${day}/${month}/${year}`
+      const fechaFinalDB = `${day}/${month}`
+
+      await updateChecker('FollowersDateUpdate', fechaFinal, 1, 'checkupdated')
+
+      // Actualizamos los seguidores  de la canción para que no vuelva a entrar en el bucle.
       await updateChecker(
         'artistfollowers',
         DatabaseAndCurrentData.CurrentArtistFollowers,
@@ -128,11 +182,12 @@ export async function POST(req: NextRequest): Promise<any> {
         'checkupdated'
       )
         .then(async () => {
-          console.log('Artist Followers Updated!!!')
+          // Manda actualizar la base de datos correspondiente y dentro de updateAll es donde está toda la lógica.
           updateAll(
             'followerstracker',
             'monthlylisteners',
-            `${month}/${day}`,
+            fechaFinalDB,
+            // `${month}/${day}`,
             'artist'
           )
             .then((data) => {
@@ -146,9 +201,6 @@ export async function POST(req: NextRequest): Promise<any> {
           console.log('Error Updating Artist Followers')
         })
     }
-
-    console.log('[+] ACTUALIZACION', DatabaseAndCurrentData)
-    console.log('[+] ACTUALIZACION', SpotifyUpdateChecker)
 
     // Return después de completar todas las operaciones dentro del if
     return NextResponse.json({ SpotifyUpdateChecker })
