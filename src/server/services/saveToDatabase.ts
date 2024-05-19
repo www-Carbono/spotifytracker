@@ -236,12 +236,7 @@ const tryUpdateAgain = async (
                 const finalData = [
                   {
                     ...data[0][row],
-                    [date]:
-                      type === 'track'
-                        ? Number(dataView)
-                        : type === 'listeners'
-                        ? Number(dataView.monthlyListeners)
-                        : Number(dataView.followers)
+                    [date]: Number(dataView)
                   }
                 ]
 
@@ -255,12 +250,7 @@ const tryUpdateAgain = async (
               const finalData = [
                 {
                   ...data[0][row],
-                  [date]:
-                    type === 'track'
-                      ? Number(dataView)
-                      : type === 'listeners'
-                      ? Number(dataView.monthlyListeners)
-                      : Number(dataView.followers)
+                  [date]: Number(dataView)
                 }
               ]
 
@@ -281,12 +271,7 @@ const tryUpdateAgain = async (
                 const finalData = [
                   {
                     ...data[0][row],
-                    [date]:
-                      type === 'track'
-                        ? Number(dataView)
-                        : type === 'listeners'
-                        ? Number(dataView.monthlyListeners)
-                        : Number(dataView.followers)
+                    [date]: Number(dataView.monthlyListeners)
                   }
                 ]
 
@@ -300,12 +285,7 @@ const tryUpdateAgain = async (
               const finalData = [
                 {
                   ...data[0][row],
-                  [date]:
-                    type === 'track'
-                      ? Number(dataView)
-                      : type === 'listeners'
-                      ? Number(dataView.monthlyListeners)
-                      : Number(dataView.followers)
+                  [date]: Number(dataView.monthlyListeners)
                 }
               ]
 
