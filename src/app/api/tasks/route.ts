@@ -65,7 +65,6 @@ export async function POST(req: NextRequest): Promise<any> {
       const year = fecha.getFullYear().toString().substring(-2)
       const fechaFinal = `${day}/${month}/${year}`
       const fechaFinalDB = `${day}/${month}`
-      console.log(fechaFinal)
 
       await updateChecker('ViewsDateUpdate', fechaFinal, 1, 'checkupdated')
       await updateChecker(
