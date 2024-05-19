@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/indent */
 export type Json =
   | string
   | number
@@ -10,6 +9,96 @@ export type Json =
 export interface Database {
   public: {
     Tables: {
+      checkupdated: {
+        Row: {
+          artist: string | null
+          artistfollowers: string | null
+          FollowersDateUpdate: string | null
+          id: number
+          ListenersDateUpdate: string | null
+          monthlylisteners: string | null
+          songname: string | null
+          songviews: string | null
+          ViewsDateUpdate: string | null
+        }
+        Insert: {
+          artist?: string | null
+          artistfollowers?: string | null
+          FollowersDateUpdate?: string | null
+          id?: number
+          ListenersDateUpdate?: string | null
+          monthlylisteners?: string | null
+          songname?: string | null
+          songviews?: string | null
+          ViewsDateUpdate?: string | null
+        }
+        Update: {
+          artist?: string | null
+          artistfollowers?: string | null
+          FollowersDateUpdate?: string | null
+          id?: number
+          ListenersDateUpdate?: string | null
+          monthlylisteners?: string | null
+          songname?: string | null
+          songviews?: string | null
+          ViewsDateUpdate?: string | null
+        }
+        Relationships: []
+      }
+      followerstracker: {
+        Row: {
+          artistname: string | null
+          coverlink: string | null
+          id: string
+          monthlylisteners: Json | null
+          songlink: string | null
+          userId: string | null
+        }
+        Insert: {
+          artistname?: string | null
+          coverlink?: string | null
+          id?: string
+          monthlylisteners?: Json | null
+          songlink?: string | null
+          userId?: string | null
+        }
+        Update: {
+          artistname?: string | null
+          coverlink?: string | null
+          id?: string
+          monthlylisteners?: Json | null
+          songlink?: string | null
+          userId?: string | null
+        }
+        Relationships: []
+      }
+      monthlylistenerstracker: {
+        Row: {
+          artistname: string | null
+          coverlink: string | null
+          id: string
+          monthlylisteners: Json | null
+          songlink: string | null
+          userId: string | null
+        }
+        Insert: {
+          artistname?: string | null
+          coverlink?: string | null
+          id?: string
+          monthlylisteners?: Json | null
+          songlink?: string | null
+          userId?: string | null
+        }
+        Update: {
+          artistname?: string | null
+          coverlink?: string | null
+          id?: string
+          monthlylisteners?: Json | null
+          songlink?: string | null
+          userId?: string | null
+        }
+        Relationships: []
+      }
       spotifytracker: {
         Row: {
           artistName: string | null

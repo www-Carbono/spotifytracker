@@ -1,6 +1,6 @@
 'use server'
 // Guardar Nuevas Canciones en la Base de Datos
-import { createClient } from '@supabase/supabase-js'
+import { type PostgrestResponse, createClient } from '@supabase/supabase-js'
 import { getViews } from './scraping'
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL ?? ''
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_KEY ?? ''
@@ -103,13 +103,26 @@ export const updateChecker = async (
   return data
 }
 
+interface dataInterface {
+  artistname: string | null
+  coverlink: string | null
+  id: string
+  monthlylisteners: any[]
+  viewsTest: any[]
+  songlink: string | null
+  userId: string | null
+}
+type DataInterfaceProperty = keyof dataInterface
+
 export const updateAll = async (
   database: string,
-  row: string,
+  row: DataInterfaceProperty,
   date: string,
   type: string
 ): Promise<any> => {
-  const { data, error } = await supabase.from(database).select('*')
+  const { data, error }: PostgrestResponse<dataInterface> = await supabase
+    .from(database)
+    .select('*')
   if (error) {
     return error
   }
@@ -141,9 +154,12 @@ export const updateAll = async (
         continue
       }
     }
+    const rowData =
+      element[row] && typeof element[row] === 'object' ? element[row] : {}
+
     const finalData = [
       {
-        ...element[row],
+        ...rowData,
         [date]:
           type === 'track'
             ? Number(dataView)
@@ -166,7 +182,7 @@ export const updateAll = async (
 
 const tryUpdateAgain = async (
   database: string,
-  row: string,
+  row: DataInterfaceProperty,
   date: string,
   type: string,
   notUpdated: any[]
@@ -178,7 +194,7 @@ const tryUpdateAgain = async (
       let contador = 0
       while (contador < CONTADOR_VALUE) {
         console.log(contador)
-        const { data } = await supabase
+        const { data }: PostgrestResponse<dataInterface> = await supabase
           .from(database)
           .select('*')
           .eq('id', elementId)
@@ -197,9 +213,14 @@ const tryUpdateAgain = async (
                   (item) => item !== elementId
                 )
                 notUpdated = nuevoArray
+                const rowData =
+                  data[0][row] && typeof data[0][row] === 'object'
+                    ? data[0][row]
+                    : {}
+
                 const finalData = [
                   {
-                    ...data[0][row],
+                    ...rowData,
                     [date]: Number(dataView.followers)
                   }
                 ]
@@ -211,9 +232,13 @@ const tryUpdateAgain = async (
             } else {
               const nuevoArray = notUpdated.filter((item) => item !== elementId)
               notUpdated = nuevoArray
+              const rowData =
+                data[0][row] && typeof data[0][row] === 'object'
+                  ? data[0][row]
+                  : {}
               const finalData = [
                 {
-                  ...data[0][row],
+                  ...rowData,
                   [date]: Number(dataView.followers)
                 }
               ]
@@ -233,9 +258,13 @@ const tryUpdateAgain = async (
                   (item) => item !== elementId
                 )
                 notUpdated = nuevoArray
+                const rowData =
+                  data[0][row] && typeof data[0][row] === 'object'
+                    ? data[0][row]
+                    : {}
                 const finalData = [
                   {
-                    ...data[0][row],
+                    ...rowData,
                     [date]: Number(dataView)
                   }
                 ]
@@ -247,9 +276,13 @@ const tryUpdateAgain = async (
             } else {
               const nuevoArray = notUpdated.filter((item) => item !== elementId)
               notUpdated = nuevoArray
+              const rowData =
+                data[0][row] && typeof data[0][row] === 'object'
+                  ? data[0][row]
+                  : {}
               const finalData = [
                 {
-                  ...data[0][row],
+                  ...rowData,
                   [date]: Number(dataView)
                 }
               ]
@@ -268,9 +301,13 @@ const tryUpdateAgain = async (
                   (item) => item !== elementId
                 )
                 notUpdated = nuevoArray
+                const rowData =
+                  data[0][row] && typeof data[0][row] === 'object'
+                    ? data[0][row]
+                    : {}
                 const finalData = [
                   {
-                    ...data[0][row],
+                    ...rowData,
                     [date]: Number(dataView.monthlyListeners)
                   }
                 ]
@@ -282,9 +319,13 @@ const tryUpdateAgain = async (
             } else {
               const nuevoArray = notUpdated.filter((item) => item !== elementId)
               notUpdated = nuevoArray
+              const rowData =
+                data[0][row] && typeof data[0][row] === 'object'
+                  ? data[0][row]
+                  : {}
               const finalData = [
                 {
-                  ...data[0][row],
+                  ...rowData,
                   [date]: Number(dataView.monthlyListeners)
                 }
               ]

@@ -19,10 +19,6 @@ export async function POST(req: NextRequest): Promise<any> {
   const updateBoolean = update === 'true'
 
   if (updateBoolean) {
-    const date = new Date()
-    const day = date.getDate()
-    const month = date.getMonth() + 1
-    const year = date.getFullYear()
     console.log('[+] Ejecución de la Cron')
     const DatabaseAndCurrentData: SpotifyUpdaterData = await isSpotifyUpdated()
 
