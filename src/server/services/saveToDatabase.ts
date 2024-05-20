@@ -171,7 +171,7 @@ export const updateAll = async (
 
     await updateChecker(row, finalData[0], element.id, database)
 
-    await new Promise((resolve) => setTimeout(resolve, 5000))
+    await new Promise((resolve) => setTimeout(resolve, 15000))
   }
   console.log('los datos que no se han actualizado aun son =>', notUpdated)
 
@@ -187,7 +187,7 @@ const tryUpdateAgain = async (
   type: string,
   notUpdated: any[]
 ): Promise<any> => {
-  const CONTADOR_VALUE = 5
+  const CONTADOR_VALUE = 10
   while (notUpdated.length > 0) {
     console.log('INICIO BUCLE')
     for (const elementId of notUpdated) {
