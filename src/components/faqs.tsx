@@ -56,12 +56,6 @@ export const Faqs = (): JSX.Element => {
                 hidden
                 id='radix-:r4o:'
                 role='region'
-                style={{
-                  '--radix-accordion-content-height':
-                    'var(--radix-collapsible-content-height)',
-                  '--radix-accordion-content-width':
-                    'var(--radix-collapsible-content-width)'
-                }}
               />
             </div>
             <div
@@ -109,12 +103,6 @@ export const Faqs = (): JSX.Element => {
                 hidden
                 id='radix-:r4q:'
                 role='region'
-                style={{
-                  '--radix-accordion-content-height':
-                    'var(--radix-collapsible-content-height)',
-                  '--radix-accordion-content-width':
-                    'var(--radix-collapsible-content-width)'
-                }}
               />
             </div>
             <div
@@ -162,12 +150,6 @@ export const Faqs = (): JSX.Element => {
                 hidden
                 id='radix-:r4s:'
                 role='region'
-                style={{
-                  '--radix-accordion-content-height':
-                    'var(--radix-collapsible-content-height)',
-                  '--radix-accordion-content-width':
-                    'var(--radix-collapsible-content-width)'
-                }}
               />
             </div>
             <div
@@ -215,12 +197,6 @@ export const Faqs = (): JSX.Element => {
                 hidden
                 id='radix-:r4u:'
                 role='region'
-                style={{
-                  '--radix-accordion-content-height':
-                    'var(--radix-collapsible-content-height)',
-                  '--radix-accordion-content-width':
-                    'var(--radix-collapsible-content-width)'
-                }}
               />
             </div>
           </div>
