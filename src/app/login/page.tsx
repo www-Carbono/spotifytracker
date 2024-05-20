@@ -6,7 +6,6 @@ import { useIsLogged } from '@/hooks/useIsLogged'
 import { Loader } from '@/components/Loader'
 import Link from 'next/link'
 import { PopUp } from '@/components/popup'
-import { Footer } from '@/components/footer'
 
 const Login = (): JSX.Element => {
   const [error, setError] = useState<boolean>(false)
@@ -59,11 +58,11 @@ const Login = (): JSX.Element => {
                   >
                     <div className='flex flex-col space-y-1.5 p-6 pb-0'>
                       <h3 className='whitespace-nowrap font-semibold tracking-tight text-2xl'>
-                        Login
+                        Iniciar Sesion
                       </h3>
                       <p className='text-sm text-muted-foreground'>
-                        Enter your Spotify account details to access your data
-                        insights.
+                        Inicia sesion en Spoti Insights para acceder al
+                        Dashboard
                       </p>
 
                       {error ? (
@@ -103,7 +102,7 @@ const Login = (): JSX.Element => {
                           className='text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-black'
                           htmlFor='password'
                         >
-                          Password
+                          Contraseña
                         </label>
                         <input
                           className='flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50'
@@ -115,7 +114,7 @@ const Login = (): JSX.Element => {
                       </div>
                       <div className='flex items-center p-6'>
                         <button className='inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 w-full bg-black text-white'>
-                          Sign in
+                          Iniciar Sesion
                         </button>
                       </div>
                     </form>
@@ -129,7 +128,6 @@ const Login = (): JSX.Element => {
                   </div>
                 </div>
               </div>
-              <Footer />
             </div>
           )}
         </div>

@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import React from 'react'
 export const HowTo = (): JSX.Element => {
   return (
@@ -8,7 +9,7 @@ export const HowTo = (): JSX.Element => {
       <div className='container px-4 md:px-6'>
         <div className='space-y-6'>
           <h2 className='text-3xl font-bold tracking-tighter sm:text-4xl'>
-            How to Start Controlling Song Plays on Spotify
+            Como empezar a trackear los datos de mi artista favorito
           </h2>
           <div className='grid gap-8 md:grid-cols-2 lg:grid-cols-3'>
             <div
@@ -34,17 +35,26 @@ export const HowTo = (): JSX.Element => {
               </div>
               <div className='p-6'>
                 <h3 className='text-xl font-bold'>
-                  1. Connect Your Spotify Account
+                  1. Registrate o Inicia sesión con tu cuenta
                 </h3>
                 <p className='text-gray-500 dark:text-gray-400'>
-                  Start by connecting your Spotify account to Spotify Insights.
-                  This will allow us to access your listening data and provide
-                  you with personalized insights.
+                  Lo Primero que debes hacer es crearte una cuenta para obtener
+                  el acceso a la aplicación y, en caso de que ya estés
+                  registrado debes iniciar sesión
                 </p>
-                <div className='mt-4'>
-                  <button className='inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2'>
-                    Connect Account
-                  </button>
+                <div className='mt-4 flex justify-center'>
+                  <Link
+                    href='/register'
+                    className='inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2'
+                  >
+                    Crear Cuenta
+                  </Link>
+                  <Link
+                    href='/login'
+                    className='inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2'
+                  >
+                    Iniciar Sesion
+                  </Link>
                 </div>
               </div>
             </div>
@@ -70,19 +80,22 @@ export const HowTo = (): JSX.Element => {
                 </svg>
               </div>
               <div className='p-6'>
-                <h3 className='text-xl font-bold'>2. Explore Your Data</h3>
+                <h3 className='text-xl font-bold'>
+                  2. Registra la canción o el Artista a trackear
+                </h3>
                 <p className='text-gray-500 dark:text-gray-400'>
-                  Once your account is connected, you can start exploring your
-                  Spotify data. Our platform provides detailed insights into
-                  your most-played songs, artists, and genres.
+                  Una vez en el dashboard, utiliza el panel de la izquierda para
+                  seleccionar lo que quieres trackear, una vez seleccionado,
+                  busca la cancion o el artista a trackear haciendo click arriba
+                  a la derecha
                 </p>
                 <div className='mt-4'>
-                  <a
+                  <Link
                     className='text-green-500 hover:underline'
-                    href='#'
+                    href='/dashboard'
                   >
-                    View Dashboard
-                  </a>
+                    Ir al Dashboard
+                  </Link>
                 </div>
               </div>
             </div>
@@ -112,18 +125,14 @@ export const HowTo = (): JSX.Element => {
               </div>
               <div className='p-6'>
                 <h3 className='text-xl font-bold'>
-                  3. Set Up Alerts and Notifications
+                  3. ¡Ya estás trackeando los datos de tu Artista Favorito!
                 </h3>
                 <p className='text-gray-500 dark:text-gray-400'>
-                  Stay on top of your listening habits by setting up alerts and
-                  notifications. Get notified about changes in your top songs,
-                  artists, and genres, and discover new music recommendations.
+                  Una vez has buscado y seleccionado la canción o el artista a
+                  trackear, ya solo queda esperar a que cada dia Spotify se
+                  actualice y podrás ver todas las estadisticas de tu artista
+                  favorito en Spotify sin hacer nada
                 </p>
-                <div className='mt-4'>
-                  <button className='inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2'>
-                    Manage Notifications
-                  </button>
-                </div>
               </div>
             </div>
           </div>

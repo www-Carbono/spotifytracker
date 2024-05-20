@@ -29,7 +29,7 @@ const Dashboard = (): JSX.Element => {
       ) : (
         <div>
           {updateInformation && (
-            <div className='flex items-center justify-center mt-10'>
+            <div className='flex items-center justify-center pt-10 bg-gray-100'>
               {updateInformation.SpotifyUpdateChecker.SongViews.toString() ===
               'true' ? (
                 <div

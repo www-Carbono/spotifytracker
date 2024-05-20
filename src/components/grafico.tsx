@@ -1,6 +1,6 @@
 'use client'
 import React, { useEffect, useState } from 'react'
-import { Line } from 'react-chartjs-2'
+import { Line, Bar } from 'react-chartjs-2'
 import { CategoryScale } from 'chart.js'
 
 import Chart from 'chart.js/auto'
@@ -55,8 +55,9 @@ const Graphics: React.FC<Props> = ({
     } else {
       const realValues = Object.values(graphicData)
       const arrayViews = []
-      setLabel(`Variacion de ${text}`)
+      setLabel(`${text} Diarias`)
       console.log(realValues.length)
+      arrayViews.push(0)
       if (realValues.length > 1) {
         for (const [index] of realValues.entries()) {
           const diferencia = realValues[index + 1] - realValues[index]
@@ -89,7 +90,7 @@ const Graphics: React.FC<Props> = ({
         pointHoverBackgroundColor: 'rgba(75,192,192,1)',
         pointHoverBorderColor: 'rgba(220,220,220,1)',
         pointHoverBorderWidth: 2,
-        pointRadius: 1,
+        pointRadius: 5,
         pointHitRadius: 10,
         showLine: true,
         data: axeY // Reproducciones,

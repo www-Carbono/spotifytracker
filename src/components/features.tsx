@@ -7,7 +7,7 @@ export const Features = (): JSX.Element => {
     >
       <div className='container px-4 md:px-6'>
         <h2 className='text-3xl font-bold tracking-tighter sm:text-4xl mb-10'>
-          Features
+          Caracteristicas
         </h2>{' '}
         <div className='grid gap-8 md:grid-cols-2 lg:grid-cols-3'>
           <div
@@ -41,9 +41,9 @@ export const Features = (): JSX.Element => {
               </svg>
             </div>
             <div className='p-6'>
-              <h3 className='text-xl font-bold'>Song Tracking</h3>
+              <h3 className='text-xl font-bold'>Trackeo de Canciones</h3>
               <p className='text-gray-500 '>
-                Track your most-played songs, genres, and artists over time.
+                Trackea las canciones que desees y observa su aumento diario
               </p>
             </div>
           </div>
@@ -85,9 +85,13 @@ export const Features = (): JSX.Element => {
               </svg>
             </div>
             <div className='p-6'>
-              <h3 className='text-xl font-bold'>Data Visualization</h3>
+              <h3 className='text-xl font-bold'>
+                Trackeo de Oyentes Mensuales
+              </h3>
               <p className='text-gray-500 '>
-                Visualize your Spotify data with beautiful charts and graphs.
+                Utiliza nuestro servicio para trackear los oyentes mensuales de
+                un tu artista favorito, con tablas para observar los cambios
+                diarios en sus oyentes.
               </p>
             </div>
           </div>
@@ -113,10 +117,10 @@ export const Features = (): JSX.Element => {
               </svg>
             </div>
             <div className='p-6'>
-              <h3 className='text-xl font-bold'>Alerts and Notifications</h3>
+              <h3 className='text-xl font-bold'>Trackeo de Followers</h3>
               <p className='text-gray-500'>
-                Get notified about changes in your listening habits and discover
-                new music.
+                Busca tu artista favorito y trackea las variaciones en followers
+                diarios en spotify
               </p>
             </div>
           </div>

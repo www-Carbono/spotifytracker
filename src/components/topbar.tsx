@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { logout } from '@/server/services/isUserLogged'
 import { useIsLogged } from '@/hooks/useIsLogged'
 import Link from 'next/link'
-
+import Image from 'next/image'
 export const TopBar = (): JSX.Element => {
   const values = {
     home: 'home',
@@ -60,28 +60,13 @@ export const TopBar = (): JSX.Element => {
           setValueSelected(values.home)
         }}
       >
-        <svg
-          className='h-6 w-6'
-          fill='none'
-          height='24'
-          stroke='currentColor'
-          strokeLinecap='round'
-          strokeLinejoin='round'
-          strokeWidth='2'
-          viewBox='0 0 24 24'
-          width='24'
-          xmlns='http://www.w3.org/2000/svg'
-        >
-          <path d='M16.85 18.58a9 9 0 1 0-9.7 0' />
-          <path d='M8 14a5 5 0 1 1 8 0' />
-          <circle
-            cx='12'
-            cy='11'
-            r='1'
-          />
-          <path d='M13 17a1 1 0 1 0-2 0l.5 4.5a.5.5 0 1 0 1 0Z' />
-        </svg>
-        <span className='text-lg font-bold ml-2'>Spotify Insights</span>
+        <Image
+          src={'/favicon.svg'}
+          alt='Favicon'
+          width={30}
+          height={30}
+        />
+        <span className='text-lg font-bold ml-2'>Spoti Insights</span>
       </Link>
       <nav className='ml-auto flex gap-4 sm:gap-6'>
         <Link
@@ -119,7 +104,7 @@ export const TopBar = (): JSX.Element => {
             setValueSelected(values.login)
           }}
         >
-          Login
+          Iniciar Sesion
         </Link>
         <Link
           className={`text-sm font-medium hover:underline underline-offset-4 ${
@@ -130,7 +115,7 @@ export const TopBar = (): JSX.Element => {
             setValueSelected(values.register)
           }}
         >
-          Register
+          Registrarse
         </Link>
         <Link
           className={`text-sm font-medium hover:underline underline-offset-4 ${
@@ -156,7 +141,7 @@ export const TopBar = (): JSX.Element => {
         </Link>
         <a
           className='text-sm font-medium hover:underline underline-offset-4'
-          href='http://twitter.com'
+          href='https://x.com/Insights_Spoti'
           target='_blank'
           rel='noreferrer'
         >

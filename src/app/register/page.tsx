@@ -3,7 +3,6 @@ import React, { useState } from 'react'
 import registerUser from '@/server/services/registerUser'
 import { useIsLogged } from '@/hooks/useIsLogged'
 import { Loader } from '@/components/Loader'
-import { Footer } from '@/components/footer'
 import { PopUp } from '@/components/popup'
 
 const Register = (): JSX.Element => {
@@ -66,11 +65,11 @@ const Register = (): JSX.Element => {
                     }}
                   >
                     <h3 className='whitespace-nowrap font-semibold tracking-tight text-2xl'>
-                      Register
+                      Registrarse
                     </h3>
                     <p className='text-sm text-muted-foreground'>
-                      Create a new Spotify Insights account to access your data
-                      insights.
+                      Create una cuenta en Spoti Insights account para acceder
+                      al Dashboard.
                     </p>
                     {error ? (
                       <div className='text-center mt-10 pt-5 -mb-4'>
@@ -120,7 +119,7 @@ const Register = (): JSX.Element => {
                           className='text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-black'
                           htmlFor='password'
                         >
-                          Password
+                          Contraseña
                         </label>
                         <input
                           className='flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50'
@@ -135,7 +134,7 @@ const Register = (): JSX.Element => {
                           className='text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-black'
                           htmlFor='confirmPassword'
                         >
-                          Confirm Password
+                          Confirmar Contraseña
                         </label>
                         <input
                           className='flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50'
@@ -148,7 +147,7 @@ const Register = (): JSX.Element => {
                     </div>
                     <div className='flex items-center p-6'>
                       <button className='bg-black text-white inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 w-full'>
-                        Register
+                        Registrarse
                       </button>
                       {loading && <Loader />}
                     </div>
@@ -157,7 +156,6 @@ const Register = (): JSX.Element => {
               </div>
             </div>
           </div>
-          <Footer />
         </div>
       )}
     </div>

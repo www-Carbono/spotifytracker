@@ -77,26 +77,26 @@ export const Stats = ({ type, database, userData }: Props): JSX.Element => {
                     </div>
                     <div className='p-6'>
                       <div className='relative w-full overflow-auto'>
-                        <table className='w-full caption-bottom text-sm'>
+                        <table className='w-full caption-bottom text-sm text-center'>
                           <thead className='[&_tr]:border-b'>
                             <tr className='border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted'>
-                              <th className='h-12 px-4 text-left align-middle font-medium text-muted-foreground'>
+                              <th className='h-12 px-2 text-left align-middle font-medium text-muted-foreground text-md'>
                                 Portada
                               </th>
-                              <th className='h-12 px-4 text-left align-middle font-medium text-muted-foreground text-sm'>
+                              <th className='h-12 px-2 align-middle font-medium text-muted-foreground text-md'>
                                 Nombre Canción
                               </th>
-                              <th className='h-12 px-4 text-left align-middle font-medium text-muted-foreground'>
+                              <th className='h-12 px-2 align-middle font-medium text-muted-foreground text-md'>
                                 Artista
                               </th>
-                              <th className='h-12 px-4 text-left align-middle font-medium text-muted-foreground'>
+                              <th className='h-12 px-2 align-middle font-medium text-muted-foreground text-md'>
                                 Reproducciones
                               </th>
-                              <th className='h-12 px-4 text-left align-middle font-medium text-muted-foreground'>
-                                Aumento ultimas 24h
+                              <th className='h-12 px-2 align-middle font-medium text-muted-foreground text-xs'>
+                                Últimas 24h
                               </th>
-                              <th className='h-12 px-4 text-left align-middle font-medium text-muted-foreground'>
-                                Mas Information
+                              <th className='h-12 px-2 align-middle font-medium text-muted-foreground text-xs'>
+                                Más Information
                               </th>
                             </tr>
                           </thead>
@@ -204,7 +204,7 @@ export const Stats = ({ type, database, userData }: Props): JSX.Element => {
                       setNewSong(!newSong)
                     }}
                   >
-                    {newSong ? 'Cerrar' : 'Añadir Canción'}
+                    {newSong ? 'Cerrar' : 'Añadir Artista'}
                   </button>
                 </div>
 
@@ -222,31 +222,32 @@ export const Stats = ({ type, database, userData }: Props): JSX.Element => {
                   >
                     <div className='flex flex-col space-y-1.5 p-6'>
                       <h3 className='whitespace-nowrap text-2xl font-semibold leading-none tracking-tight'>
-                        Top Tracks
+                        Oyentes Mensuales de Artista Trackeados
                       </h3>
                       <p className='text-sm text-muted-foreground'>
-                        Your most popular tracks by total listeners.
+                        Aquí encontrarás todos Oyentes Mensuales de los artistas
+                        a los que estás haciendole un seguimiento.
                       </p>
                     </div>
                     <div className='p-6'>
                       <div className='relative w-full overflow-auto'>
-                        <table className='w-full caption-bottom text-sm'>
+                        <table className='w-full caption-bottom text-sm text-center'>
                           <thead className='[&_tr]:border-b'>
                             <tr className='border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted'>
-                              <th className='h-12 px-4 text-left align-middle font-medium text-muted-foreground'>
-                                Cover
+                              <th className='h-12 px-2 align-middle font-medium text-muted-foreground'>
+                                Portada
                               </th>
-                              <th className='h-12 px-4 text-left align-middle font-medium text-muted-foreground'>
-                                Artist
+                              <th className='h-12 px-4 align-middle font-medium text-muted-foreground'>
+                                Artista
                               </th>
-                              <th className='h-12 px-4 text-left align-middle font-medium text-muted-foreground'>
-                                Plays
+                              <th className='h-12 px-4 align-middle font-medium text-muted-foreground'>
+                                Oyentes Mensuales
                               </th>
-                              <th className='h-12 px-4 text-left align-middle font-medium text-muted-foreground'>
-                                24h Increase
+                              <th className='h-12 px-4 align-middle font-medium text-muted-foreground'>
+                                Ultimas 24h
                               </th>
-                              <th className='h-12 px-4 text-left align-middle font-medium text-muted-foreground'>
-                                More Information
+                              <th className='h-12 px-4 align-middle font-medium text-muted-foreground'>
+                                Mas Información
                               </th>
                             </tr>
                           </thead>
@@ -385,31 +386,32 @@ export const Stats = ({ type, database, userData }: Props): JSX.Element => {
                   >
                     <div className='flex flex-col space-y-1.5 p-6'>
                       <h3 className='whitespace-nowrap text-2xl font-semibold leading-none tracking-tight'>
-                        Top Tracks
+                        Seguidores de Artista Trackeados
                       </h3>
                       <p className='text-sm text-muted-foreground'>
-                        Your most popular tracks by total listeners.
+                        Aquí encontrarás todos los seguidores en spotify de los
+                        artistas a los que estás haciendole un seguimiento.
                       </p>
                     </div>
                     <div className='p-6'>
                       <div className='relative w-full overflow-auto'>
-                        <table className='w-full caption-bottom text-sm'>
+                        <table className='w-full caption-bottom text-sm text-center'>
                           <thead className='[&_tr]:border-b'>
                             <tr className='border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted'>
-                              <th className='h-12 px-4 text-left align-middle font-medium text-muted-foreground'>
-                                Cover
+                              <th className='h-12 px-4 align-middle font-medium text-muted-foreground'>
+                                Portada
                               </th>
-                              <th className='h-12 px-4 text-left align-middle font-medium text-muted-foreground'>
-                                Artist
+                              <th className='h-12 px-4 align-middle font-medium text-muted-foreground'>
+                                Artista
                               </th>
-                              <th className='h-12 px-4 text-left align-middle font-medium text-muted-foreground'>
-                                Plays
+                              <th className='h-12 px-4 align-middle font-medium text-muted-foreground'>
+                                Seguidores
                               </th>
-                              <th className='h-12 px-4 text-left align-middle font-medium text-muted-foreground'>
-                                24h Increase
+                              <th className='h-12 px-4 align-middle font-medium text-muted-foreground'>
+                                Ultimas 24h
                               </th>
-                              <th className='h-12 px-4 text-left align-middle font-medium text-muted-foreground'>
-                                More Information
+                              <th className='h-12 px-4 align-middle font-medium text-muted-foreground'>
+                                Mas Información
                               </th>
                             </tr>
                           </thead>

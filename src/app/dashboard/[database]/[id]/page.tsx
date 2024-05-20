@@ -106,12 +106,21 @@ const Details = ({
     <div className='flex justify-center p-5'>
       {data && (
         <div className='grid gap-8 bg-white  rounded-lg shadow-2xl'>
-          <button onClick={onClickHandle}>Volver Atras</button>
           <div className='bg-white rounded-lg shadow-lg p-6'>
+            <div className='flex justify-end '>
+              <button
+                onClick={onClickHandle}
+                className='inline-flex shadow-xl items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 p-2 hover:bg-gray-200'
+              >
+                Volver
+              </button>
+            </div>
             <div className='w-full max-w-4xl'>
               <div>
-                <div>Song Details</div>
-                <div>Detailed information about the selected song.</div>
+                <h2 className='text-2xl font-bold'>Detalles</h2>
+                <h3>
+                  Información Detallada de la canción o el Artista seleccionado
+                </h3>
               </div>
               <div className='grid gap-8'>
                 <div className='grid md:grid-cols-[200px_1fr] gap-6'>
@@ -228,7 +237,7 @@ const Details = ({
                   </div>
                   <h2 className='mb-10'>
                     {data && (
-                      <div className='text-center text-sm -mt-5'>
+                      <div className='text-center text-sm -mt-5 font-semibold'>
                         {params.database === 'song'
                           ? `${data[0].songName} - ${data[0].artistName}`
                           : `${data[0].artistname}`}
@@ -238,7 +247,13 @@ const Details = ({
                 </div>
                 <div className='flex gap-8 justify-center'>
                   <div>
-                    <h4 className='text-lg font-bold mb-4'>Song Performance</h4>
+                    <h4 className='text-lg font-bold mb-4 text-center'>
+                      {params.database === 'song'
+                        ? 'Total Reproducciones de la Canción'
+                        : params.database === 'listeners'
+                        ? 'Total Oyentes Mensuales'
+                        : 'Total Followers'}
+                    </h4>
 
                     <div>
                       {data && (
@@ -255,7 +270,13 @@ const Details = ({
                     </div>
                   </div>
                   <div>
-                    <h4 className='text-lg font-bold mb-4'>Daily Plays</h4>
+                    <h4 className='text-lg font-bold mb-4 text-center'>
+                      {params.database === 'song'
+                        ? 'Reproducciones Diarias'
+                        : params.database === 'listeners'
+                        ? 'Oyentes Mensuales Diarios'
+                        : 'Followers Diarios'}
+                    </h4>
                     <div>
                       {data && (
                         <div className='flex justify-center items-center gap-96 aspect-[16/9]'>
@@ -272,19 +293,21 @@ const Details = ({
                   </div>
                 </div>
                 <div>
-                  <h4 className='text-lg font-bold mb-4'>Monthly Views</h4>
+                  <h4 className='text-lg font-bold mb-4'>
+                    Reproduciones Mensuales
+                  </h4>
                   <div className='relative w-full overflow-auto'>
                     <table className='w-full caption-bottom text-sm'>
                       <thead className='[&_tr]:border-b'>
                         <tr className='border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted'>
                           <th className='h-12 px-4  align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0 text-center'>
-                            Day
+                            Dia
                           </th>
                           <th className='h-12 px-4  align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0 text-center'>
-                            Views
+                            Reproducciones/Oyentes/Followers
                           </th>
                           <th className='h-12 px-4 align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0 text-center'>
-                            Numero Reproducciones
+                            Diferencia
                           </th>
                         </tr>
                       </thead>
@@ -301,10 +324,32 @@ const Details = ({
                                     {value}
                                   </td>
                                   <td className='p-4 align-middle [&:has([role=checkbox])]:pr-0'>
-                                    {data[0].viewsTest[value]}
+                                    {new Intl.NumberFormat().format(
+                                      data[0].viewsTest[value] as number
+                                    )}
                                   </td>
-                                  <td className='p-4 align-middle [&:has([role=checkbox])]:pr-0'>
-                                    {graphicsTableResults?.[index]}
+                                  <td
+                                    className={`p-4 align-middle [&:has([role=checkbox])]:pr-0 ${
+                                      graphicsTableResults?.[index][0] === '+'
+                                        ? 'text-green-500'
+                                        : 'text-red-500'
+                                    }`}
+                                  >
+                                    {graphicsTableResults?.[index][0] ===
+                                    '+' ? (
+                                      <>
+                                        +
+                                        {new Intl.NumberFormat().format(
+                                          Number(
+                                            graphicsTableResults?.[
+                                              index
+                                            ].substring(1)
+                                          )
+                                        )}
+                                      </>
+                                    ) : (
+                                      graphicsTableResults?.[index]
+                                    )}
                                   </td>
                                 </tr>
                               )
@@ -323,10 +368,31 @@ const Details = ({
                                   {value}
                                 </td>
                                 <td className='p-4 align-middle [&:has([role=checkbox])]:pr-0'>
-                                  {data[0].monthlylisteners[value]}
+                                  {new Intl.NumberFormat().format(
+                                    data[0].monthlylisteners[value] as number
+                                  )}
                                 </td>
-                                <td className='p-4 align-middle [&:has([role=checkbox])]:pr-0'>
-                                  {graphicsTableResults?.[index]}
+                                <td
+                                  className={`p-4 align-middle [&:has([role=checkbox])]:pr-0 ${
+                                    graphicsTableResults?.[index][0] === '+'
+                                      ? 'text-green-500'
+                                      : 'text-red-500'
+                                  }`}
+                                >
+                                  {graphicsTableResults?.[index][0] === '+' ? (
+                                    <>
+                                      +
+                                      {new Intl.NumberFormat().format(
+                                        Number(
+                                          graphicsTableResults?.[
+                                            index
+                                          ].substring(1)
+                                        )
+                                      )}
+                                    </>
+                                  ) : (
+                                    graphicsTableResults?.[index]
+                                  )}
                                 </td>
                               </tr>
                             ))}
