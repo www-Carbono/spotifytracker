@@ -1,6 +1,6 @@
 'use client'
 import React, { useEffect, useState } from 'react'
-import { Line, Bar } from 'react-chartjs-2'
+import { Line } from 'react-chartjs-2'
 import { CategoryScale } from 'chart.js'
 
 import Chart from 'chart.js/auto'
