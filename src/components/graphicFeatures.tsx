@@ -1192,7 +1192,6 @@ export const GraphicsFeatures = (): JSX.Element => {
                           <g transform='translate(19, 72)'>
                             <rect
                               fill='#2563eb'
-                              focusable='false'
                               height='172'
                               rx='0'
                               ry='0'
@@ -1204,7 +1203,6 @@ export const GraphicsFeatures = (): JSX.Element => {
                           <g transform='translate(72, 0)'>
                             <rect
                               fill='#2563eb'
-                              focusable='false'
                               height='244'
                               rx='0'
                               ry='0'
@@ -1216,7 +1214,6 @@ export const GraphicsFeatures = (): JSX.Element => {
                           <g transform='translate(125, 44)'>
                             <rect
                               fill='#2563eb'
-                              focusable='false'
                               height='200'
                               rx='0'
                               ry='0'
@@ -1228,7 +1225,6 @@ export const GraphicsFeatures = (): JSX.Element => {
                           <g transform='translate(178, 11)'>
                             <rect
                               fill='#2563eb'
-                              focusable='false'
                               height='233'
                               rx='0'
                               ry='0'
@@ -1240,7 +1236,6 @@ export const GraphicsFeatures = (): JSX.Element => {
                           <g transform='translate(231, 59)'>
                             <rect
                               fill='#2563eb'
-                              focusable='false'
                               height='185'
                               rx='0'
                               ry='0'
@@ -1252,7 +1247,6 @@ export const GraphicsFeatures = (): JSX.Element => {
                           <g transform='translate(284, 132)'>
                             <rect
                               fill='#2563eb'
-                              focusable='false'
                               height='112'
                               rx='0'
                               ry='0'
