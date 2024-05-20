@@ -1,103 +1,168 @@
 import React, { useState } from 'react'
-import { AddNewSong } from './addNewSong'
-import { AddNewArtist } from './addNewArtist'
-import { AddNewFollowers } from './addNewFollowers'
+
 import { Stats } from './stats'
 export const NavBar = (userData: any): JSX.Element => {
-  const [component, setComponent] = useState<JSX.Element>()
-  const [selected, setSelected] = useState<number>()
-
   const infoData = {
     canciones: 'canciones',
     oyentes: 'oyentes',
     seguidores: 'seguidores'
   }
+  const [component, setComponent] = useState<JSX.Element>(
+    <Stats
+      type={infoData.canciones}
+      database='spotifytracker'
+      userData={userData}
+    />
+  )
+  const [selected, setSelected] = useState<number>(1)
 
   const changeComponent = (component: JSX.Element): void => {
     setComponent(component)
   }
 
   return (
-    <div className='flex flex-row mt-10 gap-28 justify-center'>
-      <ul className='flex  flex-col gap-5 mx-10'>
-        <li
-          onClick={() => {
-            changeComponent(<AddNewSong />)
-            setSelected(1)
-          }}
-          className={selected === 1 ? 'text-red-700' : ''}
-        >
-          Añadir Seguimiento de Canción
-        </li>
-        <li
-          onClick={() => {
-            changeComponent(<AddNewArtist />)
-            setSelected(2)
-          }}
-          className={selected === 2 ? 'text-red-700' : ''}
-        >
-          Añadir Seguimiento de Oyentes Mensuales
-        </li>
-        <li
-          onClick={() => {
-            changeComponent(<AddNewFollowers />)
-            setSelected(3)
-          }}
-          className={selected === 3 ? 'text-red-700' : ''}
-        >
-          {' '}
-          Añadir Seguimiento de Seguidores en Spotify
-        </li>
-        <li
-          onClick={() => {
-            changeComponent(
-              <Stats
-                type={infoData.canciones}
-                database='spotifytracker'
-                userData={userData}
-              />
-            )
-            setSelected(4)
-          }}
-          className={selected === 4 ? 'text-red-700' : ''}
-        >
-          {' '}
-          Seguimiento Oyentes Mensuales
-        </li>
-        <li
-          onClick={() => {
-            changeComponent(
-              <Stats
-                type={infoData.oyentes}
-                database='monthlylistenerstracker'
-                userData={userData}
-              />
-            )
-            setSelected(5)
-          }}
-          className={selected === 5 ? 'text-red-700' : ''}
-        >
-          {' '}
-          Seguimiento de Oyentes Mensuales
-        </li>
-        <li
-          onClick={() => {
-            changeComponent(
-              <Stats
-                type={infoData.seguidores}
-                database='followerstracker'
-                userData={userData}
-              />
-            )
-            setSelected(6)
-          }}
-          className={selected === 6 ? 'text-red-700' : ''}
-        >
-          {' '}
-          Seguidmiento Followers
-        </li>
-      </ul>
-      <div className='mx-auto'>{component}</div>
+    <div className='flex flex-col min-h-[100dvh]'>
+      <main className='flex-1 bg-gray-100 '>
+        <div className='max-w-6xl mx-auto px-4 md:px-6 py-8 md:py-12'>
+          <div className='grid md:grid-cols-[310px_1fr] gap-8'>
+            <div className='bg-white rounded-lg shadow-lg'>
+              <div className='p-6'>
+                <h2 className='text-2xl font-bold mb-4'>Dashboard</h2>
+                <nav className='space-y-2'>
+                  <li
+                    className={`flex items-center gap-3 rounded-md px-3 py-2 text-gray-500 hover:bg-gray-100 cursor-pointer ${
+                      selected === 1 ? 'bg-gray-200' : ''
+                    }`}
+                    onClick={() => {
+                      changeComponent(
+                        <Stats
+                          type={infoData.canciones}
+                          database='spotifytracker'
+                          userData={userData}
+                        />
+                      )
+                      setSelected(1)
+                    }}
+                  >
+                    <svg
+                      className='h-5 w-5'
+                      fill='none'
+                      height='24'
+                      stroke='currentColor'
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
+                      strokeWidth='2'
+                      viewBox='0 0 24 24'
+                      width='24'
+                      xmlns='http://www.w3.org/2000/svg'
+                    >
+                      <path d='M9 18V5l12-2v13' />
+                      <circle
+                        cx='6'
+                        cy='18'
+                        r='3'
+                      />
+                      <circle
+                        cx='18'
+                        cy='16'
+                        r='3'
+                      />
+                    </svg>
+                    Trackear Canción
+                  </li>
+                  <li
+                    className={`flex items-center gap-3 rounded-md px-3 py-2 text-gray-500 hover:bg-gray-100 cursor-pointer ${
+                      selected === 2 ? 'bg-gray-200' : ''
+                    }`}
+                    onClick={() => {
+                      changeComponent(
+                        <Stats
+                          type={infoData.oyentes}
+                          database='monthlylistenerstracker'
+                          userData={userData}
+                        />
+                      )
+                      setSelected(2)
+                    }}
+                  >
+                    <svg
+                      className='h-5 w-5'
+                      fill='none'
+                      height='24'
+                      stroke='currentColor'
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
+                      strokeWidth='2'
+                      viewBox='0 0 24 24'
+                      width='24'
+                      xmlns='http://www.w3.org/2000/svg'
+                    >
+                      <path d='M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2' />
+                      <circle
+                        cx='9'
+                        cy='7'
+                        r='4'
+                      />
+                      <path d='M22 21v-2a4 4 0 0 0-3-3.87' />
+                      <path d='M16 3.13a4 4 0 0 1 0 7.75' />
+                    </svg>
+                    Trackear Oyentes Mensuales
+                  </li>
+                  <li
+                    className={`flex items-center gap-3 rounded-md px-3 py-2 text-gray-500 hover:bg-gray-100 cursor-pointer ${
+                      selected === 3 ? 'bg-gray-200' : ''
+                    }`}
+                    onClick={() => {
+                      changeComponent(
+                        <Stats
+                          type={infoData.seguidores}
+                          database='followerstracker'
+                          userData={userData}
+                        />
+                      )
+                      setSelected(3)
+                    }}
+                  >
+                    <svg
+                      className='h-5 w-5'
+                      fill='none'
+                      height='24'
+                      stroke='currentColor'
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
+                      strokeWidth='2'
+                      viewBox='0 0 24 24'
+                      width='24'
+                      xmlns='http://www.w3.org/2000/svg'
+                    >
+                      <path d='M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2' />
+                      <circle
+                        cx='9'
+                        cy='7'
+                        r='4'
+                      />
+                      <line
+                        x1='19'
+                        x2='19'
+                        y1='8'
+                        y2='14'
+                      />
+                      <line
+                        x1='22'
+                        x2='16'
+                        y1='11'
+                        y2='11'
+                      />
+                    </svg>
+                    Trackear Seguidores
+                  </li>
+                </nav>
+              </div>
+            </div>
+            <div className='mx-auto'>{component}</div>
+          </div>
+        </div>
+      </main>
     </div>
   )
 }

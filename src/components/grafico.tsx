@@ -9,7 +9,7 @@ interface Song {
   id: string
   songName: string
   artistName: string
-  coverLink: string
+  coverlink: string
   songlink: string
   viewsTest: Record<string, number>
   userId: string

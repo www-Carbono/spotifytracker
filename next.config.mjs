@@ -2,7 +2,16 @@
 const nextConfig = {
   distDir: 'build',
   images: {
-    domains: ['picsum.photos']
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'placehold.jp'
+      },
+      {
+        protocol: 'https',
+        hostname: 'i.scdn.co'
+      }
+    ]
   }
 }
 

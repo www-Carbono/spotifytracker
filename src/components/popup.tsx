@@ -1,5 +1,11 @@
 import React from 'react'
-export const PopUp = ({ type }: { type: string }): JSX.Element => {
+export const PopUp = ({
+  type,
+  children
+}: {
+  type: string
+  children: React.ReactNode
+}): JSX.Element => {
   return (
     <div className='flex justify-center'>
       {type === 'error' ? (
@@ -18,9 +24,7 @@ export const PopUp = ({ type }: { type: string }): JSX.Element => {
               ></path>
             </svg>
           </div>
-          <div className='error__title'>
-            Error al añadir la canción o el artista, vuelve a Intentarlo
-          </div>
+          <div className='error__title'>{children}</div>
         </div>
       ) : (
         <div className='info'>
@@ -38,9 +42,7 @@ export const PopUp = ({ type }: { type: string }): JSX.Element => {
               ></path>
             </svg>
           </div>
-          <div className='info__title'>
-            Cancion o Artista añadido correctamente.
-          </div>
+          <div className='info__title'>{children}</div>
         </div>
       )}
     </div>

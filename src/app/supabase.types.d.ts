@@ -102,7 +102,7 @@ export interface Database {
       spotifytracker: {
         Row: {
           artistName: string | null
-          coverLink: string | null
+          coverlink: string | null
           id: string
           songlink: string | null
           songName: string | null
@@ -111,7 +111,7 @@ export interface Database {
         }
         Insert: {
           artistName?: string | null
-          coverLink?: string | null
+          coverlink?: string | null
           id?: string
           songlink?: string | null
           songName?: string | null
@@ -120,7 +120,7 @@ export interface Database {
         }
         Update: {
           artistName?: string | null
-          coverLink?: string | null
+          coverlink?: string | null
           id?: string
           songlink?: string | null
           songName?: string | null

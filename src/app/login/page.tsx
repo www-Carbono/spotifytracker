@@ -1,16 +1,21 @@
 'use client'
 import React, { useState } from 'react'
+
 import loginUser from '@/server/services/loginUser'
 import { useIsLogged } from '@/hooks/useIsLogged'
 import { Loader } from '@/components/Loader'
 import Link from 'next/link'
+import { PopUp } from '@/components/popup'
+import { Footer } from '@/components/footer'
 
 const Login = (): JSX.Element => {
   const [error, setError] = useState<boolean>(false)
   const userData = useIsLogged()
+  const [loading, setLoading] = useState(false)
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault()
+    setLoading(true)
     const { email, password } = Object.fromEntries(
       new window.FormData(event.currentTarget)
     )
@@ -21,23 +26,21 @@ const Login = (): JSX.Element => {
         .then((data) => {
           if (!data) {
             setError(true)
+            setLoading(false)
           } else if (data) {
             setError(false)
+            setLoading(false)
             window.location.href = '/dashboard'
           }
         })
         .catch((_error) => {
+          setLoading(false)
           setError(false)
         })
     }
   }
   return (
     <div>
-      {error ? (
-        <p className='text-center m-10'>Usuario o Contraseña Incorrectos</p>
-      ) : (
-        ''
-      )}
       {userData ? (
         window && (window.location.href = '/dashboard')
       ) : (
@@ -47,33 +50,87 @@ const Login = (): JSX.Element => {
               <Loader />
             </div>
           ) : (
-            <form
-              action=''
-              className='flex flex-col justify-center items-center mt-10 text-black'
-              onSubmit={(event) => {
-                onSubmit(event)
-              }}
-            >
-              <label htmlFor='email'>Correo Electronico</label>
-              <input
-                type='email'
-                name='email'
-                id='email'
-                placeholder='Johndoe@gmail.com'
-              />
-              <label htmlFor='password'>Contraseña:</label>
-              <input
-                type='password'
-                name='password'
-                id='password'
-                placeholder='***************'
-              />
-              <button>Iniciar Sesion</button>
-              <p className='text-white'>
-                ¿No Tienes cuenta? Registrate haciendo click{' '}
-                <Link href='/register'>aquí</Link>
-              </p>
-            </form>
+            <div className='flex flex-col min-h-[100dvh]'>
+              <div className='flex-1 flex items-center justify-center'>
+                <div className='w-full max-w-md px-4 md:px-0'>
+                  <div
+                    className='rounded-lg border bg-card text-card-foreground shadow-lg'
+                    data-v0-t='card'
+                  >
+                    <div className='flex flex-col space-y-1.5 p-6 pb-0'>
+                      <h3 className='whitespace-nowrap font-semibold tracking-tight text-2xl'>
+                        Login
+                      </h3>
+                      <p className='text-sm text-muted-foreground'>
+                        Enter your Spotify account details to access your data
+                        insights.
+                      </p>
+
+                      {error ? (
+                        <div className='text-center mt-10 pt-5 -mb-4'>
+                          <PopUp type='error'>
+                            Nombre o Contraseña incorrectos, vuelve a intentarlo
+                          </PopUp>
+                        </div>
+                      ) : (
+                        ''
+                      )}
+                    </div>
+                    <form
+                      className='p-6 space-y-4'
+                      onSubmit={(event) => {
+                        onSubmit(event)
+                      }}
+                    >
+                      <div className='space-y-2'>
+                        <label
+                          className='text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-black'
+                          htmlFor='email'
+                        >
+                          Email
+                        </label>
+                        <input
+                          className='flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50'
+                          id='email'
+                          name='email'
+                          placeholder='m@example.com'
+                          required
+                          type='email'
+                        />
+                      </div>
+                      <div className='space-y-2'>
+                        <label
+                          className='text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-black'
+                          htmlFor='password'
+                        >
+                          Password
+                        </label>
+                        <input
+                          className='flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50'
+                          id='password'
+                          name='password'
+                          required
+                          type='password'
+                        />
+                      </div>
+                      <div className='flex items-center p-6'>
+                        <button className='inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 w-full bg-black text-white'>
+                          Sign in
+                        </button>
+                      </div>
+                    </form>
+                    <div className='flex justify-center p-6 flex-col items-center -mt-10'>
+                      {loading && <Loader />}
+                      <p className='text-black mt-2'>
+                        ¿No Tienes cuenta? Registrate haciendo click{' '}
+                        <Link href='/register'>aquí</Link>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <Footer />
+            </div>
           )}
         </div>
       )}

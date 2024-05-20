@@ -22,7 +22,7 @@ const saveToDatabase = async (
     const { error } = await supabase.from('spotifytracker').insert({
       songName: data2.name,
       artistName: data2.artists[0].name,
-      coverLink: data2.album.images[0].url,
+      coverlink: data2.album.images[0].url,
       songlink: data2.id,
       viewsTest: dataToUpload,
       userId: userid.id

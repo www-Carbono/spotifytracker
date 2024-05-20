@@ -21,6 +21,7 @@ export async function POST(req: NextRequest): Promise<any> {
   if (updateBoolean) {
     console.log('[+] Ejecución de la Cron')
     const DatabaseAndCurrentData: SpotifyUpdaterData = await isSpotifyUpdated()
+    console.log(DatabaseAndCurrentData)
 
     // // Este if comprueba si ya se han actualizado los datos de spotify y setea el json todo en false cuando cambia de dia. (Esto principalmente es para el aviso en la parte superior)
     if (
@@ -51,7 +52,7 @@ export async function POST(req: NextRequest): Promise<any> {
 
       // Añadimos un dia a la fecha:
       const fechaArray =
-        DatabaseAndCurrentData.DatabaseFollowersCurrentDate.split('/')
+        DatabaseAndCurrentData.DatabaseViewsCurrentDate.split('/')
       const fecha = new Date(
         Date.UTC(
           Number(fechaArray[2]),
@@ -99,7 +100,7 @@ export async function POST(req: NextRequest): Promise<any> {
 
       // Añadimos un dia a la fecha:
       const fechaArray =
-        DatabaseAndCurrentData.DatabaseFollowersCurrentDate.split('/')
+        DatabaseAndCurrentData.DatabaseListenersCurrentDate.split('/')
       const fecha = new Date(
         Date.UTC(
           Number(fechaArray[2]),
