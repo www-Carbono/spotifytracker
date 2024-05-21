@@ -167,10 +167,16 @@ export const Stats = ({ type, database, userData }: Props): JSX.Element => {
                                           {new Intl.NumberFormat().format(
                                             Object.values(
                                               elemento?.viewsTest as number
-                                            )[1] -
+                                            )[
+                                              Object.keys(elemento?.viewsTest)
+                                                .length - 1
+                                            ] -
                                               Object.values(
                                                 elemento?.viewsTest as number
-                                              )[0]
+                                              )[
+                                                Object.keys(elemento?.viewsTest)
+                                                  .length - 2
+                                              ]
                                           )}
                                         </span>
                                       )}
