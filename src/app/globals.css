@@ -77,3 +77,8 @@ label {
 th {
   padding: 10px 30px;
 }
+
+.loaderMainPage {
+  background-color: #111827;
+  height: 100vh;
+}

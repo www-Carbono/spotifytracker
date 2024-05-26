@@ -1,6 +1,14 @@
 import React, { useState } from 'react'
+import { motion } from 'framer-motion'
+
 export const Faqs = (): JSX.Element => {
   const [faqSelected, setFaqSelected] = useState<number>(0)
+
+  const variants = {
+    open: { opacity: 1, height: 'auto' },
+    closed: { opacity: 0, height: 0 }
+  }
+
   return (
     <section
       className='bg-gray-100 py-12 md:py-24 lg:py-32 flex justify-center'
@@ -13,32 +21,19 @@ export const Faqs = (): JSX.Element => {
           </h2>
           <div data-orientation='vertical'>
             <div
+              key={1}
               className='border-b'
-              data-orientation='vertical'
-              data-state='closed'
             >
-              <h3
-                className='flex'
-                data-orientation='vertical'
-                data-state='closed'
-              >
+              <h3 className='flex'>
                 <button
-                  aria-controls='radix-:r4o:'
-                  aria-expanded='false'
+                  aria-controls={`radix-:r4o-${1}`}
+                  aria-expanded={faqSelected === 1 ? 'true' : 'false'}
                   className='flex flex-1 items-center justify-between py-4 transition-all hover:underline [&[data-state=open]>svg]:rotate-180 text-lg font-medium'
-                  data-orientation='vertical'
-                  data-radix-collection-item=''
-                  data-state='closed'
-                  id='radix-:r4n:'
-                  type='button'
                   onClick={() => {
-                    setFaqSelected(1)
-                    if (faqSelected === 1) {
-                      setFaqSelected(0)
-                    }
+                    setFaqSelected((prevIndex) => (prevIndex === 1 ? 0 : 1))
                   }}
                 >
-                  ¿Que es Spoti Insights?
+                  ¿Que es Spoti Stats?
                   <svg
                     className='h-4 w-4 shrink-0 transition-transform duration-200'
                     fill='none'
@@ -55,53 +50,37 @@ export const Faqs = (): JSX.Element => {
                   </svg>
                 </button>
               </h3>
-              <div
-                aria-labelledby='radix-:r4n:'
-                className='overflow-hidden text-sm transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down'
-                data-orientation='vertical'
-                data-state='closed'
-                hidden
-                id='radix-:r4o:'
-                role='region'
-              />
-              {faqSelected === 1 && (
+              <motion.div
+                id={`radix-:r4o-${1}`}
+                variants={variants}
+                initial='closed'
+                animate={faqSelected === 1 ? 'open' : 'closed'}
+                transition={{ duration: 0.3 }}
+                className='overflow-hidden text-sm'
+              >
                 <p className='p-5'>
-                  Spoti Insights es una aplicación web con la que podrás
-                  gestionar y trackear tanto las visualizaciones de las
-                  canciones como los oyentes mensuales y los Followers en
-                  Spotify de tus artistas favoritos, obteniendo gráficas
-                  visuales y tablas para ver el comportamiento de sus perfiles
-                  de spotify{' '}
+                  Spoti Stats es una aplicación web con la que podrás gestionar
+                  y trackear tanto las visualizaciones de las canciones como los
+                  oyentes mensuales y los Followers en Spotify de tus artistas
+                  favoritos, obteniendo gráficas visuales y tablas para ver el
+                  comportamiento de sus perfiles de Spotify.
                 </p>
-              )}
+              </motion.div>
             </div>
             <div
+              key={2}
               className='border-b'
-              data-orientation='vertical'
-              data-state='closed'
             >
-              <h3
-                className='flex'
-                data-orientation='vertical'
-                data-state='closed'
-              >
+              <h3 className='flex'>
                 <button
-                  aria-controls='radix-:r4q:'
-                  aria-expanded='false'
+                  aria-controls={`radix-:r4o-${2}`}
+                  aria-expanded={faqSelected === 2 ? 'true' : 'false'}
                   className='flex flex-1 items-center justify-between py-4 transition-all hover:underline [&[data-state=open]>svg]:rotate-180 text-lg font-medium'
-                  data-orientation='vertical'
-                  data-radix-collection-item=''
-                  data-state='closed'
-                  id='radix-:r4p:'
-                  type='button'
                   onClick={() => {
-                    setFaqSelected(2)
-                    if (faqSelected === 2) {
-                      setFaqSelected(0)
-                    }
+                    setFaqSelected((prevIndex) => (prevIndex === 2 ? 0 : 2))
                   }}
                 >
-                  ¿Como Funciona Spoti Insights?
+                  ¿Como Funciona Spoti Stats?
                   <svg
                     className='h-4 w-4 shrink-0 transition-transform duration-200'
                     fill='none'
@@ -118,52 +97,37 @@ export const Faqs = (): JSX.Element => {
                   </svg>
                 </button>
               </h3>
-              <div
-                aria-labelledby='radix-:r4p:'
-                className='overflow-hidden text-sm transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down'
-                data-orientation='vertical'
-                data-state='closed'
-                hidden
-                id='radix-:r4q:'
-                role='region'
-              />
-              {faqSelected === 2 && (
+              <motion.div
+                id={`radix-:r4o-${2}`}
+                variants={variants}
+                initial='closed'
+                animate={faqSelected === 2 ? 'open' : 'closed'}
+                transition={{ duration: 0.3 }}
+                className='overflow-hidden text-sm'
+              >
                 <p className='p-5'>
-                  Para Utilizar Spoti Insights solo tienes que registrarte o
-                  Iniciar sesión, después, con la sesión iniciada desde la
-                  dashboard solo tienes que seleccionar en el manu lateral de la
-                  izquierda la opción deseada, y después solo tienes que empezar
-                  a trackear la información deseada.
+                  Para utilizar Spoti Stats solo tienes que registrarte o
+                  iniciar sesión. Después, con la sesión iniciada desde el
+                  dashboard, solo tienes que seleccionar en el menú lateral de
+                  la izquierda la opción deseada, y después solo tienes que
+                  empezar a trackear la información deseada.
                 </p>
-              )}
+              </motion.div>
             </div>
             <div
+              key={3}
               className='border-b'
-              data-orientation='vertical'
-              data-state='closed'
             >
-              <h3
-                className='flex'
-                data-orientation='vertical'
-                data-state='closed'
-              >
+              <h3 className='flex'>
                 <button
-                  aria-controls='radix-:r4s:'
-                  aria-expanded='false'
+                  aria-controls={`radix-:r4o-${3}`}
+                  aria-expanded={faqSelected === 3 ? 'true' : 'false'}
                   className='flex flex-1 items-center justify-between py-4 transition-all hover:underline [&[data-state=open]>svg]:rotate-180 text-lg font-medium'
-                  data-orientation='vertical'
-                  data-radix-collection-item=''
-                  data-state='closed'
-                  id='radix-:r4r:'
-                  type='button'
                   onClick={() => {
-                    setFaqSelected(3)
-                    if (faqSelected === 3) {
-                      setFaqSelected(0)
-                    }
+                    setFaqSelected((prevIndex) => (prevIndex === 3 ? 0 : 3))
                   }}
                 >
-                  ¿Es Spoti Insights gratis?
+                  ¿Es Spoti Stats gratis?
                   <svg
                     className='h-4 w-4 shrink-0 transition-transform duration-200'
                     fill='none'
@@ -180,45 +144,30 @@ export const Faqs = (): JSX.Element => {
                   </svg>
                 </button>
               </h3>
-              <div
-                aria-labelledby='radix-:r4r:'
-                className='overflow-hidden text-sm transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down'
-                data-orientation='vertical'
-                data-state='closed'
-                hidden
-                id='radix-:r4s:'
-                role='region'
-              />
-              {faqSelected === 3 && (
+              <motion.div
+                id={`radix-:r4o-${3}`}
+                variants={variants}
+                initial='closed'
+                animate={faqSelected === 3 ? 'open' : 'closed'}
+                transition={{ duration: 0.3 }}
+                className='overflow-hidden text-sm'
+              >
                 <p className='p-5'>
-                  Si, Spoti Insights es totalmente gratis y siempre lo será.
+                  Sí, Spoti Stats es totalmente gratis y siempre lo será.
                 </p>
-              )}
+              </motion.div>
             </div>
             <div
+              key={4}
               className='border-b'
-              data-orientation='vertical'
-              data-state='closed'
             >
-              <h3
-                className='flex'
-                data-orientation='vertical'
-                data-state='closed'
-              >
+              <h3 className='flex'>
                 <button
-                  aria-controls='radix-:r4u:'
-                  aria-expanded='false'
+                  aria-controls={`radix-:r4o-${4}`}
+                  aria-expanded={faqSelected === 4 ? 'true' : 'false'}
                   className='flex flex-1 items-center justify-between py-4 transition-all hover:underline [&[data-state=open]>svg]:rotate-180 text-lg font-medium'
-                  data-orientation='vertical'
-                  data-radix-collection-item=''
-                  data-state='closed'
-                  id='radix-:r4t:'
-                  type='button'
                   onClick={() => {
-                    setFaqSelected(4)
-                    if (faqSelected === 4) {
-                      setFaqSelected(0)
-                    }
+                    setFaqSelected((prevIndex) => (prevIndex === 4 ? 0 : 4))
                   }}
                 >
                   ¿Cuando Se Actualizan los Datos?
@@ -238,23 +187,21 @@ export const Faqs = (): JSX.Element => {
                   </svg>
                 </button>
               </h3>
-              <div
-                aria-labelledby='radix-:r4t:'
-                className='overflow-hidden text-sm transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down'
-                data-orientation='vertical'
-                data-state='closed'
-                hidden
-                id='radix-:r4u:'
-                role='region'
-              />
-              {faqSelected === 4 && (
+              <motion.div
+                id={`radix-:r4o-${4}`}
+                variants={variants}
+                initial='closed'
+                animate={faqSelected === 4 ? 'open' : 'closed'}
+                transition={{ duration: 0.3 }}
+                className='overflow-hidden text-sm'
+              >
                 <p className='p-5'>
-                  Los Datos se actualizan todos los dias a la vez que se
-                  actualiza spotify. Desde el dashboard puedes ver si los datos
-                  están actualizados al dia actual o no. (Es posible que a veces
-                  ponga que este actualizado y tarde un poco más en actualizar)
+                  Los datos se actualizan todos los días a la vez que se
+                  actualiza Spotify. Desde el dashboard puedes ver si los datos
+                  están actualizados al día actual o no. (Es posible que a veces
+                  ponga que esté actualizado y tarde un poco más en actualizar).
                 </p>
-              )}
+              </motion.div>
             </div>
           </div>
         </div>

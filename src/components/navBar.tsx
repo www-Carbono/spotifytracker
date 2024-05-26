@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
-
+import { motion } from 'framer-motion'
 import { Stats } from './stats'
+
 export const NavBar = (userData: any): JSX.Element => {
   const infoData = {
     canciones: 'canciones',
@@ -25,7 +26,12 @@ export const NavBar = (userData: any): JSX.Element => {
       <main className='flex-1 bg-gray-100 '>
         <div className='max-w-6xl mx-auto px-4 md:px-6 py-8 md:py-12'>
           <div className='grid md:grid-cols-[310px_1fr] gap-8'>
-            <div className='bg-white rounded-lg shadow-lg'>
+            <motion.div
+              className='bg-white rounded-lg shadow-lg'
+              initial={{ opacity: 0, y: -50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+            >
               <div className='p-6'>
                 <h2 className='text-2xl font-bold mb-4'>Dashboard</h2>
                 <nav className='space-y-2'>
@@ -158,8 +164,15 @@ export const NavBar = (userData: any): JSX.Element => {
                   </li>
                 </nav>
               </div>
-            </div>
-            <div className='mx-auto'>{component}</div>
+            </motion.div>
+            <motion.div
+              className='mx-auto'
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              {component}
+            </motion.div>
           </div>
         </div>
       </main>

@@ -1,9 +1,24 @@
 import Link from 'next/link'
 import React from 'react'
+import { motion } from 'framer-motion'
+
 export const HowTo = (): JSX.Element => {
+  // Variantes para las animaciones de entrada
+  const itemVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+        ease: 'easeInOut'
+      }
+    }
+  }
+
   return (
     <section
-      className='bg-gray-100  py-12 md:py-24 lg:py-32 flex justify-center'
+      className='bg-gray-100 py-12 md:py-24 lg:py-32 flex justify-center'
       id='howTo'
     >
       <div className='container px-4 md:px-6'>
@@ -12,7 +27,10 @@ export const HowTo = (): JSX.Element => {
             Como empezar a trackear los datos de mi artista favorito
           </h2>
           <div className='grid gap-8 md:grid-cols-2 lg:grid-cols-3'>
-            <div
+            <motion.div
+              variants={itemVariants}
+              initial='hidden'
+              animate='visible'
               className='rounded-lg border bg-card text-card-foreground shadow-sm'
               data-v0-t='card'
             >
@@ -57,8 +75,11 @@ export const HowTo = (): JSX.Element => {
                   </Link>
                 </div>
               </div>
-            </div>
-            <div
+            </motion.div>
+            <motion.div
+              variants={itemVariants}
+              initial='hidden'
+              animate='visible'
               className='rounded-lg border bg-card text-card-foreground shadow-sm'
               data-v0-t='card'
             >
@@ -98,8 +119,11 @@ export const HowTo = (): JSX.Element => {
                   </Link>
                 </div>
               </div>
-            </div>
-            <div
+            </motion.div>
+            <motion.div
+              variants={itemVariants}
+              initial='hidden'
+              animate='visible'
               className='rounded-lg border bg-card text-card-foreground shadow-sm'
               data-v0-t='card'
             >
@@ -129,12 +153,12 @@ export const HowTo = (): JSX.Element => {
                 </h3>
                 <p className='text-gray-500 dark:text-gray-400'>
                   Una vez has buscado y seleccionado la canción o el artista a
-                  trackear, ya solo queda esperar a que cada dia Spotify se
-                  actualice y podrás ver todas las estadisticas de tu artista
-                  favorito en Spotify sin hacer nada
+                  trackear, ya solo queda esperar a que cada día Spotify se
+                  actualice y podrás ver todas las estadísticas de tu artista
+                  favorito en Spotify sin hacer nada.
                 </p>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>

@@ -7,7 +7,7 @@ import { TopBar } from '@/components/topbar'
 const pageFont = Archivo({ subsets: ['latin'], display: 'swap' })
 
 export const metadata: Metadata = {
-  title: 'Spoti Insights',
+  title: 'Spoti Stats',
   description: 'Trackea los datos en Spotify de tus artistas Favoritos'
 }
 

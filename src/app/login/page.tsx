@@ -61,8 +61,7 @@ const Login = (): JSX.Element => {
                         Iniciar Sesion
                       </h3>
                       <p className='text-sm text-muted-foreground'>
-                        Inicia sesion en Spoti Insights para acceder al
-                        Dashboard
+                        Inicia sesion en Spoti Stats para acceder al Dashboard
                       </p>
 
                       {error ? (
