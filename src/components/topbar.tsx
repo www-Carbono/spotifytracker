@@ -29,7 +29,6 @@ export const TopBar = (): JSX.Element => {
 
   const isOnMainpage = (): boolean => {
     const pathNameLength = window.location.pathname.length
-    console.log(pathNameLength)
     if (pathNameLength > 1) {
       setHidden(true)
       return false
@@ -48,7 +47,6 @@ export const TopBar = (): JSX.Element => {
   }, [valueSelected])
 
   useEffect(() => {
-    console.log(userData)
     if (userData === undefined) {
       setLoaded(false)
     } else {
@@ -153,7 +151,7 @@ export const TopBar = (): JSX.Element => {
             </Link>
             <a
               className='text-sm font-medium hover:underline underline-offset-4'
-              href='https://x.com/Insights_Spoti'
+              href='https://x.com/SpotiTracker'
               target='_blank'
               rel='noreferrer'
             >

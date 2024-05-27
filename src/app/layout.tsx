@@ -4,6 +4,7 @@ import { Archivo } from 'next/font/google'
 import './globals.css'
 import { IsUserLoggedContext } from './../context/isUserLogged'
 import { TopBar } from '@/components/topbar'
+import { GoogleAnalytics } from '@next/third-parties/google'
 const pageFont = Archivo({ subsets: ['latin'], display: 'swap' })
 
 export const metadata: Metadata = {
@@ -30,6 +31,7 @@ const RootLayout = ({
           {children}
         </body>
       </IsUserLoggedContext>
+      <GoogleAnalytics gaId='G-D627LWYL4S' />
     </html>
   )
 }
