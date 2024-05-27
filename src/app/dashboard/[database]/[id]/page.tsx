@@ -103,321 +103,16 @@ const Details = ({
   }
 
   return (
-    // <div className='flex justify-center p-5'>
-    //   {data && (
-    //     <div className='grid gap-8 bg-white  rounded-lg shadow-2xl'>
-    //       <div className='bg-white rounded-lg shadow-lg p-6'>
-    //         <div className='flex justify-end '>
-    //           <button
-    //             onClick={onClickHandle}
-    //             className='inline-flex shadow-xl items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 p-2 hover:bg-gray-200'
-    //           >
-    //             Volver
-    //           </button>
-    //         </div>
-    //         <div className='w-full max-w-4xl'>
-    //           <div>
-    //             <h2 className='text-2xl font-bold'>Detalles</h2>
-    //             <h3>
-    //               Información Detallada de la canción o el Artista seleccionado
-    //             </h3>
-    //           </div>
-    //           <div className='grid gap-8'>
-    //             <div className='grid md:grid-cols-[200px_1fr] gap-6'>
-    //               <Image
-    //                 alt='Track Cover'
-    //                 className='rounded-md'
-    //                 height='200'
-    //                 src={data[0].coverlink}
-    //                 style={{
-    //                   aspectRatio: '200/200',
-    //                   objectFit: 'cover'
-    //                 }}
-    //                 width='200'
-    //               />
-    //               <div className='space-y-2'>
-    //                 <h3 className='text-2xl font-bold' />
-    //                 <p className='text-gray-500 dark:text-gray-400' />
-    //                 <div className='flex items-center gap-2'>
-    //                   {params.database !== 'song' ? (
-    //                     <svg
-    //                       className='h-5 w-5'
-    //                       fill='none'
-    //                       height='24'
-    //                       stroke='currentColor'
-    //                       strokeLinecap='round'
-    //                       strokeLinejoin='round'
-    //                       strokeWidth='2'
-    //                       viewBox='0 0 24 24'
-    //                       width='24'
-    //                       xmlns='http://www.w3.org/2000/svg'
-    //                     >
-    //                       <path d='M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2' />
-    //                       <circle
-    //                         cx='9'
-    //                         cy='7'
-    //                         r='4'
-    //                       />
-    //                       <path d='M22 21v-2a4 4 0 0 0-3-3.87' />
-    //                       <path d='M16 3.13a4 4 0 0 1 0 7.75' />
-    //                     </svg>
-    //                   ) : (
-    //                     <svg
-    //                       className='h-5 w-5'
-    //                       fill='none'
-    //                       height='24'
-    //                       stroke='currentColor'
-    //                       strokeLinecap='round'
-    //                       strokeLinejoin='round'
-    //                       strokeWidth='2'
-    //                       viewBox='0 0 24 24'
-    //                       width='24'
-    //                       xmlns='http://www.w3.org/2000/svg'
-    //                     >
-    //                       <path d='M9 18V5l12-2v13' />
-    //                       <circle
-    //                         cx='6'
-    //                         cy='18'
-    //                         r='3'
-    //                       />
-    //                       <circle
-    //                         cx='18'
-    //                         cy='16'
-    //                         r='3'
-    //                       />
-    //                     </svg>
-    //                   )}
-
-    //                   <span>
-    //                     {new Intl.NumberFormat().format(songData ?? 0)}
-    //                   </span>
-    //                 </div>
-    //                 <div className='flex items-center gap-2'>
-    //                   {diferencia !== undefined && diferencia > 0 ? (
-    //                     <svg
-    //                       className='h-5 w-5 text-green-500'
-    //                       fill='none'
-    //                       height='24'
-    //                       stroke='currentColor'
-    //                       strokeLinecap='round'
-    //                       strokeLinejoin='round'
-    //                       strokeWidth='2'
-    //                       viewBox='0 0 24 24'
-    //                       width='24'
-    //                       xmlns='http://www.w3.org/2000/svg'
-    //                     >
-    //                       <path d='m5 12 7-7 7 7' />
-    //                       <path d='M12 19V5' />
-    //                     </svg>
-    //                   ) : (
-    //                     <svg
-    //                       className='h-5 w-5 text-red-500'
-    //                       fill='none'
-    //                       height='24'
-    //                       stroke='currentColor'
-    //                       strokeLinecap='round'
-    //                       strokeLinejoin='round'
-    //                       strokeWidth='2'
-    //                       viewBox='0 0 24 24'
-    //                       width='24'
-    //                       xmlns='http://www.w3.org/2000/svg'
-    //                     >
-    //                       <path d='m19 12-7 7-7-7' />
-    //                       <path d='M12 5v14' />
-    //                     </svg>
-    //                   )}
-
-    //                   <span>
-    //                     {new Intl.NumberFormat().format(diferencia ?? 0)}{' '}
-    //                     {params.database === 'song'
-    //                       ? 'Reproducciones en las ultimas 24 horas'
-    //                       : 'Seguidores/Oyentes Mensuales en las ultimas 24 horas'}
-    //                   </span>
-    //                 </div>
-    //               </div>
-    //               <h2 className='mb-10'>
-    //                 {data && (
-    //                   <div className='text-center text-sm -mt-5 font-semibold'>
-    //                     {params.database === 'song'
-    //                       ? `${data[0].songName} - ${data[0].artistName}`
-    //                       : `${data[0].artistname}`}
-    //                   </div>
-    //                 )}
-    //               </h2>
-    //             </div>
-    //             <div className='flex gap-8 justify-center'>
-    //               <div>
-    //                 <h4 className='text-lg font-bold mb-4 text-center'>
-    //                   {params.database === 'song'
-    //                     ? 'Total Reproducciones de la Canción'
-    //                     : params.database === 'listeners'
-    //                     ? 'Total Oyentes Mensuales'
-    //                     : 'Total Followers'}
-    //                 </h4>
-
-    //                 <div>
-    //                   {data && (
-    //                     <div className='flex justify-center items-center gap-96 aspect-[16/9]'>
-    //                       <div>
-    //                         <Graphics
-    //                           info={data[0]}
-    //                           type={[type[0], type[1]]}
-    //                           graphType={'total'}
-    //                         />
-    //                       </div>
-    //                     </div>
-    //                   )}
-    //                 </div>
-    //               </div>
-    //               <div>
-    //                 <h4 className='text-lg font-bold mb-4 text-center'>
-    //                   {params.database === 'song'
-    //                     ? 'Reproducciones Diarias'
-    //                     : params.database === 'listeners'
-    //                     ? 'Oyentes Mensuales Diarios'
-    //                     : 'Followers Diarios'}
-    //                 </h4>
-    //                 <div>
-    //                   {data && (
-    //                     <div className='flex justify-center items-center gap-96 aspect-[16/9]'>
-    //                       <div>
-    //                         <Graphics
-    //                           info={data[0]}
-    //                           type={[type[0], type[1]]}
-    //                           graphType={'diferencia'}
-    //                         />
-    //                       </div>
-    //                     </div>
-    //                   )}
-    //                 </div>
-    //               </div>
-    //             </div>
-    //             <div>
-    //               <h4 className='text-lg font-bold mb-4'>
-    //                 Reproduciones Mensuales
-    //               </h4>
-    //               <div className='relative w-full overflow-auto'>
-    //                 <table className='w-full caption-bottom text-sm'>
-    //                   <thead className='[&_tr]:border-b'>
-    //                     <tr className='border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted'>
-    //                       <th className='h-12 px-4  align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0 text-center'>
-    //                         Dia
-    //                       </th>
-    //                       <th className='h-12 px-4  align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0 text-center'>
-    //                         Reproducciones/Oyentes/Followers
-    //                       </th>
-    //                       <th className='h-12 px-4 align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0 text-center'>
-    //                         Diferencia
-    //                       </th>
-    //                     </tr>
-    //                   </thead>
-    //                   <tbody className='[&_tr:last-child]:border-0 text-center'>
-    //                     {params.database === 'song' ? (
-    //                       <>
-    //                         {Object.keys(data[0].viewsTest as string).map(
-    //                           (value, index) => (
-    //                             <tr
-    //                               key={index}
-    //                               className='border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted'
-    //                             >
-    //                               <td className='p-4 align-middle [&:has([role=checkbox])]:pr-0'>
-    //                                 {value}
-    //                               </td>
-    //                               <td className='p-4 align-middle [&:has([role=checkbox])]:pr-0'>
-    //                                 {new Intl.NumberFormat().format(
-    //                                   data[0].viewsTest[value] as number
-    //                                 )}
-    //                               </td>
-    //                               <td
-    //                                 className={`p-4 align-middle [&:has([role=checkbox])]:pr-0 ${
-    //                                   graphicsTableResults?.[index][0] === '+'
-    //                                     ? 'text-green-500'
-    //                                     : 'text-red-500'
-    //                                 }`}
-    //                               >
-    //                                 {graphicsTableResults?.[index][0] ===
-    //                                 '+' ? (
-    //                                   <>
-    //                                     +
-    //                                     {new Intl.NumberFormat().format(
-    //                                       Number(
-    //                                         graphicsTableResults?.[
-    //                                           index
-    //                                         ].substring(1)
-    //                                       )
-    //                                     )}
-    //                                   </>
-    //                                 ) : (
-    //                                   graphicsTableResults?.[index]
-    //                                 )}
-    //                               </td>
-    //                             </tr>
-    //                           )
-    //                         )}
-    //                       </>
-    //                     ) : (
-    //                       <>
-    //                         {Object.keys(
-    //                           data[0].monthlylisteners as string
-    //                         ).map((value, index) => (
-    //                           <tr
-    //                             key={index}
-    //                             className='border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted'
-    //                           >
-    //                             <td className='p-4 align-middle [&:has([role=checkbox])]:pr-0'>
-    //                               {value}
-    //                             </td>
-    //                             <td className='p-4 align-middle [&:has([role=checkbox])]:pr-0'>
-    //                               {new Intl.NumberFormat().format(
-    //                                 data[0].monthlylisteners[value] as number
-    //                               )}
-    //                             </td>
-    //                             <td
-    //                               className={`p-4 align-middle [&:has([role=checkbox])]:pr-0 ${
-    //                                 graphicsTableResults?.[index][0] === '+'
-    //                                   ? 'text-green-500'
-    //                                   : 'text-red-500'
-    //                               }`}
-    //                             >
-    //                               {graphicsTableResults?.[index][0] === '+' ? (
-    //                                 <>
-    //                                   +
-    //                                   {new Intl.NumberFormat().format(
-    //                                     Number(
-    //                                       graphicsTableResults?.[
-    //                                         index
-    //                                       ].substring(1)
-    //                                     )
-    //                                   )}
-    //                                 </>
-    //                               ) : (
-    //                                 graphicsTableResults?.[index]
-    //                               )}
-    //                             </td>
-    //                           </tr>
-    //                         ))}
-    //                       </>
-    //                     )}
-    //                   </tbody>
-    //                 </table>
-    //               </div>
-    //             </div>
-    //           </div>
-    //         </div>
-    //       </div>
-    //     </div>
-    //   )}
-    // </div>
-    <div className='flex justify-center p-5'>
+    <div className='flex md:justify-center lg:justify-center xl:justify-center p-5'>
       {data && (
         <motion.div
-          className='grid gap-8 bg-white rounded-lg shadow-2xl'
+          className='flex gap-8 bg-white rounded-lg shadow-2xl w-[100%] md:w-auto justify-center items-center'
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
         >
           <motion.div
-            className='bg-white rounded-lg shadow-lg p-6'
+            className='bg-white rounded-lg shadow-lg p-6 w-[100%]'
             initial={{ y: -20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.5 }}
@@ -433,7 +128,7 @@ const Details = ({
                 Volver
               </motion.button>
             </div>
-            <div className='w-full max-w-4xl'>
+            <div className='md:w-full md:max-w-4xl'>
               <div>
                 <motion.h2
                   className='text-2xl font-bold'
@@ -451,7 +146,7 @@ const Details = ({
                   Información Detallada de la canción o el Artista seleccionado
                 </motion.h3>
               </div>
-              <div className='grid gap-8'>
+              <div className='grid gap-8 w-[50%]'>
                 <motion.div
                   className='grid md:grid-cols-[200px_1fr] gap-6'
                   initial={{ y: 20, opacity: 0 }}
@@ -562,7 +257,7 @@ const Details = ({
                           <path d='M12 5v14' />
                         </svg>
                       )}
-                      <span>
+                      <span className='md:text-md text-xs font-bold'>
                         {new Intl.NumberFormat().format(diferencia ?? 0)}{' '}
                         {params.database === 'song'
                           ? 'Reproducciones en las ultimas 24 horas'
@@ -572,7 +267,7 @@ const Details = ({
                   </div>
                   <h2 className='mb-10'>
                     {data && (
-                      <div className='text-center text-sm -mt-5 font-semibold'>
+                      <div className='md:text-center text-sm -mt-5 font-semibold text-left'>
                         {params.database === 'song'
                           ? `${data[0].songName} - ${data[0].artistName}`
                           : `${data[0].artistname}`}
@@ -581,13 +276,13 @@ const Details = ({
                   </h2>
                 </motion.div>
                 <motion.div
-                  className='flex gap-8 justify-center'
+                  className='flex gap-8 justify-center items-center flex-col md:flex-row'
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.5 }}
                 >
-                  <div>
-                    <h4 className='text-lg font-bold mb-4 text-center'>
+                  <div className='w-[100%]'>
+                    <h4 className='text-lg font-bold mb-4 md:text-center'>
                       {params.database === 'song'
                         ? 'Total Reproducciones de la Canción'
                         : params.database === 'listeners'
@@ -596,7 +291,7 @@ const Details = ({
                     </h4>
                     <div>
                       {data && (
-                        <div className='flex justify-center items-center gap-96 aspect-[16/9]'>
+                        <div className='flex md:justify-center md:items-center gap-96 md: aspect-[16/9]'>
                           <div>
                             <Graphics
                               info={data[0]}
@@ -609,7 +304,7 @@ const Details = ({
                     </div>
                   </div>
                   <div>
-                    <h4 className='text-lg font-bold mb-4 text-center'>
+                    <h4 className='text-lg font-bold mb-4 md:text-center mt-28 md:mt-0'>
                       {params.database === 'song'
                         ? 'Reproducciones Diarias'
                         : params.database === 'listeners'
@@ -618,7 +313,7 @@ const Details = ({
                     </h4>
                     <div>
                       {data && (
-                        <div className='flex justify-center items-center gap-96 aspect-[16/9]'>
+                        <div className='flex md:justify-center md:items-center gap-96 md:aspect-[16/9]'>
                           <div>
                             <Graphics
                               info={data[0]}
@@ -643,13 +338,13 @@ const Details = ({
                     <table className='w-full caption-bottom text-sm'>
                       <thead className='[&_tr]:border-b'>
                         <tr className='border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted'>
-                          <th className='h-12 px-4  align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0 text-center'>
+                          <th className='md:h-12 md:px-4  align-middle font-medium text-xs md:text-sm text-muted-foreground [&:has([role=checkbox])]:pr-0 text-center'>
                             Dia
                           </th>
-                          <th className='h-12 px-4  align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0 text-center'>
-                            Reproducciones/Oyentes/Followers
+                          <th className='h-12 px-4  align-middle font-medium text-muted-foreground text-xs md:text-sm [&:has([role=checkbox])]:pr-0 text-center'>
+                            Datos Totales
                           </th>
-                          <th className='h-12 px-4 align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0 text-center'>
+                          <th className='h-12 px-4 align-middle font-medium text-muted-foreground text-xs md:text-sm [&:has([role=checkbox])]:pr-0 text-center'>
                             Diferencia
                           </th>
                         </tr>

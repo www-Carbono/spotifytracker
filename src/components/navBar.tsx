@@ -22,18 +22,18 @@ export const NavBar = (userData: any): JSX.Element => {
   }
 
   return (
-    <div className='flex flex-col min-h-[100dvh]'>
+    <div className='flex flex-col min-h-screen'>
       <main className='flex-1 bg-gray-100 '>
         <div className='max-w-6xl mx-auto px-4 md:px-6 py-8 md:py-12'>
-          <div className='grid md:grid-cols-[310px_1fr] gap-8'>
+          <div className='flex md:flex-row flex-col md:space-x-8 md:space-y-0 space-y-8'>
             <motion.div
-              className='bg-white rounded-lg shadow-lg'
+              className='bg-white rounded-lg shadow-lg md:w-[460px]'
               initial={{ opacity: 0, y: -50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
             >
-              <div className='p-6'>
-                <h2 className='text-2xl font-bold mb-4'>Dashboard</h2>
+              <div className='p-4'>
+                <h2 className='text-2xl font-bold mb-4 pt-4'>Dashboard</h2>
                 <nav className='space-y-2'>
                   <li
                     className={`flex items-center gap-3 rounded-md px-3 py-2 text-gray-500 hover:bg-gray-100 cursor-pointer ${
@@ -77,7 +77,7 @@ export const NavBar = (userData: any): JSX.Element => {
                     Trackear Canción
                   </li>
                   <li
-                    className={`flex items-center gap-3 rounded-md px-3 py-2 text-gray-500 hover:bg-gray-100 cursor-pointer ${
+                    className={`flex items-center gap-3 rounded-md px-3 py-2 text-gray-500 hover:bg-gray-100 cursor-pointer${
                       selected === 2 ? 'bg-gray-200' : ''
                     }`}
                     onClick={() => {
@@ -166,7 +166,7 @@ export const NavBar = (userData: any): JSX.Element => {
               </div>
             </motion.div>
             <motion.div
-              className='mx-auto'
+              className='mx-auto w-[100%] h-9'
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5 }}

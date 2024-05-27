@@ -45,7 +45,7 @@ export const Stats = ({ type, database, userData }: Props): JSX.Element => {
         ) : (
           <div>
             {type === 'canciones' && (
-              <div className='grid gap-8'>
+              <div className='flex flex-col space-y-8'>
                 <div className='bg-white rounded-lg shadow-lg p-6'>
                   <div className='flex items-center justify-between mb-4'>
                     <h2 className='text-2xl font-bold'>Trackear Canciones</h2>
@@ -60,9 +60,9 @@ export const Stats = ({ type, database, userData }: Props): JSX.Element => {
                     </button>
                   </div>
 
-                  <div className='grid md:grid-cols-1 gap-6'>
+                  <div className='flex flex-col md:grid md:grid-cols-1 gap-6'>
                     {newSong && (
-                      <div>
+                      <div className='mb-6'>
                         <h2>Añade Una nueva Canción</h2>
                         <SearchSong type={'track'} />
                       </div>
@@ -78,10 +78,10 @@ export const Stats = ({ type, database, userData }: Props): JSX.Element => {
                         </h3>
                         <p className='text-sm text-muted-foreground'>
                           Aquí encontrarás todas las canciones a las que estás
-                          haciendole un seguimiento.
+                          haciéndole un seguimiento.
                         </p>
                       </div>
-                      <div className='p-6'>
+                      <div className='md:p-6'>
                         <div className='relative w-full overflow-auto'>
                           <table className='w-full caption-bottom text-sm text-center'>
                             <thead className='[&_tr]:border-b'>
@@ -215,13 +215,17 @@ export const Stats = ({ type, database, userData }: Props): JSX.Element => {
                         </div>
                       </div>
                     </div>
+                    <p className='font-bold text-xs'>
+                      Aviso : Si te conectas desde un dispositivo movil, puedes
+                      mover la tabla arrastrando el dedo.
+                    </p>
                   </div>
                 </div>
               </div>
             )}
 
             {type === 'oyentes' && (
-              <div className='grid gap-8'>
+              <div className='flex flex-col space-y-8'>
                 <div className='bg-white rounded-lg shadow-lg p-6'>
                   <div className='flex items-center justify-between mb-4'>
                     <h2 className='text-2xl font-bold'>Song Tracking</h2>
@@ -236,7 +240,7 @@ export const Stats = ({ type, database, userData }: Props): JSX.Element => {
                     </button>
                   </div>
 
-                  <div className='grid md:grid-cols-1 gap-6'>
+                  <div className='flex flex-col md:grid md:grid-cols-1 gap-6'>
                     {newSong && (
                       <div>
                         <h2>Añade Un Nuevo Artista</h2>
@@ -250,7 +254,7 @@ export const Stats = ({ type, database, userData }: Props): JSX.Element => {
                     >
                       <div className='flex flex-col space-y-1.5 p-6'>
                         <h3 className='whitespace-nowrap text-2xl font-semibold leading-none tracking-tight'>
-                          Oyentes Mensuales de Artista Trackeados
+                          Oyentes Mensuales
                         </h3>
                         <p className='text-sm text-muted-foreground'>
                           Aquí encontrarás todos Oyentes Mensuales de los
@@ -391,13 +395,17 @@ export const Stats = ({ type, database, userData }: Props): JSX.Element => {
                         </div>
                       </div>
                     </div>
+                    <p className='font-bold text-xs'>
+                      Aviso : Si te conectas desde un dispositivo movil, puedes
+                      mover la tabla arrastrando el dedo.
+                    </p>
                   </div>
                 </div>
               </div>
             )}
 
             {type === 'seguidores' && (
-              <div className='grid gap-8'>
+              <div className='flex flex-col space-y-8'>
                 <div className='bg-white rounded-lg shadow-lg p-6'>
                   <div className='flex items-center justify-between mb-4'>
                     <h2 className='text-2xl font-bold'>Song Tracking</h2>
@@ -412,7 +420,7 @@ export const Stats = ({ type, database, userData }: Props): JSX.Element => {
                     </button>
                   </div>
 
-                  <div className='grid md:grid-cols-1 gap-6'>
+                  <div className='flex flex-col md:grid md:grid-cols-1 gap-6'>
                     {newSong && (
                       <div>
                         <h2>Añade Un nuevo artista</h2>
@@ -426,7 +434,7 @@ export const Stats = ({ type, database, userData }: Props): JSX.Element => {
                     >
                       <div className='flex flex-col space-y-1.5 p-6'>
                         <h3 className='whitespace-nowrap text-2xl font-semibold leading-none tracking-tight'>
-                          Seguidores de Artista Trackeados
+                          Seguidores de Artista
                         </h3>
                         <p className='text-sm text-muted-foreground'>
                           Aquí encontrarás todos los seguidores en spotify de
@@ -568,6 +576,10 @@ export const Stats = ({ type, database, userData }: Props): JSX.Element => {
                         </div>
                       </div>
                     </div>
+                    <p className='font-bold text-xs'>
+                      Aviso : Si te conectas desde un dispositivo movil, puedes
+                      mover la tabla arrastrando el dedo.
+                    </p>
                   </div>
                 </div>
               </div>

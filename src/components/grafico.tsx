@@ -101,7 +101,7 @@ const Graphics: React.FC<Props> = ({
   Chart.register(CategoryScale)
 
   return (
-    <div style={{ width: '100%' }}>
+    <div className='scale-90 md:scale-100 md:w-[100%]'>
       <Line
         data={data as any}
         width={400}
