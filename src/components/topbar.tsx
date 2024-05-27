@@ -78,7 +78,7 @@ export const TopBar = (): JSX.Element => {
               width={30}
               height={30}
             />
-            <span className='text-lg font-bold ml-2'>Spoti Stats</span>
+            <span className='text-lg font-bold ml-2'>Spoti Tracker</span>
           </Link>
           <nav className='ml-auto flex gap-4 sm:gap-6'>
             <Link

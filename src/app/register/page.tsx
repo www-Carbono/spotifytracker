@@ -68,7 +68,7 @@ const Register = (): JSX.Element => {
                       Registrarse
                     </h3>
                     <p className='text-sm text-muted-foreground'>
-                      Create una cuenta en Spoti Stats account para acceder al
+                      Create una cuenta en Spoti Tracker account para acceder al
                       Dashboard.
                     </p>
                     {error ? (

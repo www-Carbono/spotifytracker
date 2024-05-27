@@ -33,7 +33,7 @@ export const Faqs = (): JSX.Element => {
                     setFaqSelected((prevIndex) => (prevIndex === 1 ? 0 : 1))
                   }}
                 >
-                  ¿Que es Spoti Stats?
+                  ¿Que es Spoti Tracker?
                   <svg
                     className='h-4 w-4 shrink-0 transition-transform duration-200'
                     fill='none'
@@ -59,11 +59,12 @@ export const Faqs = (): JSX.Element => {
                 className='overflow-hidden text-sm'
               >
                 <p className='p-5'>
-                  Spoti Stats es una aplicación web con la que podrás gestionar
-                  y trackear tanto las visualizaciones de las canciones como los
-                  oyentes mensuales y los Followers en Spotify de tus artistas
-                  favoritos, obteniendo gráficas visuales y tablas para ver el
-                  comportamiento de sus perfiles de Spotify.
+                  Spoti Tracker es una aplicación web con la que podrás
+                  gestionar y trackear tanto las visualizaciones de las
+                  canciones como los oyentes mensuales y los Followers en
+                  Spotify de tus artistas favoritos, obteniendo gráficas
+                  visuales y tablas para ver el comportamiento de sus perfiles
+                  de Spotify.
                 </p>
               </motion.div>
             </div>
@@ -80,7 +81,7 @@ export const Faqs = (): JSX.Element => {
                     setFaqSelected((prevIndex) => (prevIndex === 2 ? 0 : 2))
                   }}
                 >
-                  ¿Como Funciona Spoti Stats?
+                  ¿Como Funciona Spoti Tracker?
                   <svg
                     className='h-4 w-4 shrink-0 transition-transform duration-200'
                     fill='none'
@@ -106,7 +107,7 @@ export const Faqs = (): JSX.Element => {
                 className='overflow-hidden text-sm'
               >
                 <p className='p-5'>
-                  Para utilizar Spoti Stats solo tienes que registrarte o
+                  Para utilizar Spoti Tracker solo tienes que registrarte o
                   iniciar sesión. Después, con la sesión iniciada desde el
                   dashboard, solo tienes que seleccionar en el menú lateral de
                   la izquierda la opción deseada, y después solo tienes que
@@ -127,7 +128,7 @@ export const Faqs = (): JSX.Element => {
                     setFaqSelected((prevIndex) => (prevIndex === 3 ? 0 : 3))
                   }}
                 >
-                  ¿Es Spoti Stats gratis?
+                  ¿Es Spoti Tracker gratis?
                   <svg
                     className='h-4 w-4 shrink-0 transition-transform duration-200'
                     fill='none'
@@ -153,7 +154,7 @@ export const Faqs = (): JSX.Element => {
                 className='overflow-hidden text-sm'
               >
                 <p className='p-5'>
-                  Sí, Spoti Stats es totalmente gratis y siempre lo será.
+                  Sí, Spoti Tracker es totalmente gratis y siempre lo será.
                 </p>
               </motion.div>
             </div>
