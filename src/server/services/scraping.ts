@@ -1,7 +1,7 @@
 'use server'
 export const getViews = async (songId: any, type: string): Promise<any> => {
   const token = await resetToken()
-  const URL =
+ const URL =
     type === 'track'
       ? `https://api-partner.spotify.com/pathfinder/v1/query?operationName=getTrack&variables=%7B%22uri%22%3A%22spotify%3Atrack%3A${songId}%22%7D&extensions=%7B%22persistedQuery%22%3A%7B%22version%22%3A1%2C%22sha256Hash%22%3A%22ae85b52abb74d20a4c331d4143d4772c95f34757bfa8c625474b912b9055b5c0%22%7D%7D`
       : `https://api-partner.spotify.com/pathfinder/v1/query?operationName=queryArtistOverview&variables=%7B%22uri%22%3A%22spotify%3Aartist%3A${songId}%22%2C%22locale%22%3A%22intl-es%22%2C%22includePrerelease%22%3Atrue%7D&extensions=%7B%22persistedQuery%22%3A%7B%22version%22%3A1%2C%22sha256Hash%22%3A%22da986392124383827dc03cbb3d66c1de81225244b6e20f8d78f9f802cc43df6e%22%7D%7D`
