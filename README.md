@@ -7,13 +7,21 @@
  - **Tablas Informativas**: Consulta tablas que muestran las reproducciones, oyentes mensuales y seguidores diarios, así como los cambios entre días.
   -  **Tendencias**: Analiza el crecimiento o decrecimiento en oyentes y seguidores para identificar tendencias.
  ## Capturas de Pantalla
-  ![Gráfico de Tendencias](https://raw.githubusercontent.com/www-Carbono/spotifytracker/main/ReproduccionesDiarias.png) 
-  
-  *Ejemplo de gráfico mostrando las reproducciones diarias de una canción, puediendo ver asi la variancia.*
-  
-  ![Tabla de Seguimiento](https://raw.githubusercontent.com/www-Carbono/spotifytracker/main/totalReproducciones.png) 
-  
-  *Ejemplo de tabla mostrando las reproducciones totales de una canción.*  
+ <div>
+<p align="center">
+  <img src="https://raw.githubusercontent.com/www-Carbono/spotifytracker/main/ReproduccionesDiarias.png" alt="Gráfico de Tendencias">
+</p>
+<p align="center">
+  <em>Ejemplo de gráfico mostrando las reproducciones diarias de una canción, pudiendo ver así la variancia.</em>
+</p>
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/www-Carbono/spotifytracker/main/totalReproducciones.png" alt="Tabla de Seguimiento">
+</p>
+<p align="center">
+  <em>Ejemplo de tabla mostrando las reproducciones totales de una canción.</em>
+</p>
+ </div>
 
 ## Uso
 
