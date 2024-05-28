@@ -8,8 +8,11 @@
   -  **Tendencias**: Analiza el crecimiento o decrecimiento en oyentes y seguidores para identificar tendencias.
  ## Capturas de Pantalla
   ![Gráfico de Tendencias](https://raw.githubusercontent.com/www-Carbono/spotifytracker/main/ReproduccionesDiarias.png) 
-  *Ejemplo de gráfico mostrando las reproducciones diarias de una canción, puediendo ver asi la variancia.
+  
+  *Ejemplo de gráfico mostrando las reproducciones diarias de una canción, puediendo ver asi la variancia.*
+  
   ![Tabla de Seguimiento](https://raw.githubusercontent.com/www-Carbono/spotifytracker/main/totalReproducciones.png) 
+  
   *Ejemplo de tabla mostrando las reproducciones totales de una canción.*  
 
 ## Uso
