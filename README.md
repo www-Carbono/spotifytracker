@@ -1,17 +1,34 @@
-Página Principal
-Registro de Usuarios
-Logeo de Usuarios
-Panel DashBoard (Seguimiento de Canciones , Seguimiento de Oyentes , Seguimiento de Follows)
+# Spoti Tracker  
+## Descripción  
+**Spoti Tracker** es una aplicación web gratuita que te permite realizar un seguimiento diario de las canciones, oyentes mensuales y seguidores de tus artistas favoritos en Spotify. Nuestra herramienta proporciona gráficos y tablas detalladas que muestran las reproducciones, oyentes mensuales y seguidores de cada día, así como los cambios y tendencias diarias.
+ ## Características  
+ -  **Seguimiento Diario**: Obtén información actualizada diariamente sobre canciones, oyentes mensuales y seguidores. 
+ -  **Gráficos Detallados**: Visualiza las tendencias y cambios a lo largo del tiempo con gráficos interactivos.
+ - **Tablas Informativas**: Consulta tablas que muestran las reproducciones, oyentes mensuales y seguidores diarios, así como los cambios entre días.
+  -  **Tendencias**: Analiza el crecimiento o decrecimiento en oyentes y seguidores para identificar tendencias.
+ ## Capturas de Pantalla
+  ![Gráfico de Tendencias](https://raw.githubusercontent.com/www-Carbono/spotifytracker/main/ReproduccionesDiarias.png) 
+  *Ejemplo de gráfico mostrando las reproducciones diarias de una canción, puediendo ver asi la variancia.
+  ![Tabla de Seguimiento](https://raw.githubusercontent.com/www-Carbono/spotifytracker/main/totalReproducciones.png) 
+  *Ejemplo de tabla mostrando las reproducciones totales de una canción.*  
 
-Cosas a Realizar
+## Uso
 
-[DONE] - En la base de datos de la comprobación de actualización, añadir la fecha a la que está actualizada, para asi cuando añadamos un nuevo elemento pillaremos esa fecha.
-[DONE] - Cuando creamos un nuevo elemento, vamos a la base de datos de comprobación de actualización y pìllamos la fecha y la guardamos como primeros datos en la BD.
-[DONE] - Cada 10 minutos comprobar Si las visualizaciones de la cancion que utilizamos para comprobar han cambiado.
-[DONE] - Cada una de las 3 actualizaciones dependera de su fecha etc.
-[DONE] - Cuando las visualizaciones de la cancion que utilizamos cambien, actualizamos la fecha de la base de datos de comprobaciones.
-[InProgress] - A continuación comprobaremos todos los datos de nuestra base de datos y hacemos que se ejecute un bucle comparando las visualizaciones guardadas con las actuales hasta que sean diferentes.
-[InProgress] - Si después de N intentos, no cambia, pues ponemos las mismas visualizaciones que el dia anterior. (N = 5 en un lapso de 10 minutos??)
-[InProgress] - Una vez que actualizamos la base de datos, pillamos otra vez la fecha guardada de la base de datos de comprobacion y la añadimos al array
+1. Accede a la aplicación desde tu navegador en `https://spotitracker.es/`.
+2. Registra tu usuario o Inicia de sesión con tu usuario.
+3. Una vez en el dashboard, Añade las canciones o artistas a los que quieres hacerle el seguimiento.
+5. Ya está, ahora solo te falta consultar los gráficos y tablas para ver las estadísticas diarias cuando actualice spotify.
 
-<!-- - Una vez que han cambiado esas, comenzamos a comprobar todos los datos que tenemos guardados en bucle hasta que cambie el número de visualizaciones. Si despues de N intentos, no cambia, pues ponemos 0. (5 intentos en un lapso de 10 minutos??) Una vez actualiza, pillamos la ultima fecha que tenemos guardada y le añadimos un dia. (comprobar dia, mes y año etc) -->
+## Soporte
+
+Si tienes alguna pregunta o necesitas ayuda, no dudes en contactarme:
+
+- **Twitter**: [@SpotiTracker](https://x.com/SpotiTracker)
+
+## Licencia
+
+Este proyecto está bajo la Licencia MIT. Consulta el archivo [LICENSE](LICENSE) para más detalles.
+
+---
+
+¡Gracias por utilizar **Spoti Tracker**! Esperamos que disfrutes de nuestra herramienta y te sea de gran utilidad para seguir a tus artistas favoritos.
