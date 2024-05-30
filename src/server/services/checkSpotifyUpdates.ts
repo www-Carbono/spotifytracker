@@ -17,18 +17,34 @@ export const isSpotifyUpdated = async (): Promise<SpotifyUpdaterData> => {
   const month = date.getMonth() + 1
   const year = date.getFullYear()
 
-  const DatabaseAndCurrentData = {
-    DatabaseSongViews: data[0].songviews,
-    DatabaseMonthlyListeners: data[0].monthlylisteners,
-    DatabaseArtistFollowers: data[0].artistfollowers,
-    DatabaseViewsCurrentDate: data[0].ViewsDateUpdate,
-    DatabaseListenersCurrentDate: data[0].ListenersDateUpdate,
-    DatabaseFollowersCurrentDate: data[0].FollowersDateUpdate,
-    CurrentSongViews: songViews,
-    CurrentMonthlyListeners: artistMonthlyListeners,
-    CurrentArtistFollowers: artistFollowers,
-    CurrentDate: `${day}/${month}/${year}`
-  }
+  if (songViews <= data[0].songviews) {
+    const DatabaseAndCurrentData = {
+      DatabaseSongViews: data[0].songviews,
+      DatabaseMonthlyListeners: data[0].monthlylisteners,
+      DatabaseArtistFollowers: data[0].artistfollowers,
+      DatabaseViewsCurrentDate: data[0].ViewsDateUpdate,
+      DatabaseListenersCurrentDate: data[0].ListenersDateUpdate,
+      DatabaseFollowersCurrentDate: data[0].FollowersDateUpdate,
+      CurrentSongViews: data[0].songviews,
+      CurrentMonthlyListeners: artistMonthlyListeners,
+      CurrentArtistFollowers: artistFollowers,
+      CurrentDate: `${day}/${month}/${year}`
+    }
+    return DatabaseAndCurrentData
+  } else {
+    const DatabaseAndCurrentData = {
+      DatabaseSongViews: data[0].songviews,
+      DatabaseMonthlyListeners: data[0].monthlylisteners,
+      DatabaseArtistFollowers: data[0].artistfollowers,
+      DatabaseViewsCurrentDate: data[0].ViewsDateUpdate,
+      DatabaseListenersCurrentDate: data[0].ListenersDateUpdate,
+      DatabaseFollowersCurrentDate: data[0].FollowersDateUpdate,
+      CurrentSongViews: songViews,
+      CurrentMonthlyListeners: artistMonthlyListeners,
+      CurrentArtistFollowers: artistFollowers,
+      CurrentDate: `${day}/${month}/${year}`
+    }
 
-  return DatabaseAndCurrentData
+    return DatabaseAndCurrentData
+  }
 }
