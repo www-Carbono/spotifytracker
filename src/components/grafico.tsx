@@ -48,15 +48,25 @@ const Graphics: React.FC<Props> = ({
   const graphicData = info[databaseRow]
 
   useEffect(() => {
-    setAxeX(Object.keys(graphicData))
+    const entries = Object.entries(graphicData)
+    const entriesSort = entries.sort((a, b) => {
+      const [dayA, monthA] = a[0].split('/').map(Number)
+      const [dayB, monthB] = b[0].split('/').map(Number)
+
+      if (monthA !== monthB) {
+        return monthA - monthB
+      }
+      return dayA - dayB
+    })
+    const sortedGraphic = Object.fromEntries(entriesSort)
+    setAxeX(Object.keys(sortedGraphic))
     if (graphType === 'total') {
-      setAxeY(Object.values(graphicData))
+      setAxeY(Object.values(sortedGraphic))
       setLabel(`Total ${text}`)
     } else {
-      const realValues = Object.values(graphicData)
+      const realValues = Object.values(sortedGraphic)
       const arrayViews = []
       setLabel(`${text} Diarias`)
-      console.log(realValues.length)
       arrayViews.push(0)
       if (realValues.length > 1) {
         for (const [index] of realValues.entries()) {
