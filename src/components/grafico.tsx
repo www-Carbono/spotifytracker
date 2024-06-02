@@ -1,9 +1,11 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 'use client'
 import React, { useEffect, useState } from 'react'
 import { Line } from 'react-chartjs-2'
 import { CategoryScale } from 'chart.js'
 
 import Chart from 'chart.js/auto'
+import { sortDate } from '@/utils/sortDates'
 
 interface Song {
   id: string
@@ -49,15 +51,7 @@ const Graphics: React.FC<Props> = ({
 
   useEffect(() => {
     const entries = Object.entries(graphicData)
-    const entriesSort = entries.sort((a, b) => {
-      const [dayA, monthA] = a[0].split('/').map(Number)
-      const [dayB, monthB] = b[0].split('/').map(Number)
-
-      if (monthA !== monthB) {
-        return monthA - monthB
-      }
-      return dayA - dayB
-    })
+    const entriesSort = sortDate(entries) // Funtion
     const sortedGraphic = Object.fromEntries(entriesSort)
     setAxeX(Object.keys(sortedGraphic))
     if (graphType === 'total') {
@@ -78,6 +72,18 @@ const Graphics: React.FC<Props> = ({
       }
       setAxeY(arrayViews)
     }
+
+    // function newFunction(entries) {
+    //   return entries.sort((a, b) => {
+    //     const [dayA, monthA] = a[0].split('/').map(Number)
+    //     const [dayB, monthB] = b[0].split('/').map(Number)
+
+    //     if (monthA !== monthB) {
+    //       return monthA - monthB
+    //     }
+    //     return dayA - dayB
+    //   })
+    // }
   }, [])
 
   const data = {

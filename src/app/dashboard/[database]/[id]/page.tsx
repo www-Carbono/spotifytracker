@@ -3,7 +3,7 @@ import Graphics from '../../../../components/grafico'
 import React, { useEffect, useState } from 'react'
 import { getDetails } from '@/server/services/saveToDatabase'
 import { motion } from 'framer-motion'
-
+import { sortDate } from '@/utils/sortDates'
 type ViewsTest = Record<string, unknown>
 type monthlylisteners = Record<string, unknown>
 
@@ -49,6 +49,11 @@ const Details = ({
       .then((information: Information[]) => {
         setData(information)
         if (params.database === 'song') {
+          const entries = Object.entries(information[0].viewsTest)
+          const entriesSort = sortDate(entries) // Funtion
+          const sortedGraphic = Object.fromEntries(entriesSort)
+          information[0].viewsTest = sortedGraphic
+
           const array: any[] = Object.values(information[0].viewsTest)
           setGraphicsTable(array)
           const dataArray: number = array[array.length - 1]
@@ -59,7 +64,12 @@ const Details = ({
           setSongData(dataArray)
           setDiferencia(resta)
         } else {
-          const array: any[] = Object.values(information[0].monthlylisteners)
+          const entries = Object.entries(information[0].monthlylisteners)
+          const entriesSort = sortDate(entries) // Funtion
+          const sortedGraphic = Object.fromEntries(entriesSort)
+          information[0].monthlylisteners = sortedGraphic
+
+          const array: any[] = Object.values(sortedGraphic)
           setGraphicsTable(array)
           const dataArray: number | undefined = array[array.length - 1]
           const resta =
@@ -76,7 +86,6 @@ const Details = ({
   }, [])
 
   useEffect(() => {
-    console.log(graphicsTable)
     const result: string[] = []
 
     if (graphicsTable !== undefined) {
@@ -94,7 +103,6 @@ const Details = ({
         }
       }
       setGraphicsTableResults(result)
-      console.log(result)
     }
   }, [graphicsTable])
 
