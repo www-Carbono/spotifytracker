@@ -171,7 +171,7 @@ export const updateAll = async (
 
     await updateChecker(row, finalData[0], element.id, database)
 
-    await new Promise((resolve) => setTimeout(resolve, 35000))
+    await new Promise((resolve) => setTimeout(resolve, 120000))
   }
   console.log('los datos que no se han actualizado aun son =>', notUpdated)
 
@@ -206,7 +206,7 @@ const tryUpdateAgain = async (
             // Tengo que comparar oyentes/views/followers del element(elemento de la base de datos) y el dataView (data actual de escuchas oyentes etc)
             const lastSavedData = Object.values(data[0].monthlylisteners).pop()
             if (lastSavedData === dataView.followers) {
-              await new Promise((resolve) => setTimeout(resolve, 35000))
+              await new Promise((resolve) => setTimeout(resolve, 120000))
               contador++
               if (contador === CONTADOR_VALUE - 1) {
                 const nuevoArray = notUpdated.filter(
@@ -251,7 +251,7 @@ const tryUpdateAgain = async (
             // Tengo que comparar oyentes/views/followers del element(elemento de la base de datos) y el dataView (data actual de escuchas oyentes etc)
             const lastSavedData = Object.values(data[0].viewsTest).pop()
             if (lastSavedData === Number(dataView)) {
-              await new Promise((resolve) => setTimeout(resolve, 35000))
+              await new Promise((resolve) => setTimeout(resolve, 120000))
               contador++
               if (contador === CONTADOR_VALUE - 1) {
                 const nuevoArray = notUpdated.filter(
@@ -294,7 +294,7 @@ const tryUpdateAgain = async (
           } else if (type === 'listeners') {
             const lastSavedData = Object.values(data[0].monthlylisteners).pop()
             if (lastSavedData === dataView.monthlyListeners) {
-              await new Promise((resolve) => setTimeout(resolve, 35000))
+              await new Promise((resolve) => setTimeout(resolve, 120000))
               contador++
               if (contador === CONTADOR_VALUE - 1) {
                 const nuevoArray = notUpdated.filter(
