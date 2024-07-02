@@ -7,6 +7,7 @@ import { getData } from '@/server/services/saveToDatabase'
 import { type OyentesMensuales } from '@/app/types'
 import { SearchSong } from './SearchSong'
 import { motion } from 'framer-motion'
+import { sortDate } from '@/utils/sortDates'
 interface Props {
   type: string
   database: string
@@ -22,6 +23,19 @@ export const Stats = ({ type, database, userData }: Props): JSX.Element => {
     setIsLoading(true)
     getData(database, userData.userData.id as string)
       .then((data) => {
+        data.map((element: any) => {
+          if (type === 'canciones') {
+            const test = Object.entries(element.viewsTest)
+            sortDate(test)
+            element.viewsTest = test
+          } else {
+            const test = Object.entries(element.monthlylisteners)
+            sortDate(test)
+            element.monthlylisteners = test
+          }
+          return null
+        })
+        console.log(data)
         setData(data)
         setIsLoading(false)
       })
@@ -77,8 +91,7 @@ export const Stats = ({ type, database, userData }: Props): JSX.Element => {
                           Canciones Trackeadas
                         </h3>
                         <p className='text-sm text-muted-foreground'>
-                          Aquí encontrarás todas las canciones a las que estás
-                          haciéndole un seguimiento.
+                          Aquí encontrarás todas las canciones a las que estás haciéndole un seguimiento.
                         </p>
                       </div>
                       <div className='md:p-6'>
@@ -134,49 +147,27 @@ export const Stats = ({ type, database, userData }: Props): JSX.Element => {
                                     />
                                   </td>
                                   <td className='p-4 align-middle'>
-                                    <p className='font-medium'>
-                                      {elemento?.songName}
-                                    </p>
+                                    <p className='font-medium'>{elemento?.songName}</p>
                                   </td>
-                                  <td className='p-4 align-middle'>
-                                    {elemento?.artistName}
-                                  </td>
+                                  <td className='p-4 align-middle'>{elemento?.artistName}</td>
                                   <td className='p-4 align-middle text-center'>
                                     {elemento?.viewsTest !== null &&
                                       elemento?.viewsTest !== undefined &&
                                       new Intl.NumberFormat().format(
-                                        Object.values(
-                                          elemento?.viewsTest as number
-                                        )[
-                                          Object.keys(elemento.viewsTest)
-                                            .length - 1
-                                        ]
+                                        elemento.viewsTest[elemento.viewsTest.length - 1][1]
                                       )}
                                   </td>
                                   <td className='p-4 align-middle text-center'>
                                     {elemento?.viewsTest !== null &&
                                     elemento?.viewsTest !== undefined &&
-                                    Object.values(
-                                      elemento?.viewsTest as number
-                                    )[1] === undefined
+                                    Object.values(elemento?.viewsTest as number)[1] === undefined
                                       ? '0'
                                       : elemento?.viewsTest !== null &&
                                         elemento?.viewsTest !== undefined && (
                                           <span
                                             className={
-                                              Object.values(
-                                                elemento?.viewsTest as number
-                                              )[
-                                                Object.keys(elemento.viewsTest)
-                                                  .length - 1
-                                              ] -
-                                                Object.values(
-                                                  elemento?.viewsTest as number
-                                                )[
-                                                  Object.keys(
-                                                    elemento.viewsTest
-                                                  ).length - 2
-                                                ] >
+                                              elemento.viewsTest[elemento.viewsTest.length - 1][1] -
+                                                elemento.viewsTest[elemento.viewsTest.length - 2][1] >
                                               0
                                                 ? 'text-green-500'
                                                 : 'text-red-500'
@@ -184,29 +175,14 @@ export const Stats = ({ type, database, userData }: Props): JSX.Element => {
                                           >
                                             +
                                             {new Intl.NumberFormat().format(
-                                              Object.values(
-                                                elemento?.viewsTest as number
-                                              )[
-                                                Object.keys(elemento?.viewsTest)
-                                                  .length - 1
-                                              ] -
-                                                Object.values(
-                                                  elemento?.viewsTest as number
-                                                )[
-                                                  Object.keys(
-                                                    elemento?.viewsTest
-                                                  ).length - 2
-                                                ]
+                                              elemento.viewsTest[elemento.viewsTest.length - 1][1] -
+                                                elemento.viewsTest[elemento.viewsTest.length - 2][1]
                                             )}
                                           </span>
                                         )}
                                   </td>
                                   <td className='p-4 align-middle text-center'>
-                                    <Link
-                                      href={`/dashboard/song/${elemento.id}`}
-                                    >
-                                      Click
-                                    </Link>
+                                    <Link href={`/dashboard/song/${elemento.id}`}>Click</Link>
                                   </td>
                                 </motion.tr>
                               ))}
@@ -216,8 +192,8 @@ export const Stats = ({ type, database, userData }: Props): JSX.Element => {
                       </div>
                     </div>
                     <p className='font-bold text-xs'>
-                      Aviso : Si te conectas desde un dispositivo movil, puedes
-                      mover la tabla arrastrando el dedo.
+                      Aviso : Si te conectas desde un dispositivo movil, puedes mover la tabla arrastrando el
+                      dedo.
                     </p>
                   </div>
                 </div>
@@ -257,8 +233,8 @@ export const Stats = ({ type, database, userData }: Props): JSX.Element => {
                           Oyentes Mensuales
                         </h3>
                         <p className='text-sm text-muted-foreground'>
-                          Aquí encontrarás todos Oyentes Mensuales de los
-                          artistas a los que estás haciendole un seguimiento.
+                          Aquí encontrarás todos Oyentes Mensuales de los artistas a los que estás haciendole
+                          un seguimiento.
                         </p>
                       </div>
                       <div className='p-6'>
@@ -309,84 +285,47 @@ export const Stats = ({ type, database, userData }: Props): JSX.Element => {
                                       transition={{ duration: 0.5, delay: 0.2 }} // Duración de la transición y retraso
                                     />
                                   </td>
-                                  <td className='p-4 align-middle'>
-                                    {elemento?.artistname}
-                                  </td>
+                                  <td className='p-4 align-middle'>{elemento?.artistname}</td>
                                   <td className='p-4 align-middle'>
                                     {elemento?.monthlylisteners !== null &&
-                                      elemento?.monthlylisteners !==
-                                        undefined &&
+                                      elemento?.monthlylisteners !== undefined &&
                                       new Intl.NumberFormat().format(
-                                        Object.values(
-                                          elemento?.monthlylisteners as number
-                                        )[
-                                          Object.keys(elemento.monthlylisteners)
-                                            .length - 1
-                                        ]
+                                        elemento.monthlylisteners[elemento.monthlylisteners.length - 1][1]
                                       )}
                                   </td>
                                   <td className='p-4 align-middle text-center'>
                                     {elemento?.monthlylisteners !== null &&
                                     elemento?.monthlylisteners !== undefined &&
-                                    Object.values(
-                                      elemento?.monthlylisteners as number
-                                    )[1] === undefined
+                                    Object.values(elemento?.monthlylisteners as number)[1] === undefined
                                       ? '0'
                                       : elemento?.monthlylisteners !== null &&
-                                        elemento?.monthlylisteners !==
-                                          undefined && (
+                                        elemento?.monthlylisteners !== undefined && (
                                           <span
                                             className={
-                                              Object.values(
-                                                elemento?.monthlylisteners as number
-                                              )[
-                                                Object.keys(
-                                                  elemento.monthlylisteners
-                                                ).length - 1
-                                              ] -
-                                                Object.values(
-                                                  elemento?.monthlylisteners as number
-                                                )[
-                                                  Object.keys(
-                                                    elemento.monthlylisteners
-                                                  ).length - 2
-                                                ] >
+                                              elemento.monthlylisteners[
+                                                elemento.monthlylisteners.length - 1
+                                              ][1] -
+                                                elemento.monthlylisteners[
+                                                  elemento.monthlylisteners.length - 2
+                                                ][1] >
                                               0
                                                 ? 'text-green-500 before:content-["+"]'
                                                 : 'text-red-500'
                                             }
                                           >
                                             {new Intl.NumberFormat().format(
-                                              Object.values(
-                                                elemento?.monthlylisteners as Record<
-                                                  string,
-                                                  number
-                                                >
-                                              )[
-                                                Object.keys(
-                                                  elemento?.monthlylisteners
-                                                ).length - 1
-                                              ] -
-                                                Object.values(
-                                                  elemento.monthlylisteners as Record<
-                                                    string,
-                                                    number
-                                                  >
-                                                )[
-                                                  Object.keys(
-                                                    elemento.monthlylisteners
-                                                  ).length - 2
-                                                ]
+                                              elemento.monthlylisteners[
+                                                elemento.monthlylisteners.length - 1
+                                              ][1] -
+                                                elemento.monthlylisteners[
+                                                  elemento.monthlylisteners.length - 2
+                                                ][1]
                                             )}
                                           </span>
                                         )}
                                   </td>
                                   <td className='p-4 align-middle text-center'>
-                                    <Link
-                                      href={`/dashboard/listeners/${elemento.id}`}
-                                    >
-                                      Click
-                                    </Link>
+                                    <Link href={`/dashboard/listeners/${elemento.id}`}>Click</Link>
                                   </td>
                                 </motion.tr>
                               ))}
@@ -396,8 +335,8 @@ export const Stats = ({ type, database, userData }: Props): JSX.Element => {
                       </div>
                     </div>
                     <p className='font-bold text-xs'>
-                      Aviso : Si te conectas desde un dispositivo movil, puedes
-                      mover la tabla arrastrando el dedo.
+                      Aviso : Si te conectas desde un dispositivo movil, puedes mover la tabla arrastrando el
+                      dedo.
                     </p>
                   </div>
                 </div>
@@ -437,9 +376,8 @@ export const Stats = ({ type, database, userData }: Props): JSX.Element => {
                           Seguidores de Artista
                         </h3>
                         <p className='text-sm text-muted-foreground'>
-                          Aquí encontrarás todos los seguidores en spotify de
-                          los artistas a los que estás haciendole un
-                          seguimiento.
+                          Aquí encontrarás todos los seguidores en spotify de los artistas a los que estás
+                          haciendole un seguimiento.
                         </p>
                       </div>
                       <div className='p-6'>
@@ -490,84 +428,47 @@ export const Stats = ({ type, database, userData }: Props): JSX.Element => {
                                       transition={{ duration: 0.5, delay: 0.2 }} // Duración de la transición y retraso
                                     />
                                   </td>
-                                  <td className='p-4 align-middle'>
-                                    {elemento?.artistname}
-                                  </td>
+                                  <td className='p-4 align-middle'>{elemento?.artistname}</td>
                                   <td className='p-4 align-middle'>
                                     {elemento?.monthlylisteners !== null &&
-                                      elemento?.monthlylisteners !==
-                                        undefined &&
+                                      elemento?.monthlylisteners !== undefined &&
                                       new Intl.NumberFormat().format(
-                                        Object.values(
-                                          elemento?.monthlylisteners as number
-                                        )[
-                                          Object.keys(elemento.monthlylisteners)
-                                            .length - 1
-                                        ]
+                                        elemento.monthlylisteners[elemento.monthlylisteners.length - 1][1]
                                       )}
                                   </td>
                                   <td className='p-4 align-middle text-center'>
                                     {elemento?.monthlylisteners !== null &&
                                     elemento?.monthlylisteners !== undefined &&
-                                    Object.values(
-                                      elemento?.monthlylisteners as number
-                                    )[1] === undefined
+                                    Object.values(elemento?.monthlylisteners as number)[1] === undefined
                                       ? '0'
                                       : elemento?.monthlylisteners !== null &&
-                                        elemento?.monthlylisteners !==
-                                          undefined && (
+                                        elemento?.monthlylisteners !== undefined && (
                                           <span
                                             className={
-                                              Object.values(
-                                                elemento?.monthlylisteners as number
-                                              )[
-                                                Object.keys(
-                                                  elemento.monthlylisteners
-                                                ).length - 1
-                                              ] -
-                                                Object.values(
-                                                  elemento?.monthlylisteners as number
-                                                )[
-                                                  Object.keys(
-                                                    elemento.monthlylisteners
-                                                  ).length - 2
-                                                ] >
+                                              elemento.monthlylisteners[
+                                                elemento.monthlylisteners.length - 1
+                                              ][1] -
+                                                elemento.monthlylisteners[
+                                                  elemento.monthlylisteners.length - 2
+                                                ][1] >
                                               0
                                                 ? 'text-green-500 before:content-["+"]'
                                                 : 'text-red-500'
                                             }
                                           >
                                             {new Intl.NumberFormat().format(
-                                              Object.values(
-                                                elemento?.monthlylisteners as Record<
-                                                  string,
-                                                  number
-                                                >
-                                              )[
-                                                Object.keys(
-                                                  elemento?.monthlylisteners
-                                                ).length - 1
-                                              ] -
-                                                Object.values(
-                                                  elemento.monthlylisteners as Record<
-                                                    string,
-                                                    number
-                                                  >
-                                                )[
-                                                  Object.keys(
-                                                    elemento.monthlylisteners
-                                                  ).length - 2
-                                                ]
+                                              elemento.monthlylisteners[
+                                                elemento.monthlylisteners.length - 1
+                                              ][1] -
+                                                elemento.monthlylisteners[
+                                                  elemento.monthlylisteners.length - 2
+                                                ][1]
                                             )}
                                           </span>
                                         )}
                                   </td>
                                   <td className='p-4 align-middle text-center'>
-                                    <Link
-                                      href={`/dashboard/followers/${elemento.id}`}
-                                    >
-                                      Click
-                                    </Link>
+                                    <Link href={`/dashboard/followers/${elemento.id}`}>Click</Link>
                                   </td>
                                 </motion.tr>
                               ))}
@@ -577,8 +478,8 @@ export const Stats = ({ type, database, userData }: Props): JSX.Element => {
                       </div>
                     </div>
                     <p className='font-bold text-xs'>
-                      Aviso : Si te conectas desde un dispositivo movil, puedes
-                      mover la tabla arrastrando el dedo.
+                      Aviso : Si te conectas desde un dispositivo movil, puedes mover la tabla arrastrando el
+                      dedo.
                     </p>
                   </div>
                 </div>
